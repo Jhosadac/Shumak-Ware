@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Hotel El Jardín</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --background-color: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .header-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-menu {
+            display: flex;
+            list-style: none;
+            margin-left: 2rem;
+        }
+
+        .main-menu li {
+            margin-right: 2rem;
+        }
+
+        .main-menu a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .main-menu a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            background: rgba(0,0,0,0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Servicios Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .service-content ul {
+            list-style: none;
+        }
+
+        .service-content li {
+            margin-bottom: 0.8rem;
+            color: #666;
+        }
+
+        /* Instalaciones */
+        .facilities-section {
+            padding: 5rem 0;
+            background: var(--background-color);
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .facility-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .facility-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .facility-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .facility-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-wrap {
+                padding: 1rem 2rem;
+            }
+
+            .main-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid,
+            .facilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="index.html">Hotel El Jardín</a>
+            </div>
+            <nav class="nav-header">
+                <ul class="main-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="habitaciones.html">Habitaciones</a></li>
+                    <li><a href="restaurante.html">Restaurante</a></li>
+                    <li><a href="servicios.html" class="active">Servicios</a></li>
+                    <li><a href="contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Servicios y Instalaciones</h1>
+            <p>Disfruta de las mejores instalaciones y servicios de lujo en nuestro hotel</p>
+            <button class="cta-button">Explorar Servicios</button>
+        </div>
+    </section>
+
+    <!-- Servicios Grid -->
+    <section class="services-grid">
+        <!-- Spa y Wellness -->
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-spa"></i>
+            </div>
+            <div class="service-content">
+                <h3>Spa y Wellness</h3>
+                <ul>
+                    <li>Masajes terapéuticos</li>
+                    <li>Sauna y baño turco</li>
+                    <li>Gimnasio 24 horas</li>
+                    <li>Clases de yoga</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Servicios de Negocios -->
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="service-content">
+                <h3>Servicios de Negocios</h3>
+                <ul>
+                    <li>Salones de reuniones</li>
+                    <li>Centro de negocios</li>
+                    <li>Impresión y fax</li>
+                    <li>Equipo audiovisual</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Servicios Premium -->
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="service-content">
+                <h3>Servicios Premium</h3>
+                <ul>
+                    <li>Conserjería 24h</li>
+                    <li>Servicio de habitaciones</li>
+                    <li>Traslado al aeropuerto</li>
+                    <li>Asistencia turística</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Servicios Familiares -->
+        <div class="service-card">
+            <div class="service-icon">
+                <i class="fas fa-child"></i>
+            </div>
+            <div class="service-content">
+                <h3>Servicios Familiares</h3>
+                <ul>
+                    <li>Servicio de niñera</li>
+                    <li>Club infantil</li>
+                    <li>Habitaciones familiares</li>
+                    <li>Actividades para niños</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instalaciones -->
+    <section class="facilities-section">
+        <div class="facilities-grid">
+            <!-- Piscina -->
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Piscina" class="facility-image">
+                <h3>Piscina y Solárium</h3>
+                <p>Disfruta de nuestra piscina exterior climatizada y área de solárium con vistas panorámicas.</p>
+            </div>
+
+            <!-- Gimnasio -->
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Gimnasio" class="facility-image">
+                <h3>Gimnasio</h3>
+                <p>Equipo de última generación y personal entrenado para ayudarte a mantener tu rutina de ejercicio.</p>
+            </div>
+
+            <!-- Spa -->
+            <div class="facility-card">
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Spa" class="facility-image">
+                <h3>Spa y Sauna</h3>
+                <p>Relájate en nuestro spa con sauna, baño turco y masajes personalizados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Acerca de Nosotros</h3>
+                    <p>Hotel El Jardín es un establecimiento de lujo que combina la elegancia con la comodidad</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="habitaciones.html">Habitaciones</a></li>
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Teléfono: +34 912 345 678</li>
+                        <li>Email: info@hoteleljardin.com</li>
+                        <li>Dirección: Calle Principal 123, Madrid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
