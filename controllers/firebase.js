@@ -1,5 +1,4 @@
-// Your web app's Firebase configuration
-  const firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
     authDomain: "shumak-ware.firebaseapp.com",
     databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
@@ -8,5 +7,11 @@
     messagingSenderId: "64196160181",
     appId: "1:64196160181:web:76852cef50c12a498e6cfc",
     measurementId: "G-8L85H7B12E"
-  };
-  const app = initializeApp(firebaseConfig);
+};
+
+// Solo inicializar una vez
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Exportar para usar en otros archivos
+export { app, db };
