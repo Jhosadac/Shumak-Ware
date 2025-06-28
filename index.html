@@ -6,6 +6,31 @@
     <title>Hotel Shumak Ware</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+
+     <!--libreria de firebase-->
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js"></script>
+    <script src="controllers/firebase.js"></script>
+    <script>
+        // Inicializar Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+      
+        // Manejar envío
+        document.getElementById('contactform').addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const contacto = {
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('email').value,
+            fecha: new Date().toISOString()
+          };
+      
+          db.ref('contactos').push(contacto)
+            .then(() => alert('Reserva exitosa!'))
+            .catch(error => alert('Error: ' + error));
+        });
+      </script>
 </head>
 <body>
     <!-- Header -->
@@ -82,18 +107,18 @@
     <section class="contact" id="contacto">
         <div class="contact-form">
             <h2>Contáctanos</h2>
-            <form action="process/contact-form.php" method="post">
+            <form id="contactform">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" required>
+                    <input type="text" id="nombre" placeholder="nombre" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" placeholder="email" required>
                 </div>
                 <div class="form-group">
                     <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                    <textarea id="mensaje" placeholder="mensaje" rows="4" required></textarea>
                 </div>
                 <button type="submit" class="submit-button">Enviar</button>
             </form>
