@@ -13,27 +13,6 @@
     <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js"></script>
     
     <script src="controllers/firebase.js"></script>
-    
-    <script>
-        document.getElementById('contactform').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    try {
-        const contacto = {
-            nombre: document.getElementById('nombre').value,
-            email: document.getElementById('email').value,
-            mensaje: document.getElementById('mensaje').value,
-            fecha: new Date().toISOString()
-        };
-        
-        await push(ref(db, 'contactos'), contacto);
-        alert('Reserva exitosa!');
-    } catch (error) {
-        console.error('Error:', error.code, error.message);
-        alert(`Error al enviar el formulario: ${error.message}`);
-    }
-});
-      </script>
 </head>
 <body>
     <!-- Header -->
