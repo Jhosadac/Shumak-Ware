@@ -1,16 +1,3 @@
-import { getAuth, signInAnonymously } from "firebase/auth";
-
-const auth = getAuth(app);
-
-// Iniciar sesión anónima al cargar la página
-signInAnonymously(auth)
-  .then(() => {
-    console.log("Autenticación anónima exitosa");
-  })
-  .catch((error) => {
-    console.error("Error en autenticación:", error);
-  });
-
 // En firebase.js
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
@@ -28,8 +15,17 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
+export const db = getDatabase(app);
+export const auth = getAuth(app);
+
+// Iniciar sesión anónima al cargar la página
+signInAnonymously(auth)
+    .then((userCredential) => {
+        console.log('Autenticación anónima exitosa');
+    })
+    .catch((error) => {
+        console.error('Error en autenticación:', error.code, error.message);
+    });
 
 // En index.html
 document.getElementById('contactform').addEventListener('submit', async (e) => {
@@ -48,29 +44,33 @@ document.getElementById('contactform').addEventListener('submit', async (e) => {
         if (!email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
             throw new Error('El email no es válido');
         }
-        
+
         // Esperar a que la autenticación esté lista
         const user = auth.currentUser;
         if (!user) {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Espera más tiempo
         }
-        
+
         const contacto = {
             nombre,
             email,
             mensaje,
             fecha: new Date().toISOString()
         };
-        
-        // Guardar en la base de datos
+
+        // Guardar en la base de datos con manejo de errores mejorado
         const referencia = ref(db, 'contactos');
-        await push(referencia, contacto);
-        
-        // Limpiar el formulario
-        e.target.reset();
-        alert('¡Datos guardados exitosamente!');
+        await push(referencia, contacto)
+            .then(() => {
+                console.log('Datos guardados exitosamente');
+                alert('¡Datos guardados exitosamente!');
+                e.target.reset(); // Limpiar el formulario después de guardar
+            })
+            .catch(error => {
+                throw new Error(`Error al guardar datos: ${error.code || error.message}`);
+            });
     } catch (error) {
         console.error('Error:', error.code, error.message);
-        alert(`Error al guardar los datos: ${error.message}`);
+        alert(`Error: ${error.message}`);
     }
 });
