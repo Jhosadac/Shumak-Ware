@@ -13,24 +13,24 @@
     <script src="controllers/firebase.js"></script>
     
     <script>
-        // Inicializar Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-      
-        // Manejar envío
-        document.getElementById('contactform').addEventListener('submit', (e) => {
-          e.preventDefault();
-          
-          const contacto = {
+        document.getElementById('contactform').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    try {
+        const contacto = {
             nombre: document.getElementById('nombre').value,
             email: document.getElementById('email').value,
+            mensaje: document.getElementById('mensaje').value,
             fecha: new Date().toISOString()
-          };
-      
-          db.ref('contactos').push(contacto)
-            .then(() => alert('Reserva exitosa!'))
-            .catch(error => alert('Error: ' + error));
-        });
+        };
+        
+        await push(ref(db, 'contactos'), contacto);
+        alert('Reserva exitosa!');
+    } catch (error) {
+        console.error('Error:', error.code, error.message);
+        alert(`Error al enviar el formulario: ${error.message}`);
+    }
+});
       </script>
 </head>
 <body>
