@@ -1,7 +1,6 @@
-// En firebase.js
+// En firebase.js (usando la API modular v9+)
 import { initializeApp } from 'firebase/app';
-import { getDatabase } from 'firebase/database';
-import { getAuth, signInAnonymously } from 'firebase/auth';
+import { getDatabase, ref, push } from 'firebase/database';
 
 const firebaseConfig = {
     apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
@@ -14,20 +13,11 @@ const firebaseConfig = {
     measurementId: "G-8L85H7B12E"
 };
 
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
-export const auth = getAuth(app);
+const database = getDatabase(app);
 
-// Iniciar sesión anónima al cargar la página
-signInAnonymously(auth)
-    .then((userCredential) => {
-        console.log('Autenticación anónima exitosa');
-    })
-    .catch((error) => {
-        console.error('Error en autenticación:', error.code, error.message);
-    });
-
-// En index.html
+// Manejar el envio del formulario
 document.getElementById('contactform').addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -41,14 +31,8 @@ document.getElementById('contactform').addEventListener('submit', async (e) => {
             throw new Error('Todos los campos son obligatorios');
         }
         
-        if (!email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)) {
+        if (!email.includes('@') || !email.includes('.')) {
             throw new Error('El email no es válido');
-        }
-
-        // Esperar a que la autenticación esté lista
-        const user = auth.currentUser;
-        if (!user) {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Espera más tiempo
         }
 
         const contacto = {
@@ -58,19 +42,16 @@ document.getElementById('contactform').addEventListener('submit', async (e) => {
             fecha: new Date().toISOString()
         };
 
-        // Guardar en la base de datos con manejo de errores mejorado
-        const referencia = ref(db, 'contactos');
-        await push(referencia, contacto)
-            .then(() => {
-                console.log('Datos guardados exitosamente');
-                alert('¡Datos guardados exitosamente!');
-                e.target.reset(); // Limpiar el formulario después de guardar
-            })
-            .catch(error => {
-                throw new Error(`Error al guardar datos: ${error.code || error.message}`);
-            });
+        // Guardar en la base de datos
+        const contactosRef = ref(database, 'contactos');
+        await push(contactosRef, contacto);
+        
+        console.log('Datos guardados exitosamente');
+        alert('¡Datos guardados exitosamente!');
+        e.target.reset();
+        
     } catch (error) {
-        console.error('Error:', error.code, error.message);
+        console.error('Error:', error);
         alert(`Error: ${error.message}`);
     }
 });
