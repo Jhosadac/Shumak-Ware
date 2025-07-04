@@ -8,8 +8,132 @@
     <link rel="stylesheet" href="css/style.css">
 
      <!--libreria de firebase-->
-    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+
+     <script>
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
+            authDomain: "shumak-ware.firebaseapp.com",
+            databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
+            projectId: "shumak-ware",
+            storageBucket: "shumak-ware.appspot.com",
+            messagingSenderId: "64196160181",
+            appId: "1:64196160181:web:76852cef50c12a498e6cfc",
+            measurementId: "G-8L85H7B12E"
+        };
+
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // Referencia a la base de datos
+        const database = firebase.database();
+        const contactFormDB = database.ref("contactForm");
+        
+        // Elementos del DOM
+        const contactForm = document.getElementById('contactForm');
+        const statusElement = document.getElementById('status');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        // Manejar envío del formulario
+        contactForm.addEventListener('submit', submitForm);
+        
+        function submitForm(e) {
+            e.preventDefault();
+            
+            // Mostrar estado de envío
+            statusElement.textContent = "Enviando datos...";
+            statusElement.className = "status sending";
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            
+            try {
+                // Obtener valores
+                const nombre = getValue('nombre');
+                const email = getValue('email');
+                const mensaje = getValue('mensaje');
+                
+                // Validaciones
+                if (!nombre) throw new Error('El nombre es obligatorio');
+                if (!email) throw new Error('El correo es obligatorio');
+                if (!mensaje) throw new Error('El mensaje es obligatorio');
+                if (!validateEmail(email)) throw new Error('El email no es válido');
+                
+                // Guardar datos en Firebase
+                saveData(nombre, email, mensaje);
+                
+            } catch (error) {
+                showError(error.message);
+            }
+        }
+        
+        // Función para obtener valor
+        function getValue(id) {
+            return document.getElementById(id).value.trim();
+        }
+        
+        // Función para validar email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        // Función para mostrar error
+        function showError(message) {
+            statusElement.textContent = `Error: ${message}`;
+            statusElement.className = "status error";
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensaje';
+        }
+        
+        // Función para mostrar éxito
+        function showSuccess(message) {
+            statusElement.textContent = message;
+            statusElement.className = "status success";
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensaje';
+            
+            // Resetear formulario después de 3 segundos
+            setTimeout(() => {
+                contactForm.reset();
+                statusElement.textContent = "";
+                statusElement.className = "status";
+            }, 5000);
+        }
+        
+        // Función para guardar datos en Firebase
+        function saveData(nombre, email, mensaje) {
+            // Crear nueva referencia con ID único
+            const newContactRef = contactFormDB.push();
+            
+            // Estructura de datos
+            const formData = {
+                nombre: nombre,
+                correo: email,
+                mensaje: mensaje,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                status: "nuevo"
+            };
+            
+            // Guardar en Firebase
+            newContactRef.set(formData)
+                .then(() => {
+                    console.log("Datos guardados correctamente en Firebase");
+                    showSuccess("¡Mensaje enviado con éxito! Te contactaremos pronto.");
+                })
+                .catch((error) => {
+                    console.error("Error al guardar en Firebase:", error);
+                    showError("Error al enviar el mensaje. Por favor intenta de nuevo.");
+                });
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Firebase v7.20.0 cargado correctamente");
+            console.log("Formulario listo para recibir datos");
+        });
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -133,104 +257,5 @@
         </div>
     </footer>
 
-    <script>
-        // Cargar Firebase desde CDN
-        const firebaseScript = document.createElement('script');
-        firebaseScript.src = 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
-        firebaseScript.onload = () => {
-            // Una vez cargado firebase-app, cargar el módulo de Database
-            const databaseScript = document.createElement('script');
-            databaseScript.src = 'https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js';
-            databaseScript.onload = initializeFirebase;
-            document.head.appendChild(databaseScript);
-        };
-        document.head.appendChild(firebaseScript);
-
-        function initializeFirebase() {
-            // Configuración de Firebase
-            const firebaseConfig = {
-                apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
-                authDomain: "shumak-ware.firebaseapp.com",
-                databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
-                projectId: "shumak-ware",
-                storageBucket: "shumak-ware.appspot.com",
-                messagingSenderId: "64196160181",
-                appId: "1:64196160181:web:76852cef50c12a498e6cfc",
-                measurementId: "G-8L85H7B12E"
-            };
-
-            // Inicializar Firebase
-            firebase.initializeApp(firebaseConfig);
-
-            // Obtener referencia a la base de datos
-            const database = firebase.database();
-            const contactFormDB = database.ref("contactForm");
-
-            // Manejar el envio del formulario
-            document.getElementById('contactForm').addEventListener("submit", submitForm);
-
-            function submitForm(e) {
-                e.preventDefault();
-                
-                // Mostrar estado de carga
-                const statusElement = document.getElementById('status');
-                statusElement.textContent = "Enviando datos...";
-                statusElement.className = "status";
-                
-                try {
-                    // Obtener valores
-                    const nombre = document.getElementById('nombre').value;
-                    const email = document.getElementById('email').value;
-                    const mensaje = document.getElementById('mensaje').value;
-                    
-                    if (!nombre || !email || !mensaje) {
-                        throw new Error('Todos los campos son obligatorios');
-                    }
-                    
-                    if (!email.includes('@') || !email.includes('.')) {
-                        throw new Error('El email no es válido');
-                    }
-
-                    saveData(nombre, email, mensaje);
-
-                } catch (error) {
-                    console.error('Error:', error);
-                    statusElement.textContent = `Error: ${error.message}`;
-                    statusElement.className = "status error";
-                }
-            }
-
-            // Función para guardar datos
-            function saveData(nombre, email, mensaje) {
-                // Crear nueva referencia con ID único
-                const newContactRef = contactFormDB.push();
-                
-                newContactRef.set({
-                    nombre: nombre,
-                    correo: email,
-                    mensaje: mensaje,
-                    timestamp: firebase.database.ServerValue.TIMESTAMP
-                })
-                .then(() => {
-                    console.log("Datos guardados correctamente");
-                    document.getElementById('status').textContent = "¡Mensaje enviado con éxito!";
-                    document.getElementById('status').className = "status success";
-                    
-                    // Resetear formulario
-                    document.getElementById('contactForm').reset();
-                    
-                    // Ocultar mensaje después de 5 segundos
-                    setTimeout(() => {
-                        document.getElementById('status').textContent = "";
-                    }, 5000);
-                })
-                .catch((error) => {
-                    console.error("Error al guardar:", error);
-                    document.getElementById('status').textContent = `Error al enviar: ${error.message || "Por favor intenta más tarde"}`;
-                    document.getElementById('status').className = "status error";
-                });
-            }
-        }
-    </script>
 </body>
 </html>
