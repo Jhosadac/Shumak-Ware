@@ -60,11 +60,9 @@ function saveData(nombre, email, mensaje) {
     timestamp: firebase.database.ServerValue.TIMESTAMP
   })
   .then(() => {
-    console.log("Datos guardados correctamente");
-    alert("¡Mensaje enviado con éxito!");
+   
   })
   .catch((error) => {
-    console.error("Error al guardar:", error);
-    alert("Error al enviar el mensaje: " + error.message);
+    
   });
 }
