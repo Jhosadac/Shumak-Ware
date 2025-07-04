@@ -1,7 +1,4 @@
-// En firebase.js (usando la API modular v9+)
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push } from 'firebase/database';
-
+// Configuración de Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
     authDomain: "shumak-ware.firebaseapp.com",
@@ -14,44 +11,60 @@ const firebaseConfig = {
 };
 
 // Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+firebase.initializeApp(firebaseConfig);
+
+// Obtener referencia a la base de datos
+const database = firebase.database();
+const contactFormDB = database.ref("contactForm");
 
 // Manejar el envio del formulario
-document.getElementById('contactform').addEventListener('submit', async (e) => {
-    e.preventDefault();
+document.getElementById('contactForm').addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+  
+  try {
+    // Obtener valores
+    const nombre = document.getElementById('nombre').value;
+    const email = document.getElementById('email').value;
+    const mensaje = document.getElementById('mensaje').value;
     
-    try {
-        // Validación del lado del cliente
-        const nombre = document.getElementById('nombre').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const mensaje = document.getElementById('mensaje').value.trim();
-        
-        if (!nombre || !email || !mensaje) {
-            throw new Error('Todos los campos son obligatorios');
-        }
-        
-        if (!email.includes('@') || !email.includes('.')) {
-            throw new Error('El email no es válido');
-        }
-
-        const contacto = {
-            nombre,
-            email,
-            mensaje,
-            fecha: new Date().toISOString()
-        };
-
-        // Guardar en la base de datos
-        const contactosRef = ref(database, 'contactos');
-        await push(contactosRef, contacto);
-        
-        console.log('Datos guardados exitosamente');
-        alert('¡Datos guardados exitosamente!');
-        e.target.reset();
-        
-    } catch (error) {
-        console.error('Error:', error);
-        alert(`Error: ${error.message}`);
+    if (!nombre || !email || !mensaje) {
+        throw new Error('Todos los campos son obligatorios');
     }
-});
+    
+    if (!email.includes('@') || !email.includes('.')) {
+        throw new Error('El email no es válido');
+    }
+
+    saveData(nombre, email, mensaje);
+
+    // Resetear formulario
+    e.target.reset();
+    
+  } catch (error) {
+    console.error('Error:', error);
+    alert(`Error: ${error.message}`);
+  }
+}
+
+// Función para guardar datos
+function saveData(nombre, email, mensaje) {
+  // Crear nueva referencia con ID único
+  const newContactRef = contactFormDB.push();
+  
+  newContactRef.set({
+    nombre: nombre,
+    correo: email,
+    mensaje: mensaje,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  })
+  .then(() => {
+    console.log("Datos guardados correctamente");
+    alert("¡Mensaje enviado con éxito!");
+  })
+  .catch((error) => {
+    console.error("Error al guardar:", error);
+    alert("Error al enviar el mensaje: " + error.message);
+  });
+}
