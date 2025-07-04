@@ -134,73 +134,103 @@
     </footer>
 
     <script>
-        // Configuración de Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
-    authDomain: "shumak-ware.firebaseapp.com",
-    databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
-    projectId: "shumak-ware",
-    storageBucket: "shumak-ware.firebasestorage.app",
-    messagingSenderId: "64196160181",
-    appId: "1:64196160181:web:76852cef50c12a498e6cfc",
-    measurementId: "G-8L85H7B12E"
-};
+        // Cargar Firebase desde CDN
+        const firebaseScript = document.createElement('script');
+        firebaseScript.src = 'https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js';
+        firebaseScript.onload = () => {
+            // Una vez cargado firebase-app, cargar el módulo de Database
+            const databaseScript = document.createElement('script');
+            databaseScript.src = 'https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js';
+            databaseScript.onload = initializeFirebase;
+            document.head.appendChild(databaseScript);
+        };
+        document.head.appendChild(firebaseScript);
 
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
+        function initializeFirebase() {
+            // Configuración de Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
+                authDomain: "shumak-ware.firebaseapp.com",
+                databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
+                projectId: "shumak-ware",
+                storageBucket: "shumak-ware.appspot.com",
+                messagingSenderId: "64196160181",
+                appId: "1:64196160181:web:76852cef50c12a498e6cfc",
+                measurementId: "G-8L85H7B12E"
+            };
 
-// Obtener referencia a la base de datos
-const database = firebase.database();
-const contactFormDB = database.ref("contactForm");
+            // Inicializar Firebase
+            firebase.initializeApp(firebaseConfig);
 
-// Manejar el envio del formulario
-document.getElementById('contactForm').addEventListener("submit", submitForm);
+            // Obtener referencia a la base de datos
+            const database = firebase.database();
+            const contactFormDB = database.ref("contactForm");
 
-function submitForm(e) {
-  e.preventDefault();
-  
-  try {
-    // Obtener valores
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const mensaje = document.getElementById('mensaje').value;
-    
-    if (!nombre || !email || !mensaje) {
-        throw new Error('Todos los campos son obligatorios');
-    }
-    
-    if (!email.includes('@') || !email.includes('.')) {
-        throw new Error('El email no es válido');
-    }
+            // Manejar el envio del formulario
+            document.getElementById('contactForm').addEventListener("submit", submitForm);
 
-    saveData(nombre, email, mensaje);
+            function submitForm(e) {
+                e.preventDefault();
+                
+                // Mostrar estado de carga
+                const statusElement = document.getElementById('status');
+                statusElement.textContent = "Enviando datos...";
+                statusElement.className = "status";
+                
+                try {
+                    // Obtener valores
+                    const nombre = document.getElementById('nombre').value;
+                    const email = document.getElementById('email').value;
+                    const mensaje = document.getElementById('mensaje').value;
+                    
+                    if (!nombre || !email || !mensaje) {
+                        throw new Error('Todos los campos son obligatorios');
+                    }
+                    
+                    if (!email.includes('@') || !email.includes('.')) {
+                        throw new Error('El email no es válido');
+                    }
 
-    // Resetear formulario
-    e.target.reset();
-    
-  } catch (error) {
-    
-  }
-}
+                    saveData(nombre, email, mensaje);
 
-// Función para guardar datos
-function saveData(nombre, email, mensaje) {
-  // Crear nueva referencia con ID único
-  const newContactRef = contactFormDB.push();
-  
-  newContactRef.set({
-    nombre: nombre,
-    correo: email,
-    mensaje: mensaje,
-    timestamp: firebase.database.ServerValue.TIMESTAMP
-  })
-  .then(() => {
-    
-  })
-  .catch((error) => {
-    
-  });
-}
+                } catch (error) {
+                    console.error('Error:', error);
+                    statusElement.textContent = `Error: ${error.message}`;
+                    statusElement.className = "status error";
+                }
+            }
+
+            // Función para guardar datos
+            function saveData(nombre, email, mensaje) {
+                // Crear nueva referencia con ID único
+                const newContactRef = contactFormDB.push();
+                
+                newContactRef.set({
+                    nombre: nombre,
+                    correo: email,
+                    mensaje: mensaje,
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                })
+                .then(() => {
+                    console.log("Datos guardados correctamente");
+                    document.getElementById('status').textContent = "¡Mensaje enviado con éxito!";
+                    document.getElementById('status').className = "status success";
+                    
+                    // Resetear formulario
+                    document.getElementById('contactForm').reset();
+                    
+                    // Ocultar mensaje después de 5 segundos
+                    setTimeout(() => {
+                        document.getElementById('status').textContent = "";
+                    }, 5000);
+                })
+                .catch((error) => {
+                    console.error("Error al guardar:", error);
+                    document.getElementById('status').textContent = `Error al enviar: ${error.message || "Por favor intenta más tarde"}`;
+                    document.getElementById('status').className = "status error";
+                });
+            }
+        }
     </script>
 </body>
 </html>
