@@ -51,6 +51,7 @@
             display: flex;
             list-style: none;
             margin-left: 2rem;
+            font-size: 10px;
         }
 
         .main-menu li {
