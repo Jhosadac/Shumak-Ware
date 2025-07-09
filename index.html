@@ -6,6 +6,7 @@
     <title>Hotel Shumak Ware</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
      <!--libreria de firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
@@ -39,27 +40,126 @@
         </div>
     </section>
 
-    <!-- Servicios -->
-    <section class="services">
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="service-icon fas fa-bed"></i>
-                <h3>Habitaciones de Lujo</h3>
-                <p>Disfruta de habitaciones diseñadas para tu máximo confort y relax</p>
+     <div class="slider-container">
+            <div class="hotel-logo">GRAND HOTEL</div>
+            
+            <div class="slider">
+                <!-- Habitación 1 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <img src="assests/habitacion_1.jpg" alt="Suite Presidencial">
+                    </div>
+                    <div class="slide-info">
+                        <div class="room-type">Suite</div>
+                        <h2 class="room-title">Suite Presidencial</h2>
+                        <p class="room-description">Nuestra suite más exclusiva con sala de estar separada, comedor privado y vistas panorámicas a la ciudad. Incluye servicio de mayordomo 24 horas y acceso a nuestro club lounge premium.</p>
+                        <div class="features">
+                            <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
+                            <div class="feature"><i class="fas fa-bath"></i> Bañera Jacuzzi</div>
+                            <div class="feature"><i class="fas fa-wifi"></i> WiFi Premium</div>
+                            <div class="feature"><i class="fas fa-tv"></i> TV 65"</div>
+                        </div>
+                        <div class="price">$399 <span>por noche</span></div>
+                        <a href="#" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <!-- Habitación 2 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <img src="assests/habitacion_2.jpg" alt="Habitación Ejecutiva">
+                    </div>
+                    <div class="slide-info">
+                        <div class="room-type">Ejecutiva</div>
+                        <h2 class="room-title">Habitación Ejecutiva</h2>
+                        <p class="room-description">Diseñada para viajeros de negocios, con amplio espacio de trabajo, escritorio ejecutivo y tecnología de reuniones integrada. Acceso gratuito al centro de negocios y servicio de secretaría.</p>
+                        <div class="features">
+                            <div class="feature"><i class="fas fa-bed"></i> 2 Camas Queen</div>
+                            <div class="feature"><i class="fas fa-coffee"></i> Cafetera Premium</div>
+                            <div class="feature"><i class="fas fa-wifi"></i> WiFi Empresarial</div>
+                            <div class="feature"><i class="fas fa-desktop"></i> Escritorio Ejecutivo</div>
+                        </div>
+                        <div class="price">$249 <span>por noche</span></div>
+                        <a href="#" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <!-- Habitación 3 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <img src="https://images.unsplash.com/photo-1592229505726-ca12164124c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Habitación Deluxe">
+                    </div>
+                    <div class="slide-info">
+                        <div class="room-type">Deluxe</div>
+                        <h2 class="room-title">Habitación Deluxe con Vista al Mar</h2>
+                        <p class="room-description">Amplia habitación con balcón privado y vistas espectaculares al mar. Decoración elegante con toques modernos y baño de mármol con amenities de lujo.</p>
+                        <div class="features">
+                            <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
+                            <div class="feature"><i class="fas fa-umbrella-beach"></i> Vista al Mar</div>
+                            <div class="feature"><i class="fas fa-wine-glass"></i> Minibar Premium</div>
+                            <div class="feature"><i class="fas fa-snowflake"></i> Aire Acondicionado</div>
+                        </div>
+                        <div class="price">$299 <span>por noche</span></div>
+                        <a href="#" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <!-- Habitación 4 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Habitación Estándar">
+                    </div>
+                    <div class="slide-info">
+                        <div class="room-type">Estándar</div>
+                        <h2 class="room-title">Habitación Estándar</h2>
+                        <p class="room-description">Confortable habitación con todo lo necesario para una estancia placentera. Diseño funcional y moderno con cama de alta calidad y baño completo.</p>
+                        <div class="features">
+                            <div class="feature"><i class="fas fa-bed"></i> Cama Queen</div>
+                            <div class="feature"><i class="fas fa-tv"></i> TV 42"</div>
+                            <div class="feature"><i class="fas fa-wifi"></i> WiFi Gratis</div>
+                            <div class="feature"><i class="fas fa-coffee"></i> Cafetera</div>
+                        </div>
+                        <div class="price">$149 <span>por noche</span></div>
+                        <a href="#" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
+                
+                <!-- Habitación 5 -->
+                <div class="slide">
+                    <div class="slide-image">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Suite Nupcial">
+                    </div>
+                    <div class="slide-info">
+                        <div class="room-type">Suite</div>
+                        <h2 class="room-title">Suite Nupcial</h2>
+                        <p class="room-description">Romántica suite especialmente diseñada para lunas de miel, con decoración floral, jacuzzi privado en terraza, cama con dosel y detalles especiales para celebrar el amor.</p>
+                        <div class="features">
+                            <div class="feature"><i class="fas fa-heart"></i> Decoración Romántica</div>
+                            <div class="feature"><i class="fas fa-hot-tub"></i> Jacuzzi Privado</div>
+                            <div class="feature"><i class="fas fa-glass-cheers"></i> Champán de Bienvenida</div>
+                            <div class="feature"><i class="fas fa-gift"></i> Regalo Especial</div>
+                        </div>
+                        <div class="price">$349 <span>por noche</span></div>
+                        <a href="#" class="btn">Reservar ahora</a>
+                    </div>
+                </div>
             </div>
-            <div class="service-card">
-                <i class="service-icon fas fa-utensils"></i>
-                <h3>Gastronomía Exquisita</h3>
-                <p>Nuestro restaurante ofrece los mejores platos de la cocina Ancashina</p>
+            
+            <button class="slider-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="indicators">
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
+                <div class="indicator"></div>
             </div>
-            <div class="service-card">
-                <i class="service-icon fas fa-swimming-pool"></i>
-                <h3>Instalaciones</h3>
-                <p>Piscina, gimnasio, spa y todos los servicios que necesitas</p>
-            </div>
-        </div>
-    </section>
-
+     </div>
     <!-- Habitaciones -->
     <section class="rooms">
         <div class="rooms-grid">
