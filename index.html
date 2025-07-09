@@ -41,7 +41,6 @@
     </section>
 
      <div class="slider-container">
-            <div class="hotel-logo">GRAND HOTEL</div>
             
             <div class="slider">
                 <!-- Habitación 1 -->
@@ -299,6 +298,76 @@ const saveData = (nombre, email, mensaje) => {
         alert("Ocurrió un error al enviar el mensaje");
     });
 };
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            
+            // Función para actualizar el carrusel
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Actualizar indicadores
+                indicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Ir a slide específico
+            function goToSlide(index) {
+                currentIndex = index;
+                if (currentIndex >= slideCount) currentIndex = 0;
+                if (currentIndex < 0) currentIndex = slideCount - 1;
+                updateSlider();
+            }
+            
+            // Navegación
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateSlider();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            });
+            
+            // Eventos para indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Auto-avance cada 8 segundos
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateSlider();
+            }, 8000);
+            
+            // Eventos de teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateSlider();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateSlider();
+                }
+            });
+        });
     </script>
 </body>
 </html>
