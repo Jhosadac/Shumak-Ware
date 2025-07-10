@@ -3,158 +3,679 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shumak Ware</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Restaurante - Shumak Ware</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        /* Header */
+        .main-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .nav-header ul.main-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-header ul.main-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-header ul.main-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-header ul.main-menu li a:hover,
+        .nav-header ul.main-menu li a.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Barra de opciones del restaurante */
+        .restaurant-nav {
+            background: var(--primary-color);
+            padding: 15px 0;
+        }
+        
+        .restaurant-options {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .restaurant-options li {
+            position: relative;
+        }
+        
+        .restaurant-options li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .restaurant-options li a.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Sección de ubicación */
+        .location-section {
+            background: white;
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .location-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .location-input {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+        
+        .location-input input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .location-input button {
+            background: var(--success-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* Carrusel de categorías */
+        .category-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .category-container:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .category-description {
+            flex: 1;
+        }
+        
+        .category-description h3 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .category-description p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .category-slider {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .category-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .category-slide {
+            min-width: 100%;
+            padding: 30px;
+            background: white;
+            text-align: center;
+        }
+        
+        .slide-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .slide-title {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .slide-description {
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .slide-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .quantity-btn:not(:disabled):hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .quantity-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .add-to-cart {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        
+        .add-to-cart:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .add-to-cart:not(:disabled):hover {
+            background: #2980b9;
+        }
+        
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        
+        .slider-controls button {
+            pointer-events: auto;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .slider-controls button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .category-container {
+                flex-direction: column;
+            }
+            
+            .category-container:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-wrap {
+                flex-direction: column;
+            }
+            
+            .nav-header ul.main-menu {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-header ul.main-menu li {
+                margin: 5px;
+            }
+            
+            .restaurant-options {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="main-header">
         <div class="header-wrap">
             <div class="logo">
-                <a href="index.html">Shumak Ware</a>
+                <img src="assests/logo.png" alt="logo">
             </div>
             <nav class="nav-header">
                 <ul class="main-menu">
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="habitaciones.html">Habitaciones</a></li>
                     <li><a href="restaurante.html" class="active">Restaurante</a></li>
-                    <li><a href="servicios">Servicios</a></li>
-                    <li><a href="contacto">Contacto</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Nuestro Restaurante</h1>
-            <p>Disfruta de una experiencia gastronómica única en nuestro restaurante campestre</p>
-            <button class="cta-button">Reservar Mesa</button>
+    <!-- Barra de opciones del restaurante -->
+    <nav class="restaurant-nav">
+        <div class="container">
+            <ul class="restaurant-options">
+                <li><a href="#"><i class="fas fa-utensils"></i> Menú</a></li>
+                <li><a href="#"><i class="fas fa-calendar-check"></i> Reservas</a></li>
+                <li><a href="#" id="pedirBtn" class="disabled"><i class="fas fa-shopping-cart"></i> Pedir</a></li>
+            </ul>
         </div>
-    </section>
+    </nav>
 
-    <!-- Cocina -->
-    <section class="kitchen-section">
-        <div class="kitchen-grid">
-            <div class="kitchen-card">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Chef" class="kitchen-image">
-                <div class="kitchen-content">
-                    <h3>Nuestra Cocina</h3>
-                    <p>Descubre la pasión por la gastronomía de nuestros chefs nativos</p>
-                </div>
-            </div>
-            <div class="kitchen-card">
-                <img src="https://images.unsplash.com/photo-1568901346375-23b45b9ca4b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Cocina" class="kitchen-image">
-                <div class="kitchen-content">
-                    <h3>Experiencia Gastronómica</h3>
-                    <p>Ingredientes frescos y técnicas innovadoras para crear platos únicos</p>
-                </div>
+    <!-- Sección de ubicación -->
+    <section class="location-section">
+        <div class="container">
+            <h2>Ingresa tu ubicación para realizar pedidos</h2>
+            <div class="location-input">
+                <input type="text" id="ubicacionInput" placeholder="Ingresa tu dirección">
+                <button id="confirmarUbicacion">Confirmar Ubicación</button>
             </div>
         </div>
     </section>
 
-    <!-- Menú -->
-    <section class="menu-section">
-        <div class="menu-grid">
-            <div class="menu-item">
-                <h3>Desayuno</h3>
-                <ul>
-                    <li>
-                        <span class="dish-name">Buffet de Desayuno</span>
-                        <span class="dish-price">S/.15</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Caldo de gallina</span>
-                        <span class="dish-price">S/.10</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Pan con queso</span>
-                        <span class="dish-price">S/.2</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-item">
-                <h3>Almuerzo</h3>
-                <ul>
-                    <li>
-                        <span class="dish-name">Papa a la huancainar</span>
-                        <span class="dish-price">S/.5</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Pachamanca</span>
-                        <span class="dish-price">S/.25</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Picante de cuy</span>
-                        <span class="dish-price">S/.25</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu-item">
-                <h3>Cena</h3>
-                <ul>
-                    <li>
-                        <span class="dish-name">Siete semillas</span>
-                        <span class="dish-price">S/.5</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Caldo de cardero</span>
-                        <span class="dish-price">S/.10</span>
-                    </li>
-                    <li>
-                        <span class="dish-name">Lomo Saltado</span>
-                        <span class="dish-price">S/.15</span>
-                    </li>
-                </ul>
+    <!-- Carrusel de Entradas -->
+    <section>
+        <div class="container">
+            <h2>Entradas</h2>
+            <div class="category-container">
+                <div class="category-description">
+                    <h3>Deliciosos Inicios</h3>
+                    <p>Nuestras entradas son preparadas con ingredientes frescos y de la más alta calidad. Ideales para comenzar tu experiencia gastronómica con el mejor sabor.</p>
+                </div>
+                <div class="category-slider">
+                    <div class="category-slides" id="entradasSlides">
+                        <!-- Slide 1 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Ceviche de Trucha</h3>
+                            <p class="slide-description">Trucha fresca marinada en limón con cebolla roja, ají limo y cilantro</p>
+                            <div class="slide-price">S/ 28.90</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Causa Rellena</h3>
+                            <p class="slide-description">Papa amarilla con ají, rellena de pollo deshilachado y palta</p>
+                            <div class="slide-price">S/ 22.50</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Reservas -->
-    <section class="booking-section">
-        <div class="booking-form">
-            <h2>Reservar Mesa</h2>
-            <form>
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" required>
+    <!-- Carrusel de Sopas -->
+    <section>
+        <div class="container">
+            <h2>Sopas</h2>
+            <div class="category-container">
+                <div class="category-slider">
+                    <div class="category-slides" id="sopasSlides">
+                        <!-- Slide 1 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80');"></div>
+                            <h3 class="slide-title">Chupe de Camarones</h3>
+                            <p class="slide-description">Cremosa sopa con camarones, leche, huevo y ají panca</p>
+                            <div class="slide-price">S/ 32.90</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1603989872380-0c6d0a139ffe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Sopa de Quinua</h3>
+                            <p class="slide-description">Sopa nutritiva de quinua con verduras frescas</p>
+                            <div class="slide-price">S/ 18.50</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                <div class="category-description">
+                    <h3>Reconfortantes Caldos</h3>
+                    <p>Nuestras sopas son elaboradas con recetas tradicionales y los mejores ingredientes, perfectas para entrar en calor y disfrutar de sabores auténticos.</p>
                 </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" required>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Segundos -->
+    <section>
+        <div class="container">
+            <h2>Segundos</h2>
+            <div class="category-container">
+                <div class="category-description">
+                    <h3>Platos de Fondo</h3>
+                    <p>Platos principales que destacan por su sabor y presentación, elaborados con productos locales y técnicas tradicionales.</p>
                 </div>
-                <div class="form-group">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" id="fecha" required>
+                <div class="category-slider">
+                    <div class="category-slides" id="segundosSlides">
+                        <!-- Slide 1 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1606755962773-d324e7a84393?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Lomo Saltado</h3>
+                            <p class="slide-description">Trozos de lomo de res salteados con cebolla, tomate y papas fritas</p>
+                            <div class="slide-price">S/ 38.90</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1626082927389-6cd097cee6a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Trucha a la Parrilla</h3>
+                            <p class="slide-description">Trucha fresca a la parrilla con guarnición de papas andinas y ensalada</p>
+                            <div class="slide-price">S/ 34.50</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="hora">Hora</label>
-                    <input type="time" id="hora" required>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carrusel de Bebidas -->
+    <section>
+        <div class="container">
+            <h2>Bebidas</h2>
+            <div class="category-container">
+                <div class="category-slider">
+                    <div class="category-slides" id="bebidasSlides">
+                        <!-- Slide 1 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1257&q=80');"></div>
+                            <h3 class="slide-title">Chicha Morada</h3>
+                            <p class="slide-description">Refrescante bebida de maíz morado con piña y canela</p>
+                            <div class="slide-price">S/ 8.90</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="category-slide">
+                            <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1595981267035-7b04ca84a82d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                            <h3 class="slide-title">Emoliente</h3>
+                            <p class="slide-description">Bebida caliente de hierbas con linaza y cebada</p>
+                            <div class="slide-price">S/ 7.50</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" disabled>-</button>
+                                <span class="quantity-value">0</span>
+                                <button class="quantity-btn plus" disabled>+</button>
+                            </div>
+                            <button class="add-to-cart" disabled>Añadir</button>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="personas">Número de Personas</label>
-                    <select id="personas" required>
-                        <option value="">Seleccionar</option>
-                        <option value="1">1 persona</option>
-                        <option value="2">2 personas</option>
-                        <option value="3">3 personas</option>
-                        <option value="4">4 personas</option>
-                        <option value="5">5 personas</option>
-                        <option value="6">6 personas</option>
-                        <option value="7">7 personas</option>
-                        <option value="8">8 personas</option>
-                        <option value="9">9 personas</option>
-                        <option value="10">10 personas</option>
-                    </select>
+                <div class="category-description">
+                    <h3>Refrescos y Calientes</h3>
+                    <p>Bebidas tradicionales y refrescantes para acompañar tus platillos o disfrutar en cualquier momento.</p>
                 </div>
-                <button type="submit" class="submit-button">Reservar</button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -164,7 +685,7 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturalea con la comodidad</p>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -172,19 +693,123 @@
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="habitaciones.html">Habitaciones</a></li>
                         <li><a href="restaurante.html">Restaurante</a></li>
-                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
                     </ul>
                 </div>
             </div>
+            <div class="footer-bottom">
+                &copy; 2023 Shumak Ware. Todos los derechos reservados.
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Variables globales
+        let ubicacionIngresada = false;
+        
+        // Referencias a elementos del DOM
+        const ubicacionInput = document.getElementById('ubicacionInput');
+        const confirmarUbicacionBtn = document.getElementById('confirmarUbicacion');
+        const pedirBtn = document.getElementById('pedirBtn');
+        const minusBtns = document.querySelectorAll('.quantity-btn.minus');
+        const plusBtns = document.querySelectorAll('.quantity-btn.plus');
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        
+        // Confirmar ubicación
+        confirmarUbicacionBtn.addEventListener('click', () => {
+            if (ubicacionInput.value.trim() === '') {
+                alert('Por favor ingresa una ubicación válida');
+                return;
+            }
+            
+            ubicacionIngresada = true;
+            pedirBtn.classList.remove('disabled');
+            
+            // Habilitar controles de cantidad
+            minusBtns.forEach(btn => btn.disabled = false);
+            plusBtns.forEach(btn => btn.disabled = false);
+            addToCartBtns.forEach(btn => btn.disabled = false);
+            
+            alert(`Ubicación confirmada: ${ubicacionInput.value}`);
+        });
+        
+        // Función para manejar el carrusel
+        function setupSlider(slidesContainerId) {
+            const slidesContainer = document.getElementById(slidesContainerId);
+            const slides = slidesContainer.querySelectorAll('.category-slide');
+            const prevBtn = slidesContainer.parentElement.querySelector('.prev-btn');
+            const nextBtn = slidesContainer.parentElement.querySelector('.next-btn');
+            
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            
+            function updateSlider() {
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateSlider();
+            });
+        }
+        
+        // Inicializar carruseles
+        setupSlider('entradasSlides');
+        setupSlider('sopasSlides');
+        setupSlider('segundosSlides');
+        setupSlider('bebidasSlides');
+        
+        // Manejar controles de cantidad
+        document.querySelectorAll('.quantity-controls').forEach(control => {
+            const minusBtn = control.querySelector('.minus');
+            const plusBtn = control.querySelector('.plus');
+            const quantityValue = control.querySelector('.quantity-value');
+            
+            minusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityValue.textContent);
+                if (value > 0) {
+                    value--;
+                    quantityValue.textContent = value;
+                }
+            });
+            
+            plusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityValue.textContent);
+                value++;
+                quantityValue.textContent = value;
+            });
+        });
+        
+        // Manejar añadir al carrito
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const slide = this.closest('.category-slide');
+                const title = slide.querySelector('.slide-title').textContent;
+                const price = slide.querySelector('.slide-price').textContent;
+                const quantity = slide.querySelector('.quantity-value').textContent;
+                
+                if (quantity === '0') {
+                    alert('Por favor selecciona al menos un ítem');
+                    return;
+                }
+                
+                alert(`Añadido al carrito: ${quantity} x ${title} - ${price}`);
+                slide.querySelector('.quantity-value').textContent = '0';
+            });
+        });
+    </script>
 </body>
 </html>
