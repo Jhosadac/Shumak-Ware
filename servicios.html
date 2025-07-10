@@ -3,16 +3,630 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shumak Ware</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Servicios - Shumak Ware</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        /* Header */
+        .main-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .nav-header ul.main-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-header ul.main-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-header ul.main-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-header ul.main-menu li a:hover,
+        .nav-header ul.main-menu li a.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Carrusel de Eventos */
+        .events-section {
+            padding: 40px 0;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .events-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            height: 400px;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+        
+        .events-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+        
+        .event-slide {
+            min-width: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .event-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+        
+        .event-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+        
+        .event-title {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .event-description {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .event-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .event-btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        
+        .carousel-controls button {
+            pointer-events: auto;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-controls button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+        
+        /* Servicios */
+        .services-section {
+            background-color: white;
+            padding: 80px 0;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .service-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-title {
+            font-size: 1.6rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .service-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            margin-bottom: 20px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .feature-item i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .btn-reservar {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            display: inline-block;
+            text-decoration: none;
+            transition: background 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn-reservar:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        /* Modal de Reserva */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalAppear 0.4s;
+        }
+        
+        @keyframes modalAppear {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: var(--accent-color);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 500;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Modal de Confirmación */
+        .confirmation-modal {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .confirmation-icon {
+            font-size: 70px;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            animation: iconPulse 1s infinite alternate;
+        }
+        
+        @keyframes iconPulse {
+            from {transform: scale(1);}
+            to {transform: scale(1.1);}
+        }
+        
+        .confirmation-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .confirmation-details {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: left;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .confirmation-details p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .confirmation-code {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 20px 0;
+            letter-spacing: 3px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 2px dashed #ddd;
+        }
+        
+        .payment-info {
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid var(--warning-color);
+        }
+        
+        .payment-info h3 {
+            margin-top: 0;
+            color: var(--warning-color);
+        }
+        
+        .payment-info ul {
+            text-align: left;
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .payment-info ul li {
+            margin-bottom: 10px;
+        }
+        
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 10px;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-wrap {
+                flex-direction: column;
+            }
+            
+            .nav-header ul.main-menu {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-header ul.main-menu li {
+                margin: 5px;
+            }
+            
+            .event-title {
+                font-size: 1.8rem;
+            }
+            
+            .event-description {
+                font-size: 1rem;
+            }
+            
+            .events-carousel {
+                height: 350px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="main-header">
         <div class="header-wrap">
             <div class="logo">
-                <a href="index.html">Shumak Ware</a>
+                <img src="assests/logo.png" alt="logo">
             </div>
             <nav class="nav-header">
                 <ul class="main-menu">
@@ -20,113 +634,216 @@
                     <li><a href="habitaciones.html">Habitaciones</a></li>
                     <li><a href="restaurante.html">Restaurante</a></li>
                     <li><a href="servicios.html" class="active">Servicios</a></li>
-                    <li><a href="contacto">Contacto</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Servicios y Instalaciones</h1>
-            <p>Disfruta de las mejores instalaciones y servicios de lujo en nuestro hotel</p>
-            <button class="cta-button">Explorar Servicios</button>
-        </div>
-    </section>
-
-    <!-- Servicios Grid -->
-    <section class="services-grid">
-        <!-- Spa y Wellness -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-spa"></i>
-            </div>
-            <div class="service-content">
-                <h3>Spa y Wellness</h3>
-                <ul>
-                    <li>Masajes terapéuticos</li>
-                    <li>Sauna y baño turco</li>
-                    <li>Gimnasio 24 horas</li>
-                    <li>Clases de yoga</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Servicios de Negocios -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-briefcase"></i>
-            </div>
-            <div class="service-content">
-                <h3>Servicios de Negocios</h3>
-                <ul>
-                    <li>Salones de reuniones</li>
-                    <li>Centro de negocios</li>
-                    <li>Impresión y fax</li>
-                    <li>Equipo audiovisual</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Servicios Premium -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-star"></i>
-            </div>
-            <div class="service-content">
-                <h3>Servicios Premium</h3>
-                <ul>
-                    <li>Conserjería 24h</li>
-                    <li>Servicio de habitaciones</li>
-                    <li>Traslado al aeropuerto</li>
-                    <li>Asistencia turística</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Servicios Familiares -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-child"></i>
-            </div>
-            <div class="service-content">
-                <h3>Servicios Familiares</h3>
-                <ul>
-                    <li>Servicio de niñera</li>
-                    <li>Club infantil</li>
-                    <li>Habitaciones familiares</li>
-                    <li>Actividades para niños</li>
-                </ul>
+    <!-- Carrusel de Eventos -->
+    <section class="events-section">
+        <div class="container">
+            <h2 style="color: white;">Eventos Destacados</h2>
+            <div class="events-carousel">
+                <div class="events-slides" id="eventsSlides">
+                    <!-- Slide 1 -->
+                    <div class="event-slide">
+                        <div class="event-content">
+                            <h3 class="event-title">Celebración de Cumpleaños</h3>
+                            <p class="event-description">Organizamos las mejores fiestas de cumpleaños con decoraciones temáticas, menús personalizados y un ambiente inolvidable. Celebra tus momentos especiales con nosotros y crea recuerdos que durarán toda la vida.</p>
+                            <button class="event-btn">Ver más detalles</button>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="event-slide">
+                        <div class="event-content">
+                            <h3 class="event-title">Bodas Inolvidables</h3>
+                            <p class="event-description">Nuestro equipo de expertos en bodas se encarga de cada detalle para hacer de tu día especial una experiencia mágica. Desde la decoración floral hasta el banquete, todo está cuidadosamente planeado.</p>
+                            <button class="event-btn">Ver más detalles</button>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="event-slide">
+                        <div class="event-content">
+                            <h3 class="event-title">Aniversarios de Oro</h3>
+                            <p class="event-description">Celebra tus años de amor con una velada romántica e inolvidable. Ofrecemos paquetes exclusivos para aniversarios con cena gourmet, música en vivo y decoración especial para honrar este momento único.</p>
+                            <button class="event-btn">Ver más detalles</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="indicator active" data-index="0"></div>
+                    <div class="indicator" data-index="1"></div>
+                    <div class="indicator" data-index="2"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Instalaciones -->
-    <section class="facilities-section">
-        <div class="facilities-grid">
-            <!-- Piscina -->
-            <div class="facility-card">
-                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Piscina" class="facility-image">
-                <h3>Piscina y Solárium</h3>
-                <p>Disfruta de nuestra piscina exterior climatizada y área de solárium con vistas panorámicas.</p>
-            </div>
-
-            <!-- Gimnasio -->
-            <div class="facility-card">
-                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Gimnasio" class="facility-image">
-                <h3>Gimnasio</h3>
-                <p>Equipo de última generación y personal entrenado para ayudarte a mantener tu rutina de ejercicio.</p>
-            </div>
-
-            <!-- Spa -->
-            <div class="facility-card">
-                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Spa" class="facility-image">
-                <h3>Spa y Sauna</h3>
-                <p>Relájate en nuestro spa con sauna, baño turco y masajes personalizados.</p>
+    <!-- Servicios -->
+    <section class="services-section">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <!-- Servicio 1 -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">Cumpleaños</h3>
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Decoración temática personalizada</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Menú especial para niños y adultos</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Animación y juegos para niños</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Área de juegos segura</span>
+                            </div>
+                        </div>
+                        <button class="btn-reservar" data-service="Cumpleaños">Reservar Ahora</button>
+                    </div>
+                </div>
+                
+                <!-- Servicio 2 -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1580545994623-1a1d3e5f8c7f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">Matrimonios</h3>
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ceremonia y recepción en un solo lugar</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Menú de banquete gourmet</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Coordinador de bodas profesional</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Decoración floral y de ambiente</span>
+                            </div>
+                        </div>
+                        <button class="btn-reservar" data-service="Matrimonios">Reservar Ahora</button>
+                    </div>
+                </div>
+                
+                <!-- Servicio 3 -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+                    <div class="service-content">
+                        <h3 class="service-title">Aniversarios</h3>
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Cena romántica con vista especial</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Paquete fotográfico para recuerdos</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Brindis con vino espumante</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Postre especial con decoración</span>
+                            </div>
+                        </div>
+                        <button class="btn-reservar" data-service="Aniversarios">Reservar Ahora</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal de Reserva de Servicio -->
+    <div id="reservaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Reservar Servicio</h2>
+            <form id="reservaForm">
+                <input type="hidden" id="servicio" name="servicio">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha del Evento:</label>
+                    <input type="date" id="fecha" name="fecha" required min="">
+                </div>
+                <div class="form-group">
+                    <label for="hora_entrada">Hora de Entrada:</label>
+                    <input type="time" id="hora_entrada" name="hora_entrada" required>
+                </div>
+                <div class="form-group">
+                    <label for="hora_salida">Hora de Salida:</label>
+                    <input type="time" id="hora_salida" name="hora_salida" required>
+                </div>
+                <button type="submit">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmacionModal" class="modal">
+        <div class="modal-content confirmation-modal">
+            <span class="close">&times;</span>
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="confirmation-title">¡Reserva Exitosa!</h2>
+            
+            <div class="confirmation-details">
+                <p><strong>Servicio:</strong> <span id="conf-servicio"></span></p>
+                <p><strong>Nombre:</strong> <span id="conf-nombre"></span></p>
+                <p><strong>Fecha:</strong> <span id="conf-fecha"></span></p>
+                <p><strong>Hora de Entrada:</strong> <span id="conf-hora-entrada"></span></p>
+                <p><strong>Hora de Salida:</strong> <span id="conf-hora-salida"></span></p>
+                <p><strong>Código de Reserva:</strong></p>
+                <div class="confirmation-code" id="conf-codigo"></div>
+            </div>
+            
+            <div class="payment-info">
+                <h3>Instrucciones de Pago</h3>
+                <p>Para confirmar tu reserva, debes realizar un pago del 25% (S/ 160) dentro de las próximas 8 horas.</p>
+                <ul>
+                    <li>Pago fijo: S/ 160 (por 8 horas)</li>
+                    <li>Cada hora extra: S/ 25 adicionales</li>
+                    <li>Máximo de personas: 30</li>
+                </ul>
+                <p>Después del pago, tu reserva quedará confirmada automáticamente.</p>
+            </div>
+            
+            <a href="#" class="whatsapp-btn" id="whatsappBtn">
+                <i class="fab fa-whatsapp"></i> Realizar Pago por WhatsApp
+            </a>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -134,7 +851,7 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturalea con la comodidad</p>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -148,13 +865,155 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
                     </ul>
                 </div>
             </div>
+            <div class="footer-bottom">
+                &copy; 2023 Shumak Ware. Todos los derechos reservados.
+            </div>
         </div>
     </footer>
+
+    <script>
+        // Inicializar carrusel de eventos
+        const eventsSlides = document.getElementById('eventsSlides');
+        const eventSlides = eventsSlides.querySelectorAll('.event-slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const indicators = document.querySelectorAll('.indicator');
+        let currentSlideIndex = 0;
+        
+        function updateEventsSlider() {
+            eventsSlides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            
+            // Actualizar indicadores
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlideIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + eventSlides.length) % eventSlides.length;
+            updateEventsSlider();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % eventSlides.length;
+            updateEventsSlider();
+        });
+        
+        // Auto avanzar cada 5 segundos
+        setInterval(() => {
+            currentSlideIndex = (currentSlideIndex + 1) % eventSlides.length;
+            updateEventsSlider();
+        }, 5000);
+        
+        // Navegación por indicadores
+        indicators.forEach(indicator => {
+            indicator.addEventListener('click', function() {
+                currentSlideIndex = parseInt(this.getAttribute('data-index'));
+                updateEventsSlider();
+            });
+        });
+        
+        // Modal de reserva
+        const reservaModal = document.getElementById('reservaModal');
+        const confirmacionModal = document.getElementById('confirmacionModal');
+        const reservaBtns = document.querySelectorAll('.btn-reservar');
+        const closeBtns = document.querySelectorAll('.close');
+        const modalTitle = document.getElementById('modal-title');
+        const servicioInput = document.getElementById('servicio');
+        const fechaInput = document.getElementById('fecha');
+        const reservaForm = document.getElementById('reservaForm');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        
+        // Establecer fecha mínima como hoy
+        const today = new Date().toISOString().split('T')[0];
+        fechaInput.min = today;
+        
+        // Abrir modal de reserva
+        reservaBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const service = this.getAttribute('data-service');
+                modalTitle.textContent = `Reservar ${service}`;
+                servicioInput.value = service;
+                reservaModal.style.display = 'block';
+            });
+        });
+        
+        // Cerrar modales
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                reservaModal.style.display = 'none';
+                confirmacionModal.style.display = 'none';
+            });
+        });
+        
+        // Cerrar modal al hacer clic fuera
+        window.addEventListener('click', function(e) {
+            if (e.target === reservaModal) {
+                reservaModal.style.display = 'none';
+            }
+            if (e.target === confirmacionModal) {
+                confirmacionModal.style.display = 'none';
+            }
+        });
+        
+        // Enviar formulario de reserva
+        reservaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const telefono = document.getElementById('telefono').value;
+            const fecha = fechaInput.value;
+            const horaEntrada = document.getElementById('hora_entrada').value;
+            const horaSalida = document.getElementById('hora_salida').value;
+            const servicio = servicioInput.value;
+            
+            // Validar que la hora de salida sea después de la hora de entrada
+            if (horaSalida <= horaEntrada) {
+                alert('La hora de salida debe ser posterior a la hora de entrada');
+                return;
+            }
+            
+            // Generar código de reserva (aleatorio)
+            const codigoReserva = 'RSV-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+            
+            // Actualizar modal de confirmación
+            document.getElementById('conf-servicio').textContent = servicio;
+            document.getElementById('conf-nombre').textContent = nombre;
+            document.getElementById('conf-fecha').textContent = fecha;
+            document.getElementById('conf-hora-entrada').textContent = horaEntrada;
+            document.getElementById('conf-hora-salida').textContent = horaSalida;
+            document.getElementById('conf-codigo').textContent = codigoReserva;
+            
+            // Configurar enlace de WhatsApp
+            const mensaje = `Hola, acabo de realizar una reserva para ${servicio} en Shumak Ware.%0A%0A` +
+                            `*Código de Reserva:* ${codigoReserva}%0A` +
+                            `*Nombre:* ${nombre}%0A` +
+                            `*Fecha:* ${fecha}%0A` +
+                            `*Hora de Entrada:* ${horaEntrada}%0A` +
+                            `*Hora de Salida:* ${horaSalida}%0A%0A` +
+                            `Quiero realizar el pago del 25% para confirmar mi reserva.`;
+            
+            whatsappBtn.href = `https://wa.me/51987957231?text=${encodeURIComponent(mensaje)}`;
+            
+            // Mostrar modal de confirmación
+            reservaModal.style.display = 'none';
+            confirmacionModal.style.display = 'block';
+            
+            // Limpiar formulario
+            reservaForm.reset();
+        });
+    </script>
 </body>
 </html>
