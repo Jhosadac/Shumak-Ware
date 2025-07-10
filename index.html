@@ -4,13 +4,539 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Shumak Ware</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-     <!--libreria de firebase-->
+    <!--libreria de firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script> 
+    <style>
+        /* Estilos generales */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .main-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo img {
+            height: 60px;
+        }
+        
+        .nav-header ul.main-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-header ul.main-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-header ul.main-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-header ul.main-menu li a:hover,
+        .nav-header ul.main-menu li a.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background-size: cover !important;
+            background-position: center !important;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .cta-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Carrusel */
+        .slider-container {
+            position: relative;
+            margin: 80px auto;
+            max-width: 1200px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .slider {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+        
+        .slide {
+            min-width: 100%;
+            display: flex;
+            background: white;
+        }
+        
+        .slide-image {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide-info {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .room-type {
+            background: var(--primary-color);
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .room-title {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .room-description {
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+        }
+        
+        .feature i {
+            color: var(--primary-color);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+            width: fit-content;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            z-index: 10;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .slider-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .prev-btn {
+            left: 20px;
+        }
+        
+        .next-btn {
+            right: 20px;
+        }
+        
+        .indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        /* Servicios */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: #555;
+        }
+        
+        /* Contacto */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--secondary-color), #1a2530);
+            color: white;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .submit-button:hover {
+            background: #2980b9;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .slide {
+                flex-direction: column;
+            }
+            
+            .slide-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-wrap {
+                flex-direction: column;
+            }
+            
+            .nav-header ul.main-menu {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-header ul.main-menu li {
+                margin: 5px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .room-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 60vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -21,11 +547,11 @@
             </div>
             <nav class="nav-header">
                 <ul class="main-menu">
-                    <li><a href="index">Inicio</a></li>
-                    <li><a href="habitaciones">Habitaciones</a></li>
-                    <li><a href="restaurante">Restaurante</a></li>
-                    <li><a href="servicios">Servicios</a></li>
-                    <li><a href="contacto">Contacto</a></li>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="habitaciones.html">Habitaciones</a></li>
+                    <li><a href="restaurante.html">Restaurante</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
@@ -40,126 +566,122 @@
         </div>
     </section>
     
-    <!-- carrusel -->
-     <div class="slider-container">
-            
-            <div class="slider">
-                <!-- Habitación 1 -->
-                <div class="slide">
-                    <div class="slide-image">
-                        <img src="assests/habitacion_1.jpg" alt="Suite Presidencial">
+    <!-- Carrusel -->
+    <div class="slider-container">
+        <div class="slider">
+            <!-- Habitación 1 -->
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('assests/habitacion_1.jpg');"></div>
+                <div class="slide-info">
+                    <div class="room-type">Suite</div>
+                    <h2 class="room-title">Suite Presidencial</h2>
+                    <p class="room-description">Nuestra suite más exclusiva con sala de estar separada, comedor privado y vistas panorámicas a la ciudad. Incluye servicio de mayordomo 24 horas y acceso a nuestro club lounge premium.</p>
+                    <div class="features">
+                        <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
+                        <div class="feature"><i class="fas fa-bath"></i> Bañera Jacuzzi</div>
+                        <div class="feature"><i class="fas fa-wifi"></i> WiFi Premium</div>
+                        <div class="feature"><i class="fas fa-tv"></i> TV 65"</div>
                     </div>
-                    <div class="slide-info">
-                        <div class="room-type">Suite</div>
-                        <h2 class="room-title">Suite Presidencial</h2>
-                        <p class="room-description">Nuestra suite más exclusiva con sala de estar separada, comedor privado y vistas panorámicas a la ciudad. Incluye servicio de mayordomo 24 horas y acceso a nuestro club lounge premium.</p>
-                        <div class="features">
-                            <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
-                            <div class="feature"><i class="fas fa-bath"></i> Bañera Jacuzzi</div>
-                            <div class="feature"><i class="fas fa-wifi"></i> WiFi Premium</div>
-                            <div class="feature"><i class="fas fa-tv"></i> TV 65"</div>
-                        </div>
-                        <div class="price">$399 <span>por noche</span></div>
-                        <a href="#" class="btn">Reservar ahora</a>
-                    </div>
+                    <div class="price">$399 <span>por noche</span></div>
+                    <a href="habitaciones.html" class="btn">Reservar ahora</a>
                 </div>
-                
-                <!-- Habitación 2 -->
-                <div class="slide">
-                    <div class="slide-image">
-                        <img src="assests/habitacion_2.jpg" alt="Habitación Ejecutiva">
-                    </div>
-                    <div class="slide-info">
-                        <div class="room-type">Ejecutiva</div>
-                        <h2 class="room-title">Habitación Ejecutiva</h2>
-                        <p class="room-description">Diseñada para viajeros de negocios, con amplio espacio de trabajo, escritorio ejecutivo y tecnología de reuniones integrada. Acceso gratuito al centro de negocios y servicio de secretaría.</p>
-                        <div class="features">
-                            <div class="feature"><i class="fas fa-bed"></i> 2 Camas Queen</div>
-                            <div class="feature"><i class="fas fa-coffee"></i> Cafetera Premium</div>
-                            <div class="feature"><i class="fas fa-wifi"></i> WiFi Empresarial</div>
-                            <div class="feature"><i class="fas fa-desktop"></i> Escritorio Ejecutivo</div>
-                        </div>
-                        <div class="price">$249 <span>por noche</span></div>
-                        <a href="#" class="btn">Reservar ahora</a>
-                    </div>
-                </div>
-                
-                <!-- Habitación 3 -->
-                <div class="slide">
-                    <div class="slide-image">
-                        <img src="https://images.unsplash.com/photo-1592229505726-ca12164124c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Habitación Deluxe">
-                    </div>
-                    <div class="slide-info">
-                        <div class="room-type">Deluxe</div>
-                        <h2 class="room-title">Habitación Deluxe con Vista al Mar</h2>
-                        <p class="room-description">Amplia habitación con balcón privado y vistas espectaculares al mar. Decoración elegante con toques modernos y baño de mármol con amenities de lujo.</p>
-                        <div class="features">
-                            <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
-                            <div class="feature"><i class="fas fa-umbrella-beach"></i> Vista al Mar</div>
-                            <div class="feature"><i class="fas fa-wine-glass"></i> Minibar Premium</div>
-                            <div class="feature"><i class="fas fa-snowflake"></i> Aire Acondicionado</div>
-                        </div>
-                        <div class="price">$299 <span>por noche</span></div>
-                        <a href="#" class="btn">Reservar ahora</a>
-                    </div>
-                </div>
-                
             </div>
             
-            <button class="slider-btn prev-btn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="slider-btn next-btn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <div class="indicators">
-                <div class="indicator active"></div>
-                <div class="indicator"></div>
-                <div class="indicator"></div>
+            <!-- Habitación 2 -->
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('assests/habitacion_2.jpg');"></div>
+                <div class="slide-info">
+                    <div class="room-type">Ejecutiva</div>
+                    <h2 class="room-title">Habitación Ejecutiva</h2>
+                    <p class="room-description">Diseñada para viajeros de negocios, con amplio espacio de trabajo, escritorio ejecutivo y tecnología de reuniones integrada. Acceso gratuito al centro de negocios y servicio de secretaría.</p>
+                    <div class="features">
+                        <div class="feature"><i class="fas fa-bed"></i> 2 Camas Queen</div>
+                        <div class="feature"><i class="fas fa-coffee"></i> Cafetera Premium</div>
+                        <div class="feature"><i class="fas fa-wifi"></i> WiFi Empresarial</div>
+                        <div class="feature"><i class="fas fa-desktop"></i> Escritorio Ejecutivo</div>
+                    </div>
+                    <div class="price">$249 <span>por noche</span></div>
+                    <a href="habitaciones.html" class="btn">Reservar ahora</a>
+                </div>
             </div>
-     </div>
+            
+            <!-- Habitación 3 -->
+            <div class="slide">
+                <div class="slide-image" style="background-image: url('https://images.unsplash.com/photo-1592229505726-ca12164124c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');"></div>
+                <div class="slide-info">
+                    <div class="room-type">Deluxe</div>
+                    <h2 class="room-title">Habitación Deluxe con Vista al Mar</h2>
+                    <p class="room-description">Amplia habitación con balcón privado y vistas espectaculares al mar. Decoración elegante con toques modernos y baño de mármol con amenities de lujo.</p>
+                    <div class="features">
+                        <div class="feature"><i class="fas fa-bed"></i> Cama King Size</div>
+                        <div class="feature"><i class="fas fa-umbrella-beach"></i> Vista al Mar</div>
+                        <div class="feature"><i class="fas fa-wine-glass"></i> Minibar Premium</div>
+                        <div class="feature"><i class="fas fa-snowflake"></i> Aire Acondicionado</div>
+                    </div>
+                    <div class="price">$299 <span>por noche</span></div>
+                    <a href="habitaciones.html" class="btn">Reservar ahora</a>
+                </div>
+            </div>
+        </div>
+        
+        <button class="slider-btn prev-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+        </div>
+    </div>
    
    <!-- Servicios -->
     <section class="services">
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="service-icon fas fa-bed"></i>
-                <h3>Habitaciones de Lujo</h3>
-                <p>Disfruta de habitaciones diseñadas para tu máximo confort y relax</p>
-            </div>
-            <div class="service-card">
-                <i class="service-icon fas fa-utensils"></i>
-                <h3>Gastronomía Exquisita</h3>
-                <p>Nuestro restaurante ofrece los mejores platos de la cocina Ancashina</p>
-            </div>
-            <div class="service-card">
-                <i class="service-icon fas fa-swimming-pool"></i>
-                <h3>Instalaciones</h3>
-                <p>Piscina, gimnasio, spa y todos los servicios que necesitas</p>
+        <div class="container">
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="service-icon fas fa-bed"></i>
+                    <h3>Habitaciones de Lujo</h3>
+                    <p>Disfruta de habitaciones diseñadas para tu máximo confort y relax</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon fas fa-utensils"></i>
+                    <h3>Gastronomía Exquisita</h3>
+                    <p>Nuestro restaurante ofrece los mejores platos de la cocina Ancashina</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon fas fa-swimming-pool"></i>
+                    <h3>Instalaciones</h3>
+                    <p>Piscina, gimnasio, spa y todos los servicios que necesitas</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contacto -->
     <section class="contact" id="contacto">
-        <div class="contact-form">
-            <h2>Contáctanos</h2>
-            <form id="contactform">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" placeholder="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" placeholder="mensaje" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="submit-button">Enviar</button>
-            </form>
+        <div class="container">
+            <div class="contact-form">
+                <h2>Contáctanos</h2>
+                <form id="contactform">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="tu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -169,98 +691,100 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturalea con la comodidad</p>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
                     <ul>
-                        <li><a href="index">Inicio</a></li>
-                        <li><a href="habitaciones">Habitaciones</a></li>
-                        <li><a href="restaurante">Restaurante</a></li>
-                        <li><a href="servicios">Servicios</a></li>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="habitaciones.html">Habitaciones</a></li>
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
                     </ul>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 Shumak Ware. Todos los derechos reservados.
             </div>
         </div>
     </footer>
 
     <script>
         const firebaseConfig = {
-    apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
-    authDomain: "shumak-ware.firebaseapp.com",
-    databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
-    projectId: "shumak-ware",
-    storageBucket: "shumak-ware.firebasestorage.app",
-    messagingSenderId: "64196160181",
-    appId: "1:64196160181:web:76852cef50c12a498e6cfc",
-    measurementId: "G-8L85H7B12E"
-};
+            apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
+            authDomain: "shumak-ware.firebaseapp.com",
+            databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
+            projectId: "shumak-ware",
+            storageBucket: "shumak-ware.firebasestorage.app",
+            messagingSenderId: "64196160181",
+            appId: "1:64196160181:web:76852cef50c12a498e6cfc",
+            measurementId: "G-8L85H7B12E"
+        };
 
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
 
-// Referencia a la base de datos
-const contactFormDB = firebase.database().ref("contactForm");
+        // Referencia a la base de datos
+        const contactFormDB = firebase.database().ref("contactForm");
 
-// Manejar el envio del formulario
-document.getElementById("contactform").addEventListener("submit", submitForm);
-function submitForm(e) {
-    e.preventDefault();
-    
-    try {
-        // Obtener valores
-        const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const mensaje = document.getElementById('mensaje').value;
-        
-        // Validaciones
-        if (!nombre || !email || !mensaje) {
-            throw new Error('Todos los campos son obligatorios');
+        // Manejar el envio del formulario
+        document.getElementById("contactform").addEventListener("submit", submitForm);
+        function submitForm(e) {
+            e.preventDefault();
+            
+            try {
+                // Obtener valores
+                const nombre = document.getElementById('nombre').value;
+                const email = document.getElementById('email').value;
+                const mensaje = document.getElementById('mensaje').value;
+                
+                // Validaciones
+                if (!nombre || !email || !mensaje) {
+                    throw new Error('Todos los campos son obligatorios');
+                }
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    throw new Error('El email no es válido');
+                }
+
+                saveData(nombre, email, mensaje);
+
+                // Resetear formulario
+                document.getElementById("contactform").reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`Error: ${error.message}`);
+            }
         }
-        
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            throw new Error('El email no es válido');
-        }
 
-        saveData(nombre, email, mensaje);
+        const saveData = (nombre, email, mensaje) => {
+            const newContact = contactFormDB.push();
+            
+            newContact.set({
+                nombre: nombre,
+                correo: email,
+                mensaje: mensaje
+            })
+            .then(() => {
+                console.log("Datos guardados correctamente");
+                alert("¡Mensaje enviado con éxito!");
+            })
+            .catch((error) => {
+                console.error("Error al guardar:", error);
+                alert("Ocurrió un error al enviar el mensaje");
+            });
+        };
 
-        // Resetear formulario
-        document.getElementById("contactform").reset();
-        
-    } catch (error) {
-        console.error('Error:', error);
-        alert(`Error: ${error.message}`);
-    }
-}
-
-const saveData = (nombre, email, mensaje) => {
-    const newContact = contactFormDB.push();
-    
-    newContact.set({
-        nombre: nombre,
-        correo: email,
-        mensaje: mensaje
-    })
-    .then(() => {
-        console.log("Datos guardados correctamente");
-        alert("¡Mensaje enviado con éxito!");
-    })
-    .catch((error) => {
-        console.error("Error al guardar:", error);
-        alert("Ocurrió un error al enviar el mensaje");
-    });
-};
-    </script>
-
-    <script>
+        // Carrusel Script
         document.addEventListener('DOMContentLoaded', function() {
             const slider = document.querySelector('.slider');
             const slides = document.querySelectorAll('.slide');
@@ -326,6 +850,11 @@ const saveData = (nombre, email, mensaje) => {
                     currentIndex = (currentIndex + 1) % slideCount;
                     updateSlider();
                 }
+            });
+            
+            // Botón de reserva en hero
+            document.querySelector('.cta-button').addEventListener('click', function() {
+                window.location.href = 'habitaciones.html';
             });
         });
     </script>
