@@ -4,11 +4,653 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habitaciones - Shumak Ware</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
-
-    
+    <style>
+        /* Estilos generales */
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .main-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo a {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .nav-header ul.main-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-header ul.main-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-header ul.main-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-header ul.main-menu li a:hover,
+        .nav-header ul.main-menu li a.active {
+            background-color: var(--primary-color);
+        }
+        
+        /* Encabezado principal */
+        header {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        header h1 i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Barra de búsqueda */
+        .search-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        
+        .search-field {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .search-field label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .search-field label i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        
+        .search-field input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-field input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .dropdown-btn {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+            display: none;
+            margin-top: 5px;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+        }
+        
+        .counter {
+            margin-bottom: 20px;
+        }
+        
+        .counter-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        
+        .counter-controls {
+            display: flex;
+            align-items: center;
+        }
+        
+        .counter-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .counter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .counter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .counter-btn:disabled:hover {
+            background: white;
+            color: inherit;
+            border-color: #ddd;
+        }
+        
+        .counter-value {
+            margin: 0 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .apply-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Resultados */
+        .results-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .results-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .results-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+        
+        .results-count {
+            font-size: 1rem;
+            color: #7f8c8d;
+            background: #f8f9fa;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 25px;
+        }
+        
+        .room-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .room-image {
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .room-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--success-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .room-details {
+            padding: 20px;
+        }
+        
+        .room-name {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .room-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .room-price span {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        .room-features {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #7f8c8d;
+        }
+        
+        .feature i {
+            color: var(--primary-color);
+        }
+        
+        .room-description {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .book-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .book-btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: #7f8c8d;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: var(--accent-color);
+        }
+        
+        .modal-header {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .modal-header h2 i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .modal-header p {
+            color: #7f8c8d;
+        }
+        
+        .reservation-summary {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .reservation-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .reservation-label {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .reservation-value {
+            color: #555;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-group label i {
+            color: var(--primary-color);
+            margin-right: 8px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        .confirmation {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .confirmation i {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 20px;
+        }
+        
+        .confirmation h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .confirmation p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-header ul.main-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-header ul.main-menu li {
+                margin: 5px;
+            }
+        }
+    </style>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
@@ -23,9 +665,9 @@
                 <ul class="main-menu">
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="habitaciones.html" class="active">Habitaciones</a></li>
-                    <li><a href="restaurante">Restaurante</a></li>
-                    <li><a href="servicios">Servicios</a></li>
-                    <li><a href="contacto">Contacto</a></li>
+                    <li><a href="restaurante.html">Restaurante</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </div>
@@ -58,7 +700,7 @@
                     <div class="counter">
                         <div class="counter-label">Habitaciones</div>
                         <div class="counter-controls">
-                            <button class="counter-btn" id="decreaseRooms" disabled>-</button>
+                            <button class="counter-btn" id="decreaseRooms">-</button>
                             <span class="counter-value" id="roomCount">1</span>
                             <button class="counter-btn" id="increaseRooms">+</button>
                         </div>
@@ -67,7 +709,7 @@
                     <div class="counter">
                         <div class="counter-label">Adultos</div>
                         <div class="counter-controls">
-                            <button class="counter-btn" id="decreaseAdults" disabled>-</button>
+                            <button class="counter-btn" id="decreaseAdults">-</button>
                             <span class="counter-value" id="adultCount">2</span>
                             <button class="counter-btn" id="increaseAdults">+</button>
                         </div>
@@ -76,7 +718,7 @@
                     <div class="counter">
                         <div class="counter-label">Niños</div>
                         <div class="counter-controls">
-                            <button class="counter-btn" id="decreaseChildren" disabled>-</button>
+                            <button class="counter-btn" id="decreaseChildren">-</button>
                             <span class="counter-value" id="childCount">0</span>
                             <button class="counter-btn" id="increaseChildren">+</button>
                         </div>
@@ -154,6 +796,38 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Acerca de Nosotros</h3>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="habitaciones.html">Habitaciones</a></li>
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Teléfono: +51 912 345 678</li>
+                        <li>Email: shumakware@gmail.com</li>
+                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 Shumak Ware. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
     <script>
         // Variables globales
         let habitaciones = 1;
@@ -161,21 +835,6 @@
         let niños = 0;
         let currentRoom = null;
         let reservationId = "";
-        
-        // Configuración de Firebase (reemplaza con tu configuración)
-        const firebaseConfig = {
-            apiKey: "TU_API_KEY",
-            authDomain: "TU_PROYECTO.firebaseapp.com",
-            projectId: "TU_PROYECTO",
-            storageBucket: "TU_PROYECTO.appspot.com",
-            messagingSenderId: "TU_SENDER_ID",
-            appId: "TU_APP_ID"
-        };
-        
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
-        const auth = firebase.auth();
         
         // Referencias a elementos del DOM
         const fechaEntradaEl = document.getElementById('fechaEntrada');
@@ -203,28 +862,28 @@
         const confirmationModal = document.getElementById('confirmationModal');
         const reservationIdEl = document.getElementById('reservationId');
         const whatsappBtn = document.getElementById('whatsappBtn');
-        const confirmationModalBtn = document.getElementById('confirmationModalBtn');
-
+        
         // Configurar fechas mínimas (hoy en adelante)
         const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
         fechaEntradaEl.min = today.toISOString().split('T')[0];
         fechaEntradaEl.value = today.toISOString().split('T')[0];
         
-        // Calcular fecha de salida por defecto (mañana)
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
         fechaSalidaEl.min = tomorrow.toISOString().split('T')[0];
         fechaSalidaEl.value = tomorrow.toISOString().split('T')[0];
         
         // Evento para mostrar/ocultar el dropdown
-        dropdownBtn.addEventListener('click', () => {
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        dropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownContent.classList.toggle('show');
         });
         
         // Cerrar dropdown al hacer clic fuera de él
         document.addEventListener('click', (e) => {
             if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
-                dropdownContent.style.display = 'none';
+                dropdownContent.classList.remove('show');
             }
         });
         
@@ -301,10 +960,13 @@
                 return;
             }
             
+            // Ocultar dropdown
+            dropdownContent.classList.remove('show');
+            
             // Mostrar estado de carga
             resultadosEl.innerHTML = `
-                <div class="loading">
-                    <div class="spinner"></div>
+                <div class="loading" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    <div class="spinner" style="border: 4px solid rgba(0,0,0,0.1); border-left-color: var(--primary-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
                     <p>Buscando habitaciones disponibles...</p>
                 </div>
             `;
@@ -324,7 +986,8 @@
                     precio: 120,
                     capacidad: { adultos: 2, niños: 1 },
                     descripcion: "Amplia habitación con vista al jardín, cama king size, TV de pantalla plana y baño privado.",
-                    estado: "disponible"
+                    estado: "disponible",
+                    imagen: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=800"
                 },
                 {
                     id: "2",
@@ -332,7 +995,8 @@
                     precio: 210,
                     capacidad: { adultos: 3, niños: 2 },
                     descripcion: "Lujosa suite con sala de estar independiente, minibar, jacuzzi y balcón con vistas panorámicas.",
-                    estado: "disponible"
+                    estado: "disponible",
+                    imagen: "https://images.unsplash.com/photo-1582719508461-905c673771fd?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=800"
                 },
                 {
                     id: "3",
@@ -340,7 +1004,8 @@
                     precio: 180,
                     capacidad: { adultos: 4, niños: 3 },
                     descripcion: "Espaciosa habitación familiar con dos camas dobles, zona de juegos para niños y baño compartido.",
-                    estado: "disponible"
+                    estado: "disponible",
+                    imagen: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=800"
                 }
             ];
             
@@ -361,8 +1026,8 @@
         function mostrarResultados(habitaciones) {
             if (habitaciones.length === 0) {
                 resultadosEl.innerHTML = `
-                    <div class="no-rooms">
-                        <i class="fas fa-bed"></i>
+                    <div class="no-rooms" style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                        <i class="fas fa-bed" style="font-size: 3rem; color: #bdc3c7; margin-bottom: 20px;"></i>
                         <h3>No se encontraron habitaciones disponibles</h3>
                         <p>Intenta cambiar tus criterios de búsqueda</p>
                     </div>
@@ -372,7 +1037,7 @@
             
             resultadosEl.innerHTML = habitaciones.map(habitacion => `
                 <div class="room-card">
-                    <div class="room-image">
+                    <div class="room-image" style="background-image: url('${habitacion.imagen}')">
                         <div class="room-status">${habitacion.estado}</div>
                     </div>
                     <div class="room-details">
@@ -475,21 +1140,21 @@
             `;
             
             // Mostrar modal
-            reservationModal.style.display = 'flex';
+            reservationModal.classList.add('show');
         };
         
         // Cerrar modal al hacer clic en la X
         closeModal.addEventListener('click', () => {
-            reservationModal.style.display = 'none';
+            reservationModal.classList.remove('show');
         });
         
         // Cerrar modal al hacer clic fuera del contenido
         window.addEventListener('click', (e) => {
             if (e.target === reservationModal) {
-                reservationModal.style.display = 'none';
+                reservationModal.classList.remove('show');
             }
             if (e.target === confirmationModal) {
-                confirmationModal.style.display = 'none';
+                confirmationModal.classList.remove('show');
             }
         });
         
@@ -515,47 +1180,14 @@
             // Simular guardado en Firebase
             console.log("Guardando reserva en Firebase...");
             
-            // En una implementación real:
-            /*
-            try {
-                await db.collection("reservas").add({
-                    idReserva: reservationId,
-                    habitacion: {
-                        id: currentRoom.id,
-                        nombre: currentRoom.nombre,
-                        precio: currentRoom.precio
-                    },
-                    fechaEntrada: firebase.firestore.Timestamp.fromDate(fechaEntrada),
-                    fechaSalida: firebase.firestore.Timestamp.fromDate(fechaSalida),
-                    noches: noches,
-                    personas: {
-                        adultos: adultos,
-                        niños: niños
-                    },
-                    cliente: {
-                        nombre: nombre,
-                        email: email,
-                        telefono: telefono
-                    },
-                    total: total,
-                    estado: "pendiente",
-                    fechaCreacion: firebase.firestore.Timestamp.fromDate(new Date())
-                });
-            } catch (error) {
-                console.error("Error al guardar reserva:", error);
-                alert("Hubo un error al guardar tu reserva. Por favor intenta nuevamente.");
-                return;
-            }
-            */
-            
             // Simular éxito después de 1 segundo
             setTimeout(() => {
                 // Ocultar modal de reserva
-                reservationModal.style.display = 'none';
+                reservationModal.classList.remove('show');
                 
                 // Mostrar modal de confirmación
                 reservationIdEl.textContent = reservationId;
-                confirmationModal.style.display = 'flex';
+                confirmationModal.classList.add('show');
             }, 1000);
         });
         
@@ -577,33 +1209,5 @@
         // Cargar habitaciones de ejemplo al inicio
         mostrarHabitacionesEjemplo();
     </script>
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturalea con la comodidad</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Enlaces Rápidos</h3>
-                    <ul>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="habitaciones.html">Habitaciones</a></li>
-                        <li><a href="restaurante">Restaurante</a></li>
-                        <li><a href="servicios">Servicios</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contacto</h3>
-                    <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>
