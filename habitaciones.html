@@ -26,113 +26,544 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Nuestras Habitaciones</h1>
-            <p>Descubre nuestro amplio rango de habitaciones diseñadas para tu máximo confort</p>
-            <button class="cta-button">Reservar Ahora</button>
-        </div>
-    </section>
-
-    <!-- Habitaciones Grid -->
-    <section class="rooms-grid">
-        <!-- Junior Suite -->
-        <div class="room-card">
-            <img src="assests/habitacion_1.jpg" alt="Junior Suite" class="room-image">
-            <div class="room-content">
-                <h3>Junior Suite</h3>
-                <p>Habitación amplia con vista al jardín y balcón privado. Perfecta para parejas y viajeros de negocios.</p>
-                <p class="room-price">Desde S/.70/noche</p>
-                <div class="room-features">
-                    <div class="room-feature">
-                        <i class="fas fa-bed"></i>
-                        <span>1 cama king size</span>
+    <div class="search-bar">
+            <div class="search-field">
+                <label for="fechaEntrada"><i class="fas fa-calendar-check"></i> Fecha de Entrada</label>
+                <input type="date" id="fechaEntrada">
+            </div>
+            
+            <div class="search-field">
+                <label for="fechaSalida"><i class="fas fa-calendar-times"></i> Fecha de Salida</label>
+                <input type="date" id="fechaSalida">
+            </div>
+            
+            <div class="dropdown">
+                <label><i class="fas fa-users"></i> Personas y Habitaciones</label>
+                <button class="dropdown-btn" id="dropdownBtn">
+                    <span>1 Habitación, 2 Adultos</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <div class="counter">
+                        <div class="counter-label">Habitaciones</div>
+                        <div class="counter-controls">
+                            <button class="counter-btn" id="decreaseRooms" disabled>-</button>
+                            <span class="counter-value" id="roomCount">1</span>
+                            <button class="counter-btn" id="increaseRooms">+</button>
+                        </div>
                     </div>
-                    <div class="room-feature">
-                        <i class="fas fa-shower"></i>
-                        <span>Baño privado</span>
+                    
+                    <div class="counter">
+                        <div class="counter-label">Adultos</div>
+                        <div class="counter-controls">
+                            <button class="counter-btn" id="decreaseAdults" disabled>-</button>
+                            <span class="counter-value" id="adultCount">2</span>
+                            <button class="counter-btn" id="increaseAdults">+</button>
+                        </div>
                     </div>
-                    <div class="room-feature">
-                        <i class="fas fa-wifi"></i>
-                        <span>WiFi gratuito</span>
+                    
+                    <div class="counter">
+                        <div class="counter-label">Niños</div>
+                        <div class="counter-controls">
+                            <button class="counter-btn" id="decreaseChildren" disabled>-</button>
+                            <span class="counter-value" id="childCount">0</span>
+                            <button class="counter-btn" id="increaseChildren">+</button>
+                        </div>
                     </div>
-                    <div class="room-feature">
-                        <i class="fas fa-tv"></i>
-                        <span>TV de 50"</span>
-                    </div>
-                </div>
-                <div class="room-cta">
-                    <button class="view-button">Ver más</button>
-                    <button class="book-button">Reservar</button>
+                    
+                    <button class="apply-btn" id="aplicarBtn">Aplicar</button>
                 </div>
             </div>
         </div>
-
-        <!-- Suite Presidencial -->
-        <div class="room-card">
-            <img src="assests/habitacion_2.jpg" class="room-image">
-            <div class="room-content">
-                <h3>Suite Presidencial</h3>
-                <p>Luxury y privacidad en nuestra suite más exclusiva, con sala de estar independiente y vistas panorámicas.</p>
-                <p class="room-price">Desde S/.50/noche</p>
-                <div class="room-features">
-                    <div class="room-feature">
-                        <i class="fas fa-bed"></i>
-                        <span>2 camas king size</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-hot-tub"></i>
-                        <span>Jacuzzi privado</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-wine"></i>
-                        <span>Bar privado</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-shower"></i>
-                        <span>Baño de lujo</span>
-                    </div>
-                </div>
-                <div class="room-cta">
-                    <button class="view-button">Ver más</button>
-                    <button class="book-button">Reservar</button>
-                </div>
+        
+        <div class="results-container">
+            <div class="results-header">
+                <h2 class="results-title">Habitaciones Disponibles</h2>
+                <div class="results-count" id="resultsCount">3 encontradas</div>
+            </div>
+            
+            <div class="rooms-grid" id="resultados">
+                <!-- Las habitaciones se cargarán aquí dinámicamente -->
             </div>
         </div>
 
-        <!-- Habitación Doble -->
-        <div class="room-card">
-            <img src="https://images.unsplash.com/photo-1558875073-03d7c62d5a3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Habitación Doble" class="room-image">
-            <div class="room-content">
-                <h3>Habitación Doble</h3>
-                <p>Habitación cómoda ideal para familias o grupos de amigos, con dos camas individuales.</p>
-                <p class="room-price">Desde S/.100/noche</p>
-                <div class="room-features">
-                    <div class="room-feature">
-                        <i class="fas fa-bed"></i>
-                        <span>2 camas individuales</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-shower"></i>
-                        <span>Baño privado</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-wifi"></i>
-                        <span>WiFi gratuito</span>
-                    </div>
-                    <div class="room-feature">
-                        <i class="fas fa-coffee"></i>
-                        <span>Cafetera</span>
-                    </div>
+        <!-- Modal de reserva -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            
+            <div class="modal-header">
+                <h2><i class="fas fa-calendar-check"></i> Completa tu reserva</h2>
+                <p>Por favor ingresa tus datos para finalizar la reserva</p>
+            </div>
+            
+            <div class="reservation-summary" id="reservationSummary">
+                <!-- Resumen de la reserva se cargará aquí -->
+            </div>
+            
+            <form id="reservationForm">
+                <div class="form-group">
+                    <label for="nombre"><i class="fas fa-user"></i> Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
                 </div>
-                <div class="room-cta">
-                    <button class="view-button">Ver más</button>
-                    <button class="book-button">Reservar</button>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Correo electrónico</label>
+                    <input type="email" id="email" placeholder="Ingresa tu correo electrónico" required>
                 </div>
+                
+                <div class="form-group">
+                    <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                    <input type="tel" id="telefono" placeholder="Ingresa tu número telefónico" required>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitReservation">
+                    <i class="fas fa-check-circle"></i> Confirmar Reserva
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal de confirmación -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h2>¡Reserva Confirmada!</h2>
+                <p>Tu reserva ha sido registrada exitosamente.</p>
+                <p>ID de reserva: <strong id="reservationId">RES-2023-001</strong></p>
+                <p>Por favor envía el comprobante de pago por WhatsApp para finalizar el proceso.</p>
+                
+                <button class="submit-btn whatsapp-btn" id="whatsappBtn">
+                    <i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp
+                </button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <script>
+        // Variables globales
+        let habitaciones = 1;
+        let adultos = 2;
+        let niños = 0;
+        let currentRoom = null;
+        let reservationId = "";
+        
+        // Configuración de Firebase (reemplaza con tu configuración)
+        const firebaseConfig = {
+            apiKey: "TU_API_KEY",
+            authDomain: "TU_PROYECTO.firebaseapp.com",
+            projectId: "TU_PROYECTO",
+            storageBucket: "TU_PROYECTO.appspot.com",
+            messagingSenderId: "TU_SENDER_ID",
+            appId: "TU_APP_ID"
+        };
+        
+        // Inicializar Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        
+        // Referencias a elementos del DOM
+        const fechaEntradaEl = document.getElementById('fechaEntrada');
+        const fechaSalidaEl = document.getElementById('fechaSalida');
+        const dropdownBtn = document.getElementById('dropdownBtn');
+        const dropdownContent = document.getElementById('dropdownContent');
+        const roomCountEl = document.getElementById('roomCount');
+        const adultCountEl = document.getElementById('adultCount');
+        const childCountEl = document.getElementById('childCount');
+        const decreaseRoomsBtn = document.getElementById('decreaseRooms');
+        const increaseRoomsBtn = document.getElementById('increaseRooms');
+        const decreaseAdultsBtn = document.getElementById('decreaseAdults');
+        const increaseAdultsBtn = document.getElementById('increaseAdults');
+        const decreaseChildrenBtn = document.getElementById('decreaseChildren');
+        const increaseChildrenBtn = document.getElementById('increaseChildren');
+        const aplicarBtn = document.getElementById('aplicarBtn');
+        const resultadosEl = document.getElementById('resultados');
+        const resultsCountEl = document.getElementById('resultsCount');
+        
+        // Referencias modales
+        const reservationModal = document.getElementById('reservationModal');
+        const closeModal = document.getElementById('closeModal');
+        const reservationForm = document.getElementById('reservationForm');
+        const reservationSummary = document.getElementById('reservationSummary');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const reservationIdEl = document.getElementById('reservationId');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const confirmationModalBtn = document.getElementById('confirmationModalBtn');
+
+        // Configurar fechas mínimas (hoy en adelante)
+        const today = new Date();
+        fechaEntradaEl.min = today.toISOString().split('T')[0];
+        fechaEntradaEl.value = today.toISOString().split('T')[0];
+        
+        // Calcular fecha de salida por defecto (mañana)
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        fechaSalidaEl.min = tomorrow.toISOString().split('T')[0];
+        fechaSalidaEl.value = tomorrow.toISOString().split('T')[0];
+        
+        // Evento para mostrar/ocultar el dropdown
+        dropdownBtn.addEventListener('click', () => {
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Cerrar dropdown al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+        
+        // Eventos para contadores
+        increaseRoomsBtn.addEventListener('click', () => {
+            habitaciones++;
+            roomCountEl.textContent = habitaciones;
+            updateDropdownText();
+            decreaseRoomsBtn.disabled = habitaciones <= 1;
+        });
+        
+        decreaseRoomsBtn.addEventListener('click', () => {
+            if (habitaciones > 1) {
+                habitaciones--;
+                roomCountEl.textContent = habitaciones;
+                updateDropdownText();
+                decreaseRoomsBtn.disabled = habitaciones <= 1;
+            }
+        });
+        
+        increaseAdultsBtn.addEventListener('click', () => {
+            adultos++;
+            adultCountEl.textContent = adultos;
+            updateDropdownText();
+            decreaseAdultsBtn.disabled = adultos <= 1;
+        });
+        
+        decreaseAdultsBtn.addEventListener('click', () => {
+            if (adultos > 1) {
+                adultos--;
+                adultCountEl.textContent = adultos;
+                updateDropdownText();
+                decreaseAdultsBtn.disabled = adultos <= 1;
+            }
+        });
+        
+        increaseChildrenBtn.addEventListener('click', () => {
+            niños++;
+            childCountEl.textContent = niños;
+            updateDropdownText();
+            decreaseChildrenBtn.disabled = niños <= 0;
+        });
+        
+        decreaseChildrenBtn.addEventListener('click', () => {
+            if (niños > 0) {
+                niños--;
+                childCountEl.textContent = niños;
+                updateDropdownText();
+                decreaseChildrenBtn.disabled = niños <= 0;
+            }
+        });
+        
+        // Actualizar texto del botón dropdown
+        function updateDropdownText() {
+            let text = `${habitaciones} Habitación${habitaciones > 1 ? 'es' : ''}, `;
+            text += `${adultos} Adulto${adultos > 1 ? 's' : ''}`;
+            if (niños > 0) {
+                text += `, ${niños} Niño${niños > 1 ? 's' : ''}`;
+            }
+            dropdownBtn.querySelector('span').textContent = text;
+        }
+        
+        // Inicializar texto del dropdown
+        updateDropdownText();
+        
+        // Evento para botón "Aplicar"
+        aplicarBtn.addEventListener('click', () => {
+            const fechaEntrada = new Date(fechaEntradaEl.value);
+            const fechaSalida = new Date(fechaSalidaEl.value);
+            
+            // Validar fechas
+            if (fechaSalida <= fechaEntrada) {
+                alert("La fecha de salida debe ser posterior a la de entrada.");
+                return;
+            }
+            
+            // Mostrar estado de carga
+            resultadosEl.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Buscando habitaciones disponibles...</p>
+                </div>
+            `;
+            
+            // Simular búsqueda con datos de ejemplo
+            setTimeout(() => {
+                mostrarHabitacionesEjemplo();
+            }, 1500);
+        });
+        
+        // Función para mostrar habitaciones de ejemplo
+        function mostrarHabitacionesEjemplo() {
+            const habitaciones = [
+                {
+                    id: "1",
+                    nombre: "Habitación Estándar",
+                    precio: 120,
+                    capacidad: { adultos: 2, niños: 1 },
+                    descripcion: "Amplia habitación con vista al jardín, cama king size, TV de pantalla plana y baño privado.",
+                    estado: "disponible"
+                },
+                {
+                    id: "2",
+                    nombre: "Suite Ejecutiva",
+                    precio: 210,
+                    capacidad: { adultos: 3, niños: 2 },
+                    descripcion: "Lujosa suite con sala de estar independiente, minibar, jacuzzi y balcón con vistas panorámicas.",
+                    estado: "disponible"
+                },
+                {
+                    id: "3",
+                    nombre: "Habitación Familiar",
+                    precio: 180,
+                    capacidad: { adultos: 4, niños: 3 },
+                    descripcion: "Espaciosa habitación familiar con dos camas dobles, zona de juegos para niños y baño compartido.",
+                    estado: "disponible"
+                }
+            ];
+            
+            // Filtrar por capacidad
+            const resultados = habitaciones.filter(habitacion => 
+                habitacion.capacidad.adultos >= adultos &&
+                habitacion.capacidad.niños >= niños
+            );
+            
+            // Actualizar contador
+            resultsCountEl.textContent = `${resultados.length} encontrada${resultados.length !== 1 ? 's' : ''}`;
+            
+            // Mostrar resultados
+            mostrarResultados(resultados);
+        }
+        
+        // Función para mostrar resultados
+        function mostrarResultados(habitaciones) {
+            if (habitaciones.length === 0) {
+                resultadosEl.innerHTML = `
+                    <div class="no-rooms">
+                        <i class="fas fa-bed"></i>
+                        <h3>No se encontraron habitaciones disponibles</h3>
+                        <p>Intenta cambiar tus criterios de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultadosEl.innerHTML = habitaciones.map(habitacion => `
+                <div class="room-card">
+                    <div class="room-image">
+                        <div class="room-status">${habitacion.estado}</div>
+                    </div>
+                    <div class="room-details">
+                        <h3 class="room-name">${habitacion.nombre}</h3>
+                        <div class="room-price">$${habitacion.precio} <span>/noche</span></div>
+                        
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-user"></i>
+                                <span>${habitacion.capacidad.adultos} Adultos</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-child"></i>
+                                <span>${habitacion.capacidad.niños} Niños</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>${habitacion.capacidad.adultos + habitacion.capacidad.niños <= 2 ? '1 Cama' : '2 Camas'}</span>
+                            </div>
+                        </div>
+                        
+                        <p class="room-description">${habitacion.descripcion}</p>
+                        
+                        <button class="book-btn" onclick="openReservationModal('${habitacion.id}')">Reservar Ahora</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Función para abrir el modal de reserva
+        window.openReservationModal = function(roomId) {
+            // En una implementación real, obtendríamos los datos de Firebase
+            // Aquí usamos datos de ejemplo
+            const habitaciones = [
+                {
+                    id: "1",
+                    nombre: "Habitación Estándar",
+                    precio: 120,
+                    capacidad: { adultos: 2, niños: 1 },
+                    descripcion: "Amplia habitación con vista al jardín, cama king size, TV de pantalla plana y baño privado.",
+                    estado: "disponible"
+                },
+                {
+                    id: "2",
+                    nombre: "Suite Ejecutiva",
+                    precio: 210,
+                    capacidad: { adultos: 3, niños: 2 },
+                    descripcion: "Lujosa suite con sala de estar independiente, minibar, jacuzzi y balcón con vistas panorámicas.",
+                    estado: "disponible"
+                },
+                {
+                    id: "3",
+                    nombre: "Habitación Familiar",
+                    precio: 180,
+                    capacidad: { adultos: 4, niños: 3 },
+                    descripcion: "Espaciosa habitación familiar con dos camas dobles, zona de juegos para niños y baño compartido.",
+                    estado: "disponible"
+                }
+            ];
+            
+            currentRoom = habitaciones.find(r => r.id === roomId);
+            
+            // Calcular total
+            const fechaEntrada = new Date(fechaEntradaEl.value);
+            const fechaSalida = new Date(fechaSalidaEl.value);
+            const noches = Math.ceil((fechaSalida - fechaEntrada) / (1000 * 60 * 60 * 24));
+            const total = noches * currentRoom.precio;
+            
+            // Crear resumen de reserva
+            reservationSummary.innerHTML = `
+                <h3>Resumen de Reserva</h3>
+                <div class="reservation-item">
+                    <span class="reservation-label">Habitación:</span>
+                    <span class="reservation-value">${currentRoom.nombre}</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Fecha de entrada:</span>
+                    <span class="reservation-value">${fechaEntrada.toLocaleDateString()}</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Fecha de salida:</span>
+                    <span class="reservation-value">${fechaSalida.toLocaleDateString()}</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Noches:</span>
+                    <span class="reservation-value">${noches}</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Personas:</span>
+                    <span class="reservation-value">${adultos} adultos, ${niños} niños</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Precio por noche:</span>
+                    <span class="reservation-value">$${currentRoom.precio}</span>
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Total:</span>
+                    <span class="reservation-value" style="color: #e74c3c; font-weight: 700;">$${total}</span>
+                </div>
+            `;
+            
+            // Mostrar modal
+            reservationModal.style.display = 'flex';
+        };
+        
+        // Cerrar modal al hacer clic en la X
+        closeModal.addEventListener('click', () => {
+            reservationModal.style.display = 'none';
+        });
+        
+        // Cerrar modal al hacer clic fuera del contenido
+        window.addEventListener('click', (e) => {
+            if (e.target === reservationModal) {
+                reservationModal.style.display = 'none';
+            }
+            if (e.target === confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+        });
+        
+        // Enviar formulario de reserva
+        reservationForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            
+            // Calcular total
+            const fechaEntrada = new Date(fechaEntradaEl.value);
+            const fechaSalida = new Date(fechaSalidaEl.value);
+            const noches = Math.ceil((fechaSalida - fechaEntrada) / (1000 * 60 * 60 * 24));
+            const total = noches * currentRoom.precio;
+            
+            // Generar ID de reserva
+            const timestamp = new Date().getTime();
+            reservationId = `RES-${timestamp}`;
+            
+            // Simular guardado en Firebase
+            console.log("Guardando reserva en Firebase...");
+            
+            // En una implementación real:
+            /*
+            try {
+                await db.collection("reservas").add({
+                    idReserva: reservationId,
+                    habitacion: {
+                        id: currentRoom.id,
+                        nombre: currentRoom.nombre,
+                        precio: currentRoom.precio
+                    },
+                    fechaEntrada: firebase.firestore.Timestamp.fromDate(fechaEntrada),
+                    fechaSalida: firebase.firestore.Timestamp.fromDate(fechaSalida),
+                    noches: noches,
+                    personas: {
+                        adultos: adultos,
+                        niños: niños
+                    },
+                    cliente: {
+                        nombre: nombre,
+                        email: email,
+                        telefono: telefono
+                    },
+                    total: total,
+                    estado: "pendiente",
+                    fechaCreacion: firebase.firestore.Timestamp.fromDate(new Date())
+                });
+            } catch (error) {
+                console.error("Error al guardar reserva:", error);
+                alert("Hubo un error al guardar tu reserva. Por favor intenta nuevamente.");
+                return;
+            }
+            */
+            
+            // Simular éxito después de 1 segundo
+            setTimeout(() => {
+                // Ocultar modal de reserva
+                reservationModal.style.display = 'none';
+                
+                // Mostrar modal de confirmación
+                reservationIdEl.textContent = reservationId;
+                confirmationModal.style.display = 'flex';
+            }, 1000);
+        });
+        
+        // Botón para abrir WhatsApp
+        whatsappBtn.addEventListener('click', () => {
+            // Reemplaza con tu número de WhatsApp Business
+            const whatsappNumber = "51943205577";
+            
+            // Mensaje predefinido
+            const message = encodeURIComponent(
+                `Hola, acabo de realizar una reserva con ID: ${reservationId}.\n` +
+                `Por favor encontrarás adjunto el comprobante de pago.`
+            );
+            
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        });
+        
+        // Cargar habitaciones de ejemplo al inicio
+        mostrarHabitacionesEjemplo();
+    </script>
 
     <!-- Footer -->
     <footer class="footer">
