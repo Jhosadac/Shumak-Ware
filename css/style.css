@@ -417,6 +417,18 @@
         }
 
          /* reservas ps */
+         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         .search-bar {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
