@@ -676,9 +676,9 @@
                     <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
                 <div class="carousel-indicators">
-                    <div class="indicator active" data-index="0"></div>
-                    <div class="indicator" data-index="1"></div>
-                    <div class="indicator" data-index="2"></div>
+                    <div class="indicator-serv active" data-index="0"></div>
+                    <div class="indicator-serv" data-index="1"></div>
+                    <div class="indicator-serv" data-index="2"></div>
                 </div>
             </div>
         </div>
@@ -774,8 +774,8 @@
     </section>
 
     <!-- Modal de Reserva de Servicio -->
-    <div id="reservaModal" class="modal">
-        <div class="modal-content">
+    <div id="reservaModal" class="modal-serv">
+        <div class="modal-serv-content">
             <span class="close">&times;</span>
             <h2 id="modal-title">Reservar Servicio</h2>
             <form id="reservaForm">
@@ -810,8 +810,8 @@
     </div>
 
     <!-- Modal de Confirmación -->
-    <div id="confirmacionModal" class="modal">
-        <div class="modal-content confirmation-modal">
+    <div id="confirmacionModal" class="modal-serv">
+        <div class="modal-serv-content confirmation-modal">
             <span class="close">&times;</span>
             <div class="confirmation-icon">
                 <i class="fas fa-check-circle"></i>
@@ -839,7 +839,7 @@
                 <p>Después del pago, tu reserva quedará confirmada automáticamente.</p>
             </div>
             
-            <a href="#" class="whatsapp-btn" id="whatsappBtn">
+            <a href="#" class="whatsapp-btn-serv" id="whatsappBtn">
                 <i class="fab fa-whatsapp"></i> Realizar Pago por WhatsApp
             </a>
         </div>
@@ -883,7 +883,7 @@
         const eventSlides = eventsSlides.querySelectorAll('.event-slide');
         const prevBtn = document.querySelector('.prev-btn');
         const nextBtn = document.querySelector('.next-btn');
-        const indicators = document.querySelectorAll('.indicator');
+        const indicators = document.querySelectorAll('.indicator-serv');
         let currentSlideIndex = 0;
         
         function updateEventsSlider() {
