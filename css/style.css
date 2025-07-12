@@ -713,6 +713,14 @@
             font-size: 0.85rem;
             font-weight: 500;
         }
+
+        .room-status.unavailable {
+            background-color: var(--secondary-color);
+        }
+        
+        .room-status.soon {
+            background-color: var(--warning-color);
+        }
         
         .room-details {
             padding: 20px;
