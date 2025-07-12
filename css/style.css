@@ -478,7 +478,12 @@
  /* INDEX */
 
 /* HABITACIONES */
-        
+
+        .container header{
+           display: flex;
+            align-items: center;
+        }
+
         .subtitle {
             font-size: 1.2rem;
             color: #7f8c8d;
