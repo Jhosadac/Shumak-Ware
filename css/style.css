@@ -479,10 +479,9 @@
 
 /* HABITACIONES */
 
-        .container header{
-           display: flex;
-            align-items: center;
-        }
+        .container header {
+    text-align: center;
+       }
 
         .subtitle {
             font-size: 1.2rem;
