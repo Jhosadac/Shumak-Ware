@@ -470,7 +470,7 @@
         
         // Confirmar ubicación
         confirmarUbicacionBtn.addEventListener('click', () => {
-            if (ubicacionInput.value === '') {
+            if (ubicacionInput.value.trim() === '') {
                 alert('Por favor ingresa una ubicación válida');
                 return;
             }
