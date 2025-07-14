@@ -452,6 +452,7 @@
         let ubicacionIngresada = false;
         let carrito = [];
         let metodoEntrega = 'delivery';
+         let reservationId = "";
         
         // Referencias a elementos del DOM
         const ubicacionInput = document.getElementById('ubicacionInput');
@@ -476,6 +477,7 @@
         const nombrePedidoInput = document.getElementById('nombrePedido');
         const telefonoPedidoInput = document.getElementById('telefonoPedido');
         const confirmationModal = document.getElementById('confirmationModal');
+        const reservationIdEl = document.getElementById('reservationId');
         
         // Establecer fecha mínima como hoy
         const today = new Date().toISOString().split('T')[0];
