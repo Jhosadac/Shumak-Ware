@@ -388,6 +388,18 @@
         </div>
     </div>
 
+    <!-- Modal de confirmación -->
+    <div class="modal-hab" id="confirmationModal">
+        <div class="modal-hab-content">
+            <div class="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h2>¡Reserva Confirmada!</h2>
+                <p>Tu reserva ha sido registrada exitosamente.</p>
+                <p>ID de reserva: <strong id="reservationId">RES-2023-001</strong></p>
+                <p>Por favor tome captura de su numero de reserva.</p>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -463,6 +475,7 @@
         const confirmarPedidoBtn = document.getElementById('confirmarPedido');
         const nombrePedidoInput = document.getElementById('nombrePedido');
         const telefonoPedidoInput = document.getElementById('telefonoPedido');
+        const confirmationModal = document.getElementById('confirmationModal');
         
         // Establecer fecha mínima como hoy
         const today = new Date().toISOString().split('T')[0];
@@ -622,6 +635,9 @@
             }
             if (e.target === pedidoModal) {
                 pedidoModal.style.display = 'none';
+            }
+            if (e.target === confirmationModal) {
+                confirmationModal.classList.remove('show');
             }
         });
         
@@ -871,6 +887,10 @@
                 zona,
                 timestamp: new Date().toISOString() // Para ordenamiento
             };
+
+             // Generar ID de reserva
+            const timestamp = new Date().getTime();
+            reservationId = `RES-${timestamp}`;
             
             // Guardar en Firebase
             reservasRef.push(reserva)
@@ -878,6 +898,9 @@
                     alert('¡Reserva realizada con éxito! Te esperamos el ' + fecha + ' a las ' + hora);
                     reservaForm.reset();
                     reservasModal.style.display = 'none';
+                    // Mostrar modal de confirmación
+                    reservationIdEl.textContent = reservationId;
+                    confirmationModal.classList.add('show');
                 })
                 .catch((error) => {
                     console.error('Error al guardar reserva:', error);
