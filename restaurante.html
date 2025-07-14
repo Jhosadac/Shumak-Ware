@@ -895,8 +895,7 @@
             // Guardar en Firebase
             reservasRef.push(reserva)
                 .then(() => {
-                    alert('¡Reserva realizada con éxito! Te esperamos el ' + fecha + ' a las ' + hora);
-                    reservaForm.reset();
+                    // Ocultar modal de reserva
                     reservasModal.style.display = 'none';
                     // Mostrar modal de confirmación
                     reservationIdEl.textContent = reservationId;
