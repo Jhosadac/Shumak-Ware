@@ -762,6 +762,174 @@
                 alert('Hubo un error al procesar tu pedido. Por favor, intenta de nuevo.');
             });
         });
+
+        //modal de reservas
+        // Referencia a la base de datos para reservas
+    const reservasRef = database.ref('reservas');
+    
+    // Función para convertir hora a minutos
+    function horaAMinutos(hora) {
+        const [horas, minutos] = hora.split(':').map(Number);
+        return horas * 60 + minutos;
+    }
+
+    // Función para verificar conflicto de horarios
+    function hayConflictoHorario(existingReservations, fecha, hora, zona) {
+        const horaMinutos = horaAMinutos(hora);
+        const fechaActual = new Date();
+        
+        for (const key in existingReservations) {
+            const reserva = existingReservations[key];
+            
+            // Solo verificar reservas en la misma fecha y zona que sean futuras
+            if (reserva.fecha === fecha && reserva.zona === zona) {
+                // Convertir fecha de reserva a objeto Date para comparación
+                const [anio, mes, dia] = fecha.split('-').map(Number);
+                const reservaDate = new Date(anio, mes - 1, dia);
+                
+                // Verificar si la reserva es futura (o de hoy pero con hora posterior)
+                if (reservaDate > fechaActual || 
+                   (reservaDate.toDateString() === fechaActual.toDateString() && 
+                    horaAMinutos(reserva.hora) > fechaActual.getHours() * 60 + fechaActual.getMinutes())) {
+                    
+                    const reservaHoraMinutos = horaAMinutos(reserva.hora);
+                    
+                    // Verificar conflicto con margen de 30 minutos
+                    if (Math.abs(reservaHoraMinutos - horaMinutos) <= 30) {
+                        return true; // Hay conflicto
+                    }
+                }
+            }
+        }
+        return false; // No hay conflicto
+    }
+
+    // Manejar envío de formulario de reserva
+    reservaForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nombre = document.getElementById('nombre').value;
+        const correo = document.getElementById('correo').value;
+        const telefono = document.getElementById('telefono').value;
+        const fecha = document.getElementById('fecha').value;
+        const hora = document.getElementById('hora').value;
+        const personas = parseInt(document.getElementById('personas').value);
+        const zona = document.getElementById('zona').value;
+        
+        // Validar campos
+        if (!nombre || !correo || !telefono || !fecha || !hora || !personas || !zona) {
+            alert('Por favor completa todos los campos');
+            return;
+        }
+        
+        // Validar número de personas
+        if (personas < 1 || personas > 20) {
+            alert('Por favor ingresa un número válido de personas (1-20)');
+            return;
+        }
+        
+        // Obtener fecha y hora actual
+        const ahora = new Date();
+        const [anioReserva, mesReserva, diaReserva] = fecha.split('-').map(Number);
+        const reservaDate = new Date(anioReserva, mesReserva - 1, diaReserva);
+        
+        // Verificar si la fecha de reserva es pasada
+        if (reservaDate < ahora && reservaDate.toDateString() !== ahora.toDateString()) {
+            alert('No puedes reservar para una fecha pasada');
+            return;
+        }
+        
+        // Verificar si la hora de reserva es pasada (para reservas de hoy)
+        if (reservaDate.toDateString() === ahora.toDateString()) {
+            const horaMinutos = horaAMinutos(hora);
+            const horaActualMinutos = ahora.getHours() * 60 + ahora.getMinutes();
+            
+            if (horaMinutos < horaActualMinutos) {
+                alert('No puedes reservar para una hora pasada');
+                return;
+            }
+        }
+        
+        // Obtener todas las reservas existentes
+        reservasRef.once('value').then((snapshot) => {
+            const reservas = snapshot.val();
+            
+            // Verificar si hay conflicto de horario (solo con reservas futuras)
+            if (reservas && hayConflictoHorario(reservas, fecha, hora, zona)) {
+                alert('Lo sentimos, no hay disponibilidad para ese horario. Por favor elige otro horario o zona.');
+                return;
+            }
+            
+            // Crear objeto de reserva
+            const reserva = {
+                nombre,
+                correo,
+                telefono,
+                fecha,
+                hora,
+                personas,
+                zona,
+                timestamp: new Date().toISOString() // Para ordenamiento
+            };
+            
+            // Guardar en Firebase
+            reservasRef.push(reserva)
+                .then(() => {
+                    alert('¡Reserva realizada con éxito! Te esperamos el ' + fecha + ' a las ' + hora);
+                    reservaForm.reset();
+                    reservasModal.style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error('Error al guardar reserva:', error);
+                    alert('Hubo un error al guardar tu reserva. Por favor intenta de nuevo.');
+                });
+        });
+    });
+
+    // Función para actualizar disponibilidad de mesas
+    function actualizarDisponibilidad() {
+        const ahora = new Date();
+        
+        // Inicializar contadores
+        let aireLibreDisponible = 10;
+        let adentroDisponible = 10;
+        
+        // Obtener todas las reservas
+        reservasRef.once('value').then((snapshot) => {
+            const reservas = snapshot.val();
+            
+            if (reservas) {
+                Object.keys(reservas).forEach(key => {
+                    const reserva = reservas[key];
+                    const [anio, mes, dia] = reserva.fecha.split('-').map(Number);
+                    const reservaDate = new Date(anio, mes - 1, dia);
+                    
+                    // Solo considerar reservas futuras o de hoy con hora posterior
+                    if (reservaDate > ahora || 
+                       (reservaDate.toDateString() === ahora.toDateString() && 
+                        horaAMinutos(reserva.hora) > ahora.getHours() * 60 + ahora.getMinutes())) {
+                        
+                        if (reserva.zona === 'aire_libre') {
+                            aireLibreDisponible--;
+                        } else if (reserva.zona === 'adentro') {
+                            adentroDisponible--;
+                        }
+                    }
+                });
+            }
+            
+            // Actualizar UI con disponibilidad
+            document.getElementById('disponibilidadAireLibre').textContent = aireLibreDisponible;
+            document.getElementById('disponibilidadAdentro').textContent = adentroDisponible;
+        });
+    }
+
+    // Actualizar disponibilidad al cargar la página
+    actualizarDisponibilidad();
+    
+    // Actualizar disponibilidad cada minuto
+    setInterval(actualizarDisponibilidad, 60000);
+
     </script>
 </body>
 </html>
