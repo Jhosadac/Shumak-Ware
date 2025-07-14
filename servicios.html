@@ -98,7 +98,7 @@
                                 <span>Área de juegos segura</span>
                             </div>
                         </div>
-                        <button class="btn-reservar" data-service="Cumpleaños">Reservar Ahora</button>
+                        <button class="btn-reservar" data-service="Cumpleanos">Reservar Ahora</button>
                     </div>
                 </div>
                 
@@ -264,125 +264,134 @@
     </footer>
 
     <script>
-        // Inicializar carrusel de eventos
-        const eventsSlides = document.getElementById('eventsSlides');
-        const eventSlides = eventsSlides.querySelectorAll('.event-slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const indicators = document.querySelectorAll('.indicator-serv');
-        let currentSlideIndex = 0;
-        
-        function updateEventsSlider() {
-            eventsSlides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
-            
-            // Actualizar indicadores
-            indicators.forEach((indicator, index) => {
-                if (index === currentSlideIndex) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
-                }
-            });
-        }
-        
+    // Configuración e inicialización de Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
+        authDomain: "shumak-ware.firebaseapp.com",
+        databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
+        projectId: "shumak-ware",
+        storageBucket: "shumak-ware.firebasestorage.app",
+        messagingSenderId: "64196160181",
+        appId: "1:64196160181:web:76852cef50c12a498e6cfc",
+        measurementId: "G-8L85H7B12E"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database(); // Usaremos db para referirnos a la base de datos
+    // Elementos del DOM
+    const eventsSlides = document.getElementById('eventsSlides');
+    const eventSlides = eventsSlides.querySelectorAll('.event-slide');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const indicators = document.querySelectorAll('.indicator-serv');
+    const reservaModal = document.getElementById('reservaModal');
+    const confirmacionModal = document.getElementById('confirmacionModal');
+    const reservaBtns = document.querySelectorAll('.btn-reservar');
+    const closeBtns = document.querySelectorAll('.close');
+    const modalTitle = document.getElementById('modal-title');
+    const servicioInput = document.getElementById('servicio');
+    const fechaInput = document.getElementById('fecha');
+    const reservaForm = document.getElementById('reservaForm');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+    const confServicio = document.getElementById('conf-servicio');
+    const confNombre = document.getElementById('conf-nombre');
+    const confFecha = document.getElementById('conf-fecha');
+    const confHoraEntrada = document.getElementById('conf-hora-entrada');
+    const confHoraSalida = document.getElementById('conf-hora-salida');
+    const confCodigo = document.getElementById('conf-codigo');
+    // Variables de estado
+    let currentSlideIndex = 0;
+    let codigoReserva = ""; // Ahora es let
+    // Inicialización del carrusel
+    function initCarousel() {
+        updateSlider();
         prevBtn.addEventListener('click', () => {
             currentSlideIndex = (currentSlideIndex - 1 + eventSlides.length) % eventSlides.length;
-            updateEventsSlider();
+            updateSlider();
         });
-        
         nextBtn.addEventListener('click', () => {
             currentSlideIndex = (currentSlideIndex + 1) % eventSlides.length;
-            updateEventsSlider();
+            updateSlider();
         });
-        
-        // Auto avanzar cada 5 segundos
         setInterval(() => {
             currentSlideIndex = (currentSlideIndex + 1) % eventSlides.length;
-            updateEventsSlider();
+            updateSlider();
         }, 5000);
-        
-        // Navegación por indicadores
         indicators.forEach(indicator => {
-            indicator.addEventListener('click', function() {
-                currentSlideIndex = parseInt(this.getAttribute('data-index'));
-                updateEventsSlider();
+            indicator.addEventListener('click', () => {
+                currentSlideIndex = parseInt(indicator.dataset.index);
+                updateSlider();
             });
         });
-        
-        // Modal de reserva
-        const reservaModal = document.getElementById('reservaModal');
-        const confirmacionModal = document.getElementById('confirmacionModal');
-        const reservaBtns = document.querySelectorAll('.btn-reservar');
-        const closeBtns = document.querySelectorAll('.close');
-        const modalTitle = document.getElementById('modal-title');
-        const servicioInput = document.getElementById('servicio');
-        const fechaInput = document.getElementById('fecha');
-        const reservaForm = document.getElementById('reservaForm');
-        const whatsappBtn = document.getElementById('whatsappBtn');
-        
-        // Establecer fecha mínima como hoy
-        const today = new Date().toISOString().split('T')[0];
-        fechaInput.min = today;
-        
+    }
+    function updateSlider() {
+        eventsSlides.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === currentSlideIndex);
+        });
+    }
+    // Inicialización de modales
+    function initModals() {
+        // Fecha mínima hoy
+        fechaInput.min = new Date().toISOString().split('T')[0];
         // Abrir modal de reserva
         reservaBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const service = this.getAttribute('data-service');
+            btn.addEventListener('click', () => {
+                const service = btn.dataset.service;
                 modalTitle.textContent = `Reservar ${service}`;
                 servicioInput.value = service;
                 reservaModal.style.display = 'block';
             });
         });
-        
         // Cerrar modales
         closeBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                reservaModal.style.display = 'none';
-                confirmacionModal.style.display = 'none';
-            });
+            btn.addEventListener('click', closeModals);
         });
-        
-        // Cerrar modal al hacer clic fuera
-        window.addEventListener('click', function(e) {
-            if (e.target === reservaModal) {
-                reservaModal.style.display = 'none';
-            }
-            if (e.target === confirmacionModal) {
-                confirmacionModal.style.display = 'none';
+        // Cerrar al hacer clic fuera
+        window.addEventListener('click', (e) => {
+            if (e.target === reservaModal || e.target === confirmacionModal) {
+                closeModals();
             }
         });
-        
-        // Enviar formulario de reserva
-        reservaForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Obtener valores del formulario
-            const nombre = document.getElementById('nombre').value;
-            const correo = document.getElementById('correo').value;
-            const telefono = document.getElementById('telefono').value;
-            const fecha = fechaInput.value;
-            const horaEntrada = document.getElementById('hora_entrada').value;
-            const horaSalida = document.getElementById('hora_salida').value;
-            const servicio = servicioInput.value;
-            
-            // Validar que la hora de salida sea después de la hora de entrada
-            if (horaSalida <= horaEntrada) {
-                alert('La hora de salida debe ser posterior a la hora de entrada');
-                return;
-            }
-            
-            // Generar código de reserva (aleatorio)
-            const codigoReserva = 'RSV-' + Math.random().toString(36).substr(2, 6).toUpperCase();
-            
+    }
+    function closeModals() {
+        reservaModal.style.display = 'none';
+        confirmacionModal.style.display = 'none';
+    }
+    // Manejo de reservas
+    async function handleReservaSubmit(e) {
+        e.preventDefault(); // Prevenir recarga
+        // Obtener datos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const correo = document.getElementById('correo').value;
+        const telefono = document.getElementById('telefono').value;
+        const fecha = fechaInput.value;
+        const horaEntrada = document.getElementById('hora_entrada').value;
+        const horaSalida = document.getElementById('hora_salida').value;
+        const servicio = servicioInput.value;
+        // Validar hora
+        if (horaSalida <= horaEntrada) {
+            alert('La hora de salida debe ser posterior a la hora de entrada');
+            return;
+        }
+        const clienteData = {
+            nombre,
+            correo,
+            telefono,
+            fecha,
+            horaEntrada,
+            horaSalida
+        };
+        // Intentar hacer la reserva
+        const reservaExitosa = await confirmarReserva(servicio, clienteData);
+        if (reservaExitosa) {
             // Actualizar modal de confirmación
-            document.getElementById('conf-servicio').textContent = servicio;
-            document.getElementById('conf-nombre').textContent = nombre;
-            document.getElementById('conf-fecha').textContent = fecha;
-            document.getElementById('conf-hora-entrada').textContent = horaEntrada;
-            document.getElementById('conf-hora-salida').textContent = horaSalida;
-            document.getElementById('conf-codigo').textContent = codigoReserva;
-            
-            // Configurar enlace de WhatsApp
+            confServicio.textContent = servicio;
+            confNombre.textContent = nombre;
+            confFecha.textContent = fecha;
+            confHoraEntrada.textContent = horaEntrada;
+            confHoraSalida.textContent = horaSalida;
+            confCodigo.textContent = codigoReserva;
+            // Configurar WhatsApp
             const mensaje = `Hola, acabo de realizar una reserva para ${servicio} en Shumak Ware.%0A%0A` +
                             `*Código de Reserva:* ${codigoReserva}%0A` +
                             `*Nombre:* ${nombre}%0A` +
@@ -390,16 +399,67 @@
                             `*Hora de Entrada:* ${horaEntrada}%0A` +
                             `*Hora de Salida:* ${horaSalida}%0A%0A` +
                             `Quiero realizar el pago del 25% para confirmar mi reserva.`;
-            
             whatsappBtn.href = `https://wa.me/51987957231?text=${encodeURIComponent(mensaje)}`;
-            
-            // Mostrar modal de confirmación
+            // Mostrar confirmación
             reservaModal.style.display = 'none';
             confirmacionModal.style.display = 'block';
-            
-            // Limpiar formulario
+            // Resetear formulario
             reservaForm.reset();
-        });
-    </script>
+        }
+    }
+    async function confirmarReserva(servicio, clienteData) {
+        try {
+            const refServicio = db.ref(`services/${servicio}/clientes`);
+            const snapshot = await refServicio.once('value');
+            const reservas = snapshot.val() || {};
+            // Validar disponibilidad
+            if (!validarDisponibilidad(reservas, clienteData)) {
+                alert("Pruebe otro horario");
+                return false;
+            }
+            // Guardar la reserva
+            const nuevaReservaRef = refServicio.push();
+            codigoReserva = nuevaReservaRef.key; // Firebase genera un ID único
+            await nuevaReservaRef.set(clienteData);
+            return true;
+        } catch (error) {
+            console.error("Error en reserva:", error);
+            return false;
+        }
+    }
+    function validarDisponibilidad(reservas, { fecha, horaEntrada, horaSalida }) {
+        const hoy = new Date();
+        const entradaCliente = new Date(`${fecha}T${horaEntrada}`);
+        const salidaCliente = new Date(`${fecha}T${horaSalida}`);
+        // Verificar que la fecha sea hoy o en el futuro
+        if (entradaCliente < hoy) {
+            alert("No se puede reservar en una fecha pasada");
+            return false;
+        }
+        // Convertir a minutos para facilitar comparación
+        const entradaMin = entradaCliente.getTime();
+        const salidaMin = salidaCliente.getTime();
+        // Verificar solapamiento con reservas existentes
+        for (const reservaId in reservas) {
+            const reserva = reservas[reservaId];
+            // Solo comparar si es la misma fecha
+            if (reserva.fecha === fecha) {
+                const entradaExistente = new Date(`${reserva.fecha}T${reserva.horaEntrada}`).getTime();
+                const salidaExistente = new Date(`${reserva.fecha}T${reserva.horaSalida}`).getTime();
+                // Comprobar solapamiento
+                if (entradaMin < salidaExistente && salidaMin > entradaExistente) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+        initCarousel();
+        initModals();
+        reservaForm.addEventListener('submit', handleReservaSubmit);
+    });
+</script>
 </body>
 </html>
