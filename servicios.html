@@ -304,6 +304,7 @@
     // Variables de estado
     let currentSlideIndex = 0;
     let codigoReserva = ""; // Ahora es let
+        
     // Inicialización del carrusel
     function initCarousel() {
         updateSlider();
@@ -360,10 +361,55 @@
         reservaModal.style.display = 'none';
         confirmacionModal.style.display = 'none';
     }
-    // Manejo de reservas
-    async function handleReservaSubmit(e) {
-        e.preventDefault(); // Prevenir recarga
-        // Obtener datos del formulario
+    //manejo de reservas
+	async function confirmarReserva(clienteActual,codigoReserva){
+    	try {
+    	const refReservas = db.ref('services');
+        const snapshot = await refReservas.once('value');
+        const reservas = snapshot.val();
+            
+        const hoy = new Date();
+        const entradaCliente = new Date(`${clienteActual.fecha}T${clienteActual.horaEntrada}`);
+        const salidaCliente = new Date(`${clienteActual.fecha}T${clienteActual.horaSalida}`);
+        if (entradaCliente < hoy) {
+        	alert("No se puede reservar en una fecha pasada");
+            return false;
+        }
+        
+        if (salidaCliente <= entradaCliente){
+        alert("La fecha de entrada debe ser antes de la salida");
+        return false;
+        }
+        
+        if (reservas) {
+        	for(const key in reservas) {
+                const reserva = reservas[key];
+                const entradaExistente = new Date(`${reserva.fecha}T${reserva.horaEntrada}`);
+                const salidaExistente = new Date(`${reserva.fecha}T${reserva.horaSalida}`);
+            	if (reserva.fecha === clienteActual.fecha) {
+                	if(salidaCliente > entradaExistente && entradaCliente < salidaExistente){
+                    	alert("Pruebe otro horario");
+                        return false;
+                    };
+                }
+            } 			
+        
+        }
+        await refReservas.child(codigoReserva).set(clienteActual);
+       return true;
+       } catch (error) {
+       		alert(`Lo sentimos hubo un error al cargar sus datos. Error: ${error}`);
+            return false;
+       }
+    }
+   
+    document.addEventListener('DOMContentLoaded', () => {
+		initCarousel();
+        initModals();
+        reservaForm.addEventListener('submit', async function(e){
+        	e.preventDefault();
+            
+        	// Obtener datos del formulario
         const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo').value;
         const telefono = document.getElementById('telefono').value;
@@ -371,23 +417,28 @@
         const horaEntrada = document.getElementById('hora_entrada').value;
         const horaSalida = document.getElementById('hora_salida').value;
         const servicio = servicioInput.value;
-        // Validar hora
-        if (horaSalida <= horaEntrada) {
-            alert('La hora de salida debe ser posterior a la hora de entrada');
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(correo)) {
+            alert("Por favor, introduce un correo electrónico válido.");
             return;
         }
+    	
         const clienteData = {
             nombre,
             correo,
             telefono,
             fecha,
             horaEntrada,
-            horaSalida
+            horaSalida,
+            servicio
         };
-        // Intentar hacer la reserva
-        const reservaExitosa = await confirmarReserva(servicio, clienteData);
+        codigoReserva = "SEV" + Math.floor(1000000000 + Math.random() * 9000000000).toString()
+
+        try {
+        const reservaExitosa = await confirmarReserva(clienteData,codigoReserva);
         if (reservaExitosa) {
-            // Actualizar modal de confirmación
+        	// Actualizar modal de confirmación
             confServicio.textContent = servicio;
             confNombre.textContent = nombre;
             confFecha.textContent = fecha;
@@ -409,60 +460,12 @@
             // Resetear formulario
             reservaForm.reset();
         }
-    }
-    async function confirmarReserva(servicio, clienteData) {
-        try {
-            const refServicio = db.ref(`services/${servicio}/clientes`);
-            const snapshot = await refServicio.once('value');
-            const reservas = snapshot.val() || {};
-            // Validar disponibilidad
-            if (!validarDisponibilidad(reservas, clienteData)) {
-                alert("Pruebe otro horario");
-                return false;
-            }
-            // Guardar la reserva
-            const nuevaReservaRef = refServicio.push();
-            codigoReserva = nuevaReservaRef.key; // Firebase genera un ID único
-            await nuevaReservaRef.set(clienteData);
-            return true;
+            
         } catch (error) {
-            console.error("Error en reserva:", error);
-            return false;
+            alert(`Error: ${error}`);
         }
-    }
-    function validarDisponibilidad(reservas, { fecha, horaEntrada, horaSalida }) {
-        const hoy = new Date();
-        const entradaCliente = new Date(`${fecha}T${horaEntrada}`);
-        const salidaCliente = new Date(`${fecha}T${horaSalida}`);
-        // Verificar que la fecha sea hoy o en el futuro
-        if (entradaCliente < hoy) {
-            alert("No se puede reservar en una fecha pasada");
-            return false;
-        }
-        // Convertir a minutos para facilitar comparación
-        const entradaMin = entradaCliente.getTime();
-        const salidaMin = salidaCliente.getTime();
-        // Verificar solapamiento con reservas existentes
-        for (const reservaId in reservas) {
-            const reserva = reservas[reservaId];
-            // Solo comparar si es la misma fecha
-            if (reserva.fecha === fecha) {
-                const entradaExistente = new Date(`${reserva.fecha}T${reserva.horaEntrada}`).getTime();
-                const salidaExistente = new Date(`${reserva.fecha}T${reserva.horaSalida}`).getTime();
-                // Comprobar solapamiento
-                if (entradaMin < salidaExistente && salidaMin > entradaExistente) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    // Inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-        initCarousel();
-        initModals();
-        reservaForm.addEventListener('submit', handleReservaSubmit);
     });
+  });
 </script>
 </body>
 </html>
