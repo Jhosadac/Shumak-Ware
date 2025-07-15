@@ -775,46 +775,36 @@
         const reservas = snapshot.val();
             
         const hoy = new Date();
-        const entradaCliente = new Date(`${clienteActual.fecha}T${clienteActual.hora}`);
+        const entradaCliente = new Date(`${clienteActual.fecha}T${clienteActual.hora}:00-05:00`);
         const salidaCliente = new Date(entradaCliente.getTime() + 30 * 60000);
         if (entradaCliente < hoy) {
         	alert("No se puede reservar en una fecha pasada");
             return false;
         }
         
-        const existentes = 0;
-        const numSolapaciones = 0;
-        
+        let mesasOcupadas = 0;
+	const totalMesas = 10;
         if (reservas) {
         	for(const key in reservas) {
                 const reserva = reservas[key];
-                const entradaExistente = new Date(`${reserva.fecha}T${reserva.hora}`);
+                const entradaExistente = new Date(`${reserva.fecha}T${reserva.hora}:00-05:00`);
                 const salidaExistente = new Date(entradaExistente.getTime() + 30 * 60000);
             	if (reserva.fecha === clienteActual.fecha) {
-                	if(entradaCliente>=entradaExistente && entradaCliente<salidaExistente){
-                    	existentes+=reserva.personas;
-                    }
-                
                 	if(salidaCliente > entradaExistente && entradaCliente < salidaExistente){
-                    numSolapaciones++;	
+				mesasOcupadas += Math.ceil(reserva.personas / 4);
                     };
                 }
                 
             } 			
-        
         }
-        if (numSolapaciones > 0){
-        	alert("Pruebe otro horario");
+
+	const mesasDisponibles = totalMesas - mesasOcupadas;
+        const mesasRequeridas = Math.ceil(clienteActual.personas/4);
+        if (mesasDisponibles < mesasRequeridas){
+        	alert(`Mesas insuficientes. Disponibles: ${mesasDisponibles}, Requeridas: ${mesasRequeridas}`);
             return false;
         }
-        
-        mesasDisponibles = Math.floor((40-existentes)/4);
-        const mesas = Math.ceil(reserva.personas/4);
-        if (mesasDisponibles<mesas){
-        	alert("mesas insuficientes");
-            return false
-        }
-        
+
         await refReservas.child(codigoReserva).set(clienteActual);
        return true;
        } catch (error) {
@@ -823,15 +813,13 @@
        }
     }
    
-        reservaForm.addEventListener('submit', async function(e){
-        	e.preventDefault();
-            
-            let mesasDisponibles = 0;
+reservaForm.addEventListener('submit', async function(e){
+	e.preventDefault();
         	// Obtener datos del formulario
         const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo').value;
         const telefono = document.getElementById('telefono').value;
-        const fecha = fechaInput.value;
+        const fecha = document.getElementById('fecha').value;
         const hora = document.getElementById('hora').value;
         const personas = parseInt(document.getElementById('personas').value);
         
