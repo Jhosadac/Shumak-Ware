@@ -67,31 +67,32 @@
                 <h2 class="results-title"><i class="fas fa-hiking"></i> ¡Encuentra tu aventura perfecta!</h2>
                 <div class="results-count" id="resultsCount">0 encontradas</div>
             </div>
+
+            <!-- estados  -->
+        <div class="initial-state">
+            <i class="fas fa-binoculars"></i>
+            <h3>¡Comienza tu aventura!</h3>
+            <p>Selecciona fechas para descubrir nuestras habitaciones disponibles</p>
+        </div>
+
+        <div class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Cargando habitaciones disponibles...</p>
+        </div>
+
+        <div class="error" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Por favor selecciona fechas de entrada y salida</p>
+        </div>
+
+        <div class="no-rooms" style="display: none;">
+            <i class="fas fa-bed"></i>
+            <h3>No se encontraron habitaciones disponibles</h3>
+            <p>Intenta cambiar tus criterios de búsqueda</p>
+        </div>
             
             <div class="rooms-grid" id="resultados">
-                <!-- Estado inicial -->
-                <div class="initial-state">
-                    <i class="fas fa-binoculars"></i>
-                    <h3>¡Comienza tu aventura!</h3>
-                    <p>Selecciona fechas para descubrir nuestras habitaciones disponibles</p>
-                </div>
-
-                <!-- Estados que estarán ocultos inicialmente -->
-                <div class="loading" style="display: none;">
-                    <div class="spinner"></div>
-                    <p>Cargando habitaciones disponibles...</p>
-                </div>
-
-                <div class="error" style="display: none;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Por favor selecciona fechas de entrada y salida</p>
-                </div>
-
-                <div class="no-rooms" style="display: none;">
-                    <i class="fas fa-bed"></i>
-                    <h3>No se encontraron habitaciones disponibles</h3>
-                    <p>Intenta cambiar tus criterios de búsqueda</p>
-                </div>
+                <!-- Solo habitaciones aquí -->
             </div>
         </div>
     </div>
@@ -305,7 +306,7 @@
     }
 
     // Función para verificar disponibilidad de habitaciones (CORREGIDA)
-    async function habitacionesDisponibles(tipo, fechaEntrada, fechaSalida) {
+    async function habitacionesDisponibles(fechaEntrada, fechaSalida) {
         try {
             const refReservas = db.ref('rooms');
             const snapshot = await refReservas.once('value');
@@ -438,7 +439,7 @@
         hideElement(document.querySelector('.initial-state'));
         
         // Obtener IDs de habitaciones disponibles
-        const disponiblesIds = await habitacionesDisponibles(selectedType,fechaEntrada, fechaSalida);
+        const disponiblesIds = await habitacionesDisponibles(fechaEntrada, fechaSalida);
         
         // Renderizar habitaciones
         renderHabitaciones(disponiblesIds);
