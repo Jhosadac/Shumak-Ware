@@ -168,43 +168,93 @@
     </footer>
 
     <script>
-        // Validación del formulario
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+    const firebaseConfig = {
+        apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
+        authDomain: "shumak-ware.firebaseapp.com",
+        databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
+        projectId: "shumak-ware",
+        storageBucket: "shumak-ware.firebasestorage.app",
+        messagingSenderId: "64196160181",
+        appId: "1:64196160181:web:76852cef50c12a498e6cfc",
+        measurementId: "G-8L85H7B12E"
+    };
+
+    // Inicializar Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Referencia a la base de datos
+    const contactFormDB = firebase.database().ref("contactForm");
+
+    // Validación del formulario
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        try {
+            // CORRECCIÓN: Usar nombres consistentes de variables
+            const nombre = document.getElementById('name').value;
+            const correo = document.getElementById('email').value;
+            const asunto = document.getElementById('subject').value;
+            const mensaje = document.getElementById('message').value;
             
-            if (!name || !email || !subject || !message) {
-                e.preventDefault();
+            // CORRECCIÓN: Usar las mismas variables declaradas
+            if (!nombre || !correo || !asunto || !mensaje) {
                 alert('Por favor, complete todos los campos requeridos');
                 return false;
             }
             
             // Validación de email básica
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(email)) {
-                e.preventDefault();
+            if (!emailPattern.test(correo)) {
                 alert('Por favor, ingrese una dirección de correo válida');
                 return false;
             }
+
+            // CORRECCIÓN: Enviar asunto y usar variables consistentes
+            saveData(nombre, correo, asunto, mensaje);
             
-            // Mostrar mensaje de éxito
-            alert('¡Su mensaje ha sido enviado con éxito! Nos pondremos en contacto pronto.');
-        });
+        } catch (error) {
+            console.error('Error:', error);
+            alert(`Error: ${error.message}`);
+        }
+    });
+
+    // Función para guardar datos
+    const saveData = (nombre, correo, asunto, mensaje) => {
+        const codigoContacto = "CON" + Math.floor(1000000000 + Math.random() * 9000000000).toString();
+        const newContact = contactFormDB.child(codigoContacto);
         
-        // Animación para los elementos de contacto
-        const contactItems = document.querySelectorAll('.contact-item');
-        contactItems.forEach((item, index) => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        // CORRECCIÓN: Guardar todos los campos incluyendo asunto
+        newContact.set({
+            nombre: nombre,
+            correo: correo,  // Antes estaba 'email' que no existía
+            asunto: asunto,  // Campo faltante
+            mensaje: mensaje
+        })
+        .then(() => {
+            console.log("Datos guardados correctamente");
+            alert("¡Mensaje enviado con éxito!");
             
-            setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, 300 + (index * 150));
+            // CORRECCIÓN: Usar el ID correcto (case-sensitive)
+            document.getElementById("contactForm").reset();
+        })
+        .catch((error) => {
+            console.error("Error al guardar:", error);
+            alert("Ocurrió un error al enviar el mensaje");
         });
-    </script>
+    };
+    
+    // Animación para los elementos de contacto (sin cambios)
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        
+        setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+        }, 300 + (index * 150));
+    });
+</script>
 </body>
 </html>
