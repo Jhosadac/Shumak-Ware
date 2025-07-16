@@ -182,17 +182,13 @@
                     <input type="tel" id="telefono" name="telefono" required>
                 </div>
                 <div class="form-group">
-                    <label for="fecha">Fecha del Evento:</label>
-                    <input type="date" id="fecha" name="fecha" required min="">
-                </div>
-                <div class="form-group">
-                    <label for="hora_entrada">Hora de Entrada:</label>
-                    <input type="time" id="hora_entrada" name="hora_entrada" required>
-                </div>
-                <div class="form-group">
-                    <label for="hora_salida">Hora de Salida:</label>
-                    <input type="time" id="hora_salida" name="hora_salida" required>
-                </div>
+    			<label for="fecha_entrada">Fecha y Hora de Entrada:</label>
+    			<input type="datetime-local" id="fecha_entrada" name="fecha_entrada" required min="">
+		</div>
+		<div class="form-group">
+    			<label for="fecha_salida">Fecha y Hora de Salida:</label>
+    			<input type="datetime-local" id="fecha_salida" name="fecha_salida" required>
+		</div>
                 <button type="submit">Confirmar Reserva</button>
             </form>
         </div>
@@ -210,9 +206,8 @@
             <div class="confirmation-details">
                 <p><strong>Servicio:</strong> <span id="conf-servicio"></span></p>
                 <p><strong>Nombre:</strong> <span id="conf-nombre"></span></p>
-                <p><strong>Fecha:</strong> <span id="conf-fecha"></span></p>
-                <p><strong>Hora de Entrada:</strong> <span id="conf-hora-entrada"></span></p>
-                <p><strong>Hora de Salida:</strong> <span id="conf-hora-salida"></span></p>
+                <p><strong>Fecha y Hora de Entrada:</strong> <span id="conf-fecha-entrada"></span></p>
+		<p><strong>Fecha y Hora de Salida:</strong> <span id="conf-fecha-salida"></span></p>
                 <p><strong>Código de Reserva:</strong></p>
                 <div class="confirmation-code" id="conf-codigo"></div>
             </div>
@@ -298,8 +293,8 @@
     const confServicio = document.getElementById('conf-servicio');
     const confNombre = document.getElementById('conf-nombre');
     const confFecha = document.getElementById('conf-fecha');
-    const confHoraEntrada = document.getElementById('conf-hora-entrada');
-    const confHoraSalida = document.getElementById('conf-hora-salida');
+    const confFechaEntrada = document.getElementById('conf-fecha-entrada');
+    const confFechaSalida = document.getElementById('conf-fecha-salida');
     const confCodigo = document.getElementById('conf-codigo');
     // Variables de estado
     let currentSlideIndex = 0;
@@ -364,14 +359,12 @@
     //manejo de reservas
 	async function confirmarReserva(clienteActual,codigoReserva){
     	try {
-    	const refReservas = db.ref('services');
-        const snapshot = await refReservas.once('value');
-        const reservas = snapshot.val();
-            
+
+	const entradaCliente = new Date(clienteActual.fechaEntrada);
+        const salidaCliente = new Date(clienteActual.fechaSalida);
         const hoy = new Date();
-        const entradaCliente = new Date(`${clienteActual.fecha}T${clienteActual.horaEntrada}`);
-        const salidaCliente = new Date(`${clienteActual.fecha}T${clienteActual.horaSalida}`);
-        if (entradaCliente < hoy) {
+
+	if (entradaCliente < hoy) {
         	alert("No se puede reservar en una fecha pasada");
             return false;
         }
@@ -380,17 +373,19 @@
         alert("La fecha de entrada debe ser antes de la salida");
         return false;
         }
+		
+    	const refReservas = db.ref('services');
+        const snapshot = await refReservas.once('value');
+        const reservas = snapshot.val();
         
         if (reservas) {
         	for(const key in reservas) {
                 const reserva = reservas[key];
-                const entradaExistente = new Date(`${reserva.fecha}T${reserva.horaEntrada}`);
-                const salidaExistente = new Date(`${reserva.fecha}T${reserva.horaSalida}`);
-            	if (reserva.fecha === clienteActual.fecha) {
-                	if(salidaCliente > entradaExistente && entradaCliente < salidaExistente){
+                const entradaExistente = new Date(reserva.fechaEntrada);
+                const salidaExistente = new Date(reserva.fechaSalida);
+                if(salidaCliente > entradaExistente && entradaCliente < salidaExistente){
                     	alert("Pruebe otro horario");
                         return false;
-                    };
                 }
             } 			
         
@@ -404,8 +399,13 @@
     }
    
     document.addEventListener('DOMContentLoaded', () => {
-		initCarousel();
+	initCarousel();
         initModals();
+	    
+	const fechaEntradaInput = document.getElementById('fecha_entrada');
+	const fechaSalidaInput = document.getElementById('fecha_salida');
+	fechaEntradaInput.min = new Date().toISOString().slice(0, 16);
+	    
         reservaForm.addEventListener('submit', async function(e){
         	e.preventDefault();
             
@@ -413,9 +413,8 @@
         const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo').value;
         const telefono = document.getElementById('telefono').value;
-        const fecha = fechaInput.value;
-        const horaEntrada = document.getElementById('hora_entrada').value;
-        const horaSalida = document.getElementById('hora_salida').value;
+        const fechaEntrada = fechaEntradaInput.value;
+	const fechaSalida = fechaSalidaInput.value;
         const servicio = servicioInput.value;
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -428,9 +427,8 @@
             nombre,
             correo,
             telefono,
-            fecha,
-            horaEntrada,
-            horaSalida,
+            fechaEntrada,
+   	    fechaSalida,
             servicio
         };
         codigoReserva = "SEV" + Math.floor(1000000000 + Math.random() * 9000000000).toString();
@@ -438,20 +436,31 @@
         try {
         const reservaExitosa = await confirmarReserva(clienteData,codigoReserva);
         if (reservaExitosa) {
+		// Función para formatear fecha y hora
+		function formatDateTime(datetimeStr) {
+    			const options = { 
+        		year: 'numeric', 
+        		month: 'long', 
+        		day: 'numeric',
+        		hour: '2-digit', 
+        		minute: '2-digit',
+        		hour12: true
+    		};
+    		return new Date(datetimeStr).toLocaleString('es-ES', options);
+		}
+		
         	// Actualizar modal de confirmación
             confServicio.textContent = servicio;
             confNombre.textContent = nombre;
-            confFecha.textContent = fecha;
-            confHoraEntrada.textContent = horaEntrada;
-            confHoraSalida.textContent = horaSalida;
+            confFechaEntrada.textContent = formatDateTime(fechaEntrada);
+	    confFechaSalida.textContent = formatDateTime(fechaSalida);
             confCodigo.textContent = codigoReserva;
             // Configurar WhatsApp
             const mensaje = `Hola, acabo de realizar una reserva para ${servicio} en Shumak Ware.%0A%0A` +
                             `*Código de Reserva:* ${codigoReserva}%0A` +
                             `*Nombre:* ${nombre}%0A` +
-                            `*Fecha:* ${fecha}%0A` +
-                            `*Hora de Entrada:* ${horaEntrada}%0A` +
-                            `*Hora de Salida:* ${horaSalida}%0A%0A` +
+                            `*Fecha/Hora Entrada:* ${formatDateTime(fechaEntrada)}%0A` +
+                	    `*Fecha/Hora Salida:* ${formatDateTime(fechaSalida)}%0A%0A` +
                             `Quiero realizar el pago del 25% para confirmar mi reserva.`;
             whatsappBtn.href = `https://wa.me/51987957231?text=${encodeURIComponent(mensaje)}`;
             // Mostrar confirmación
