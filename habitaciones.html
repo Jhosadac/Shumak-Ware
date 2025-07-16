@@ -305,7 +305,7 @@
     }
 
     // Función para verificar disponibilidad de habitaciones (CORREGIDA)
-    async function habitacionesDisponibles(fechaEntrada, fechaSalida) {
+    async function habitacionesDisponibles(tipo, fechaEntrada, fechaSalida) {
         try {
             const refReservas = db.ref('rooms');
             const snapshot = await refReservas.once('value');
@@ -313,6 +313,15 @@
             
             // Si no hay reservas, todas las habitaciones están disponibles
             if (!reservas) {
+                if (tipo === 'simple'){
+                    return [1,2,3];
+                }
+                if (tipo === 'doble'){
+                    return [4,5,6];
+                }
+                if (tipo === 'matrimonial'){
+                    return [7];
+                }
                 return [1, 2, 3, 4, 5, 6, 7];
             }
             
@@ -429,7 +438,7 @@
         hideElement(document.querySelector('.initial-state'));
         
         // Obtener IDs de habitaciones disponibles
-        const disponiblesIds = await habitacionesDisponibles(fechaEntrada, fechaSalida);
+        const disponiblesIds = await habitacionesDisponibles(selectedType,fechaEntrada, fechaSalida);
         
         // Renderizar habitaciones
         renderHabitaciones(disponiblesIds);
