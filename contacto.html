@@ -194,13 +194,13 @@
         e.preventDefault();
 
         try {
-            // CORRECCIÓN: Usar nombres consistentes de variables
+            
             const nombre = document.getElementById('name').value;
             const correo = document.getElementById('email').value;
             const asunto = document.getElementById('subject').value;
             const mensaje = document.getElementById('message').value;
             
-            // CORRECCIÓN: Usar las mismas variables declaradas
+            // Campos obligatorios
             if (!nombre || !correo || !asunto || !mensaje) {
                 alert('Por favor, complete todos los campos requeridos');
                 return false;
@@ -213,14 +213,36 @@
                 return false;
             }
 
-            // CORRECCIÓN: Enviar asunto y usar variables consistentes
-            saveData(nombre, correo, asunto, mensaje);
+            // 1. Guardar en Firebase
+        saveData(nombre, correo, asunto, mensaje);
+        
+        // 2. Enviar a WhatsApp
+        sendWhatsAppMessage(nombre, correo, asunto, mensaje);
             
         } catch (error) {
             console.error('Error:', error);
             alert(`Error: ${error.message}`);
         }
     });
+
+    // Función para enviar mensaje por WhatsApp
+    function sendWhatsAppMessage(nombre, correo, asunto, mensaje) {
+        // Número de la empresa (formato internacional sin espacios)
+        const phoneNumber = "51123456567"; // +51 123 456 567
+        
+        // Crear mensaje formateado
+        const text = `*Nuevo mensaje de contacto:*%0A%0A
+*Nombre:* ${nombre}%0A
+*Correo:* ${correo}%0A
+*Asunto:* ${asunto}%0A
+*Mensaje:*%0A${mensaje}`;
+        
+        // Crear enlace de WhatsApp
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${text}`;
+        
+        // Abrir en nueva pestaña
+        window.open(whatsappUrl, '_blank');
+    }
 
     // Función para guardar datos
     const saveData = (nombre, correo, asunto, mensaje) => {
