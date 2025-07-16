@@ -489,7 +489,7 @@
         const telefono = document.getElementById('telefono').value;
         
         // Generar ID de reserva
-        const reservationId = 'RES-' + Date.now();
+        const reservationId = 'REC' + Date.now();
         
         // Guardar en Firebase
         const reservaRef = db.ref('rooms/' + reservationId);
