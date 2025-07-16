@@ -287,7 +287,8 @@
     const closeBtns = document.querySelectorAll('.close');
     const modalTitle = document.getElementById('modal-title');
     const servicioInput = document.getElementById('servicio');
-    const fechaInput = document.getElementById('fecha');
+    const fechaEntradaInput = document.getElementById('fecha_entrada');
+    const fechaSalidaInput = document.getElementById('fecha_salida');
     const reservaForm = document.getElementById('reservaForm');
     const whatsappBtn = document.getElementById('whatsappBtn');
     const confServicio = document.getElementById('conf-servicio');
@@ -331,7 +332,7 @@
     // Inicialización de modales
     function initModals() {
         // Fecha mínima hoy
-        fechaInput.min = new Date().toISOString().split('T')[0];
+        fechaEntradaInput.min = new Date().toISOString().slice(0, 16);
         // Abrir modal de reserva
         reservaBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -401,10 +402,6 @@
     document.addEventListener('DOMContentLoaded', () => {
 	initCarousel();
         initModals();
-	    
-	const fechaEntradaInput = document.getElementById('fecha_entrada');
-	const fechaSalidaInput = document.getElementById('fecha_salida');
-	fechaEntradaInput.min = new Date().toISOString().slice(0, 16);
 	    
         reservaForm.addEventListener('submit', async function(e){
         	e.preventDefault();
