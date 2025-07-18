@@ -7,43 +7,92 @@
     <!--estilos-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
     <!--libreria de firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script> 
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-wrap">
-            <div class="logo">
-                <img src="assests/logo.png" alt="logo">
-            </div>
-            <nav class="nav-header">
-                <ul class="main-menu">
-                    <li><a href="index.html" class="active">Inicio</a></li>
-                    <li><a href="habitaciones.html">Habitaciones</a></li>
-                    <li><a href="restaurante.html">Restaurante</a></li>
-                    <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <!-- Hero Section -->
-    <section class="hero" style="background: url('assests/main_header.jpg')">
-        <div class="hero-content">
-            <h1>Bienvenidos a Shumak Ware</h1>
-            <p>Disfruta de una experiencia única en nuestro hotel y restaurante campestre</p>
-            <button class="cta-button">Reservar Ahora</button>
+    <section class="hero-section">
+        <img src="assests/main_image.gif" alt="selecion peruana" class="hero-bg">
+        
+        <div class="overlay"></div>
+        <header class="header">
+            
+            <img src="assests/logo_final.png">
+            
+            <nav class="nav-links">
+                <a href="restaurante.html">Restaurante</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </header>
+        
+        <h1 class="main-title">#ShumakWare</h1>
+
+        <div class="booking-box">
+  <h3>Fechas (opcionales)</h3>
+  <form class="booking-form">
+    <div class="date-range-group">
+      <div class="form-group date-input-group">
+        <div class="custom-date-picker">
+          <div class="date-picker-button" onclick="toggleCalendar('entry')">
+            <span>📅</span>
+            <span class="date-label">Entrada</span>
+          </div>
+          <div class="calendar-dropdown" id="entry-calendar">
+            <div class="calendar-header">
+              <button onclick="prevMonth('entry')">◀</button>
+              <h3 id="entry-current-month">Febrero 2024</h3>
+              <button onclick="nextMonth('entry')">▶</button>
+            </div>
+            <div class="calendar-grid" id="entry-calendar-grid"></div>
+          </div>
         </div>
+
+        <div class="divider"></div>
+        
+        <div class="custom-date-picker">
+          <div class="date-picker-button" onclick="toggleCalendar('exit')">
+            <span>📅</span>
+            <span class="date-label">Salida</span>
+          </div>
+          <div class="calendar-dropdown" id="exit-calendar">
+            <div class="calendar-header">
+              <button onclick="prevMonth('exit')">◀</button>
+              <h3 id="exit-current-month">Febrero 2024</h3>
+              <button onclick="nextMonth('exit')">▶</button>
+            </div>
+            <div class="calendar-grid" id="exit-calendar-grid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group room-type-dropdown">
+      <span>🛏️</span>
+      <select id="room-type">
+        <option value="">Tipo de Habitación</option>
+        <option value="Sencilla">Sencilla (1 cama)</option>
+        <option value="Doble">Doble (2 camas)</option>
+        <option value="Matrimonial">Matrimonial (1 cama grande)</option>
+      </select>
+    </div>
+    
+    <button type="button" class="search-btn">Buscar</button>
+  </form>
+</div>
+                              
     </section>
     
     <!-- Carrusel -->
-    <div class="slider-container-idx">
-        <div class="slider-idx">
+    <div class="slider-container">
+        <div class="slider">
             <!-- Habitación 1 -->
-            <div class="slide-idx">
+            <div class="slide">
                 <div class="slide-image-idx" style="background-image: url('assests/habitacion_1.jpg');"></div>
                 <div class="slide-info-idx">
                     <div class="room-type">Cama simple</div>
@@ -62,7 +111,7 @@ Relájate en una cama cómoda y despierta cada mañana con el espectacular paisa
             </div>
             
             <!-- Habitación 2 -->
-            <div class="slide-idx">
+            <div class="slide">
                 <div class="slide-image-idx" style="background-image: url('assests/habitacion_2.jpg');"></div>
                 <div class="slide-info-idx">
                     <div class="room-type">Cama doble</div>
@@ -81,7 +130,7 @@ y acogedoras colchas de lana de la sierra, ideales para el clima fresco de Huara
             </div>
             
             <!-- Habitación 3 -->
-            <div class="slide-idx">
+            <div class="slide">
                 <div class="slide-image-idx" style="background-image: url('https://www.google.com/search?q=cama+matrimonial+3+plazas+hotel+campestre&sca_esv=1000ec4505037274&udm=2&biw=1536&bih=730&sxsrf=AE3TifOlA6PyDw379ctZdvS-rrATLCnh9g%3A1752263460246&ei=JGtxaIujDu6b5OUP6-W7oAM&ved=0ahUKEwiLxeaIyrWOAxXuDbkGHevyDjQQ4dUDCBE&uact=5&oq=cama+matrimonial+3+plazas+hotel+campestre&gs_lp=EgNpbWciKWNhbWEgbWF0cmltb25pYWwgMyBwbGF6YXMgaG90ZWwgY2FtcGVzdHJlSNkbUOEFWLUbcAF4AJABAZgB-gWgAe8ZqgENMC4xLjIuMS4xLjIuMbgBA8gBAPgBAZgCAaACCcICBxAjGCcYyQKYAwCIBgGSBwExoAeMA7IHALgHAMIHAzItMcgHBg&sclient=img#vhid=ufwHEo0n5O3WJM&vssid=mosaic');"></div>
                 <div class="slide-info-idx">
                     <div class="room-type">Cama matrimonial</div>
@@ -140,30 +189,6 @@ brindis y música ambiental para que revivas cada momento con magia.</p>
         </div>
     </section>
 
-    <!-- Contacto -->
-    <section class="contact" id="contacto">
-        <div class="container">
-            <div class="contact-form">
-                <h2>Contáctanos</h2>
-                <form id="contactform">
-                    <div class="form-group-idx">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" id="nombre" placeholder="Nombre completo" required>
-                    </div>
-                    <div class="form-group-idx">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="tu@email.com" required>
-                    </div>
-                    <div class="form-group-idx">
-                        <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Enviar</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -195,78 +220,122 @@ brindis y música ambiental para que revivas cada momento con magia.</p>
             </div>
         </div>
     </footer>
+    
+    <script>
+let entryCurrentDate = new Date();
+let exitCurrentDate = new Date();
+let selectedEntryDate = null;
+let selectedExitDate = null;
+
+function toggleCalendar(type) {
+    const calendar = document.getElementById(`${type}-calendar`);
+    calendar.style.display = calendar.style.display === "block" ? "none" : "block";
+    if (calendar.style.display === "block") {
+        renderCalendar(type);
+    }
+}
+
+function renderCalendar(type) {
+    const currentDate = type === 'entry' ? entryCurrentDate : exitCurrentDate;
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    document.getElementById(`${type}-current-month`).textContent = 
+        new Date(year, month, 1).toLocaleDateString("es-ES", { month: "long", year: "numeric" });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    let calendarHTML = "";
+    
+    // Días de la semana
+    const weekdays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+    weekdays.forEach(day => {
+        calendarHTML += `<div style="font-weight: bold;">${day}</div>`;
+    });
+    
+    // Espacios vacíos al inicio
+    for (let i = 0; i < firstDay; i++) {
+        calendarHTML += `<div class="day-disabled"></div>`;
+    }
+    
+    // Días del mes
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${month + 1}-${day}`;
+        const isSelected = (type === 'entry' && selectedEntryDate === dateStr) || 
+                          (type === 'exit' && selectedExitDate === dateStr);
+        calendarHTML += `
+            <div 
+                class="${isSelected ? 'day-selected' : ''}" 
+                onclick="selectDate('${type}', '${dateStr}')"
+            >${day}</div>
+        `;
+    }
+    
+    document.getElementById(`${type}-calendar-grid`).innerHTML = calendarHTML;
+}
+
+function selectDate(type, dateStr) {
+    if (type === 'entry') {
+        selectedEntryDate = dateStr;
+    } else {
+        selectedExitDate = dateStr;
+    }
+    const [year, month, day] = dateStr.split("-");
+    const formattedDate = `${day}/${month}/${year}`;
+    document.querySelector(`.date-picker-button[onclick="toggleCalendar('${type}')"] .date-label`).textContent = formattedDate;
+    document.getElementById(`${type}-calendar`).style.display = "none";
+}
+
+function prevMonth(type) {
+    if (type === 'entry') {
+        entryCurrentDate.setMonth(entryCurrentDate.getMonth() - 1);
+    } else {
+        exitCurrentDate.setMonth(exitCurrentDate.getMonth() - 1);
+    }
+    renderCalendar(type);
+}
+
+function nextMonth(type) {
+    if (type === 'entry') {
+        entryCurrentDate.setMonth(entryCurrentDate.getMonth() + 1);
+    } else {
+        exitCurrentDate.setMonth(exitCurrentDate.getMonth() + 1);
+    }
+    renderCalendar(type);
+}
+
+// Renderizar calendarios inicialmente
+renderCalendar('entry');
+renderCalendar('exit');
+
+// Cerrar calendario al hacer clic fuera
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".custom-date-picker")) {
+        document.getElementById("entry-calendar").style.display = "none";
+        document.getElementById("exit-calendar").style.display = "none";
+    }
+});
+</script>
 
     <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
-            authDomain: "shumak-ware.firebaseapp.com",
-            databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
-            projectId: "shumak-ware",
-            storageBucket: "shumak-ware.firebasestorage.app",
-            messagingSenderId: "64196160181",
-            appId: "1:64196160181:web:76852cef50c12a498e6cfc",
-            measurementId: "G-8L85H7B12E"
-        };
-
-        // Inicializar Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Referencia a la base de datos
-        const contactFormDB = firebase.database().ref("contactForm");
-
-        // Manejar el envio del formulario
-        document.getElementById("contactform").addEventListener("submit", submitForm);
-        function submitForm(e) {
-            e.preventDefault();
-            
-            try {
-                // Obtener valores
-                const nombre = document.getElementById('nombre').value;
-                const email = document.getElementById('email').value;
-                const mensaje = document.getElementById('mensaje').value;
-                
-                // Validaciones
-                if (!nombre || !email || !mensaje) {
-                    throw new Error('Todos los campos son obligatorios');
-                }
-                
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                    throw new Error('El email no es válido');
-                }
-
-                saveData(nombre, email, mensaje);
-
-                // Resetear formulario
-                document.getElementById("contactform").reset();
-                
-            } catch (error) {
-                console.error('Error:', error);
-                alert(`Error: ${error.message}`);
-            }
+        //calendario
+        function updateDateLabel(input, labelText) {
+        const container = input.parentElement;
+        const label = container.querySelector('.date-label');
+        
+        if (input.value) {
+            label.style.display = 'block';
+            label.textContent = labelText;
+        } else {
+            label.style.display = 'none';
         }
-
-        const saveData = (nombre, email, mensaje) => {
-            const newContact = contactFormDB.push();
-            
-            newContact.set({
-                nombre: nombre,
-                correo: email,
-                mensaje: mensaje
-            })
-            .then(() => {
-                console.log("Datos guardados correctamente");
-                alert("¡Mensaje enviado con éxito!");
-            })
-            .catch((error) => {
-                console.error("Error al guardar:", error);
-                alert("Ocurrió un error al enviar el mensaje");
-            });
-        };
+    }
 
         // Carrusel Script
         document.addEventListener('DOMContentLoaded', function() {
-            const slider = document.querySelector('.slider-idx');
-            const slides = document.querySelectorAll('.slide-idx');
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
             const indicators = document.querySelectorAll('.indicator');
@@ -333,7 +402,7 @@ brindis y música ambiental para que revivas cada momento con magia.</p>
             
             // Botón de reserva en hero
             document.querySelector('.cta-button').addEventListener('click', function() {
-                window.location.href = 'habitaciones.html';
+                window.location.href = 'reservas.html';
             });
         });
     </script>
