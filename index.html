@@ -24,11 +24,17 @@
             
             <img src="assests/logo_final.png">
             
-            <nav class="nav-links">
-                <a href="restaurante.html">Restaurante</a>
-                <a href="servicios.html">Servicios</a>
-                <a href="contacto.html">Contacto</a>
-            </nav>
+  <nav class="nav-links">
+    <div class="dropdown-restaurante">
+        <a href="restaurante.html" class="nav-link-restaurante">Restaurante</a>
+        <div class="dropdown-content-restaurante">
+            <a href="menu.html">Menú</a>
+            <a href="reserva-mesa.html">Reserva de Mesa</a>
+        </div>
+    </div>
+    <a href="servicios.html">Servicios</a>
+    <a href="contacto.html">Contacto</a>
+</nav>
         </header>
         
         <h1 class="main-title">#ShumakWare</h1>
@@ -38,37 +44,47 @@
   <form class="booking-form">
     <div class="date-range-group">
       <div class="form-group date-input-group">
-        <div class="custom-date-picker">
-          <div class="date-picker-button" onclick="toggleCalendar('entry')">
+
+        <div class="custom-date-picker entrada">
+          <div class="date-picker-button" id="entry-btn">
             <span>📅</span>
-            <span class="date-label">Entrada</span>
-          </div>
-          <div class="calendar-dropdown" id="entry-calendar">
-            <div class="calendar-header">
-              <button onclick="prevMonth('entry')">◀</button>
-              <h3 id="entry-current-month">Febrero 2024</h3>
-              <button onclick="nextMonth('entry')">▶</button>
-            </div>
-            <div class="calendar-grid" id="entry-calendar-grid"></div>
+            <span class="date-label" id="entry-label">Entrada</span>
           </div>
         </div>
 
         <div class="divider"></div>
         
         <div class="custom-date-picker">
-          <div class="date-picker-button" onclick="toggleCalendar('exit')">
+          <div class="date-picker-button" id="exit-btn">
             <span>📅</span>
-            <span class="date-label">Salida</span>
-          </div>
-          <div class="calendar-dropdown" id="exit-calendar">
-            <div class="calendar-header">
-              <button onclick="prevMonth('exit')">◀</button>
-              <h3 id="exit-current-month">Febrero 2024</h3>
-              <button onclick="nextMonth('exit')">▶</button>
-            </div>
-            <div class="calendar-grid" id="exit-calendar-grid"></div>
+            <span class="date-label" id="exit-label">Salida</span>
           </div>
         </div>
+
+        <div class="calendars-dropdown" id="calendars-dropdown">
+  <div class="calendar-side-info">
+    <h1 class="calendar-title">Seleccione sus fechas (opcional)</h1>
+    <div class="calendar-nights">
+      <span id="nights-count">Noches seleccionadas: 0</span>
+    </div>
+  </div>
+  <div class="calendars-container">
+    <div class="calendar-block">
+      <div class="calendar-header">
+        <button type="button" id="prev-month-btn">◀</button>
+        <span id="entry-month-label" class="calendar-month-label"></span>
+      </div>
+      <div class="calendar-grid" id="entry-calendar-grid"></div>
+    </div>
+    <div class="calendar-block">
+      <div class="calendar-header">
+        <span id="exit-month-label" class="calendar-month-label"></span>
+        <button type="button" id="next-month-btn">▶</button>
+      </div>
+      <div class="calendar-grid" id="exit-calendar-grid"></div>
+    </div>
+  </div>
+</div>
       </div>
     </div>
     
@@ -82,67 +98,51 @@
       </select>
     </div>
     
-    <button type="button" class="search-btn">Buscar</button>
+    <a href="reservas.html" class="search-btn">Buscar</a>
   </form>
 </div>
                               
     </section>
     
-    <!-- Carrusel -->
-    <div class="slider-container">
-        <div class="slider">
+    <div>
+      <div class="noticias-title"> Noticias</div>
+      <!-- Carrusel -->
+    <div class="noticias-container">
+        <div class="noticiasMain">
             <!-- Habitación 1 -->
-            <div class="slide">
-                <div class="slide-image-idx" style="background-image: url('assests/habitacion_1.jpg');"></div>
-                <div class="slide-info-idx">
-                    <div class="room-type">Cama simple</div>
-                    <h2 class="room-title">Simple</h2>
+            <div class="noticia">
+                <div class="noticia-img" style="background-image: url('assests/habitacion_1.jpg');"></div>
+                <div class="noticia-info">
+                    <div class="room-type">noticia1</div>
+                    <h2 class="room-title">hola</h2>
                     <p class="room-description">Disfruta de una estadía inolvidable en Huaraz con nuestra habitación con vista panorámica al imponente Huascarán. 
-Relájate en una cama cómoda y despierta cada mañana con el espectacular paisaje de la Cordillera Blanca.</p>
-                    <div class="features-idx">
-                        <div class="feature-idx"><i class="fas fa-bed"></i> 2 camas simples</div>
-                        <div class="feature-idx"><i class="fas fa-bath"></i> Baño</div>
-                        <div class="feature-idx"><i class="fas fa-wifi"></i> WiFi Rapido</div>
-                        <div class="feature-idx"><i class="fas fa-tv"></i> TV 35"</div>
-                    </div>
+Relájate en una cama cómoda y despierta cada mañana with el espectacular paisaje de la Cordillera Blanca.</p>
                     <div class="price">S/. 20 <span>por noche</span></div>
                     <a href="habitaciones.html" class="btn">Reservar ahora</a>
                 </div>
             </div>
             
             <!-- Habitación 2 -->
-            <div class="slide">
-                <div class="slide-image-idx" style="background-image: url('assests/habitacion_2.jpg');"></div>
-                <div class="slide-info-idx">
-                    <div class="room-type">Cama doble</div>
-                    <h2 class="room-title">Doble</h2>
+            <div class="noticia">
+                <div class="noticia-img" style="background-image: url('assests/habitacion_2.jpg');"></div>
+                <div class="noticia-info">
+                    <div class="room-type">Noticia2</div>
+                    <h2 class="room-title">como</h2>
                     <p class="room-description">Perfecta para amigos o familiares, esta habitación cuenta con una cama para dos personas con colchón ergonómico 
 y acogedoras colchas de lana de la sierra, ideales para el clima fresco de Huaraz.</p>
-                    <div class="features-idx">
-                        <div class="feature-idx"><i class="fas fa-bed"></i> 1 cama doble</div>
-                        <div class="feature-idx"><i class="fas fa-wifi"></i> WiFi </div>
-                        <div class="feature-idx"><i class="fas fa-tv"></i> TV 35"</div>
-                        <div class="feature-idx"><i class="fas fa-desktop"></i> Escritorio Personal</div>
-                    </div>
                     <div class="price">S/. 30 <span>por noche</span></div>
                     <a href="habitaciones.html" class="btn">Reservar ahora</a>
                 </div>
             </div>
             
             <!-- Habitación 3 -->
-            <div class="slide">
-                <div class="slide-image-idx" style="background-image: url('https://www.google.com/search?q=cama+matrimonial+3+plazas+hotel+campestre&sca_esv=1000ec4505037274&udm=2&biw=1536&bih=730&sxsrf=AE3TifOlA6PyDw379ctZdvS-rrATLCnh9g%3A1752263460246&ei=JGtxaIujDu6b5OUP6-W7oAM&ved=0ahUKEwiLxeaIyrWOAxXuDbkGHevyDjQQ4dUDCBE&uact=5&oq=cama+matrimonial+3+plazas+hotel+campestre&gs_lp=EgNpbWciKWNhbWEgbWF0cmltb25pYWwgMyBwbGF6YXMgaG90ZWwgY2FtcGVzdHJlSNkbUOEFWLUbcAF4AJABAZgB-gWgAe8ZqgENMC4xLjIuMS4xLjIuMbgBA8gBAPgBAZgCAaACCcICBxAjGCcYyQKYAwCIBgGSBwExoAeMA7IHALgHAMIHAzItMcgHBg&sclient=img#vhid=ufwHEo0n5O3WJM&vssid=mosaic');"></div>
-                <div class="slide-info-idx">
-                    <div class="room-type">Cama matrimonial</div>
-                    <h2 class="room-title">Matrimonial</h2>
+            <div class="noticia">
+                <div class="noticia-img" style="background-image: url('https://www.google.com/search?q=cama+matrimonial+3+plazas+hotel+campestre&sca_esv=1000ec4505037274&udm=2&biw=1536&bih=730&sxsrf=AE3TifOlA6PyDw379ctZdvS-rrATLCnh9g%3A1752263460246&ei=JGtxaIujDu6b5OUP6-W7oAM&ved=0ahUKEwiLxeaIyrWOAxXuDbkGHevyDjQQ4dUDCBE&uact=5&oq=cama+matrimonial+3+plazas+hotel+campestre&gs_lp=EgNpbWciKWNhbWEgbWF0cmltb25pYWwgMyBwbGF6YXMgaG90ZWwgY2FtcGVzdHJlSNkbUOEFWLUbcAF4AJABAZgB-gWgAe8ZqgENMC4xLjIuMS4xLjIuMbgBA8gBAPgBAZgCAaACCcICBxAjGCcYyQKYAwCIBgGSBwExoAeMA7IHALgHAMIHAzItMcgHBg&sclient=img#vhid=ufwHEo0n5O3WJM&vssid=mosaic');"></div>
+                <div class="noticia-info">
+                    <div class="room-type">Noticia3</div>
+                    <h2 class="room-title">estas</h2>
                     <p class="room-description">Pensada para parejas, nuestra cama matrimonial cuenta con un amplio colchón de alta calidad, sábanas frescas y un diseño 
 que combina elegancia y relax. Disfruten de noches tranquilas con el clima serrano de Huaraz.</p>
-                    <div class="features-idx">
-                        <div class="feature-idx"><i class="fas fa-bed"></i> 1 cama matrimonial</div>
-                        <div class="feature-idx"><i class="fas fa-bath"></i> Baño</div>
-                        <div class="feature-idx"><i class="fas fa-wifi"></i> WiFi Rapido</div>
-                        <div class="feature-idx"><i class="fas fa-tv"></i> TV 45"</div>
-                    </div>
                     <div class="price">S/. 40 <span>por noche</span></div>
                     <a href="habitaciones.html" class="btn">Reservar ahora</a>
                 </div>
@@ -162,6 +162,9 @@ que combina elegancia y relax. Disfruten de noches tranquilas con el clima serra
             <div class="indicator"></div>
         </div>
     </div>
+
+    </div>
+    
    
    <!-- Servicios -->
     <section class="services-idx">
@@ -222,130 +225,21 @@ brindis y música ambiental para que revivas cada momento con magia.</p>
     </footer>
     
     <script>
-let entryCurrentDate = new Date();
-let exitCurrentDate = new Date();
-let selectedEntryDate = null;
-let selectedExitDate = null;
-
-function toggleCalendar(type) {
-    const calendar = document.getElementById(`${type}-calendar`);
-    calendar.style.display = calendar.style.display === "block" ? "none" : "block";
-    if (calendar.style.display === "block") {
-        renderCalendar(type);
-    }
-}
-
-function renderCalendar(type) {
-    const currentDate = type === 'entry' ? entryCurrentDate : exitCurrentDate;
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    
-    document.getElementById(`${type}-current-month`).textContent = 
-        new Date(year, month, 1).toLocaleDateString("es-ES", { month: "long", year: "numeric" });
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    
-    let calendarHTML = "";
-    
-    // Días de la semana
-    const weekdays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-    weekdays.forEach(day => {
-        calendarHTML += `<div style="font-weight: bold;">${day}</div>`;
-    });
-    
-    // Espacios vacíos al inicio
-    for (let i = 0; i < firstDay; i++) {
-        calendarHTML += `<div class="day-disabled"></div>`;
-    }
-    
-    // Días del mes
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${month + 1}-${day}`;
-        const isSelected = (type === 'entry' && selectedEntryDate === dateStr) || 
-                          (type === 'exit' && selectedExitDate === dateStr);
-        calendarHTML += `
-            <div 
-                class="${isSelected ? 'day-selected' : ''}" 
-                onclick="selectDate('${type}', '${dateStr}')"
-            >${day}</div>
-        `;
-    }
-    
-    document.getElementById(`${type}-calendar-grid`).innerHTML = calendarHTML;
-}
-
-function selectDate(type, dateStr) {
-    if (type === 'entry') {
-        selectedEntryDate = dateStr;
-    } else {
-        selectedExitDate = dateStr;
-    }
-    const [year, month, day] = dateStr.split("-");
-    const formattedDate = `${day}/${month}/${year}`;
-    document.querySelector(`.date-picker-button[onclick="toggleCalendar('${type}')"] .date-label`).textContent = formattedDate;
-    document.getElementById(`${type}-calendar`).style.display = "none";
-}
-
-function prevMonth(type) {
-    if (type === 'entry') {
-        entryCurrentDate.setMonth(entryCurrentDate.getMonth() - 1);
-    } else {
-        exitCurrentDate.setMonth(exitCurrentDate.getMonth() - 1);
-    }
-    renderCalendar(type);
-}
-
-function nextMonth(type) {
-    if (type === 'entry') {
-        entryCurrentDate.setMonth(entryCurrentDate.getMonth() + 1);
-    } else {
-        exitCurrentDate.setMonth(exitCurrentDate.getMonth() + 1);
-    }
-    renderCalendar(type);
-}
-
-// Renderizar calendarios inicialmente
-renderCalendar('entry');
-renderCalendar('exit');
-
-// Cerrar calendario al hacer clic fuera
-document.addEventListener("click", (e) => {
-    if (!e.target.closest(".custom-date-picker")) {
-        document.getElementById("entry-calendar").style.display = "none";
-        document.getElementById("exit-calendar").style.display = "none";
-    }
-});
-</script>
-
-    <script>
-        //calendario
-        function updateDateLabel(input, labelText) {
-        const container = input.parentElement;
-        const label = container.querySelector('.date-label');
-        
-        if (input.value) {
-            label.style.display = 'block';
-            label.textContent = labelText;
-        } else {
-            label.style.display = 'none';
-        }
-    }
 
         // Carrusel Script
         document.addEventListener('DOMContentLoaded', function() {
-            const slider = document.querySelector('.slider');
-            const slides = document.querySelectorAll('.slide');
+            const noticiasMain = document.querySelector('.noticiasMain');
+            const noticias = document.querySelectorAll('.noticia');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
             const indicators = document.querySelectorAll('.indicator');
             
             let currentIndex = 0;
-            const slideCount = slides.length;
+            const slideCount = noticias.length;
             
             // Función para actualizar el carrusel
             function updateSlider() {
-                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                noticiasMain.style.transform = `translateX(-${currentIndex * 100}%)`;
                 
                 // Actualizar indicadores
                 indicators.forEach((indicator, index) => {
@@ -400,11 +294,225 @@ document.addEventListener("click", (e) => {
                 }
             });
             
-            // Botón de reserva en hero
-            document.querySelector('.cta-button').addEventListener('click', function() {
-                window.location.href = 'reservas.html';
-            });
         });
     </script>
+    
+    <script>
+const entryBtn = document.getElementById('entry-btn');
+const exitBtn = document.getElementById('exit-btn');
+const calendarsDropdown = document.getElementById('calendars-dropdown');
+const entryLabel = document.getElementById('entry-label');
+const exitLabel = document.getElementById('exit-label');
+const entryMonthLabel = document.getElementById('entry-month-label');
+const exitMonthLabel = document.getElementById('exit-month-label');
+const entryCalendarGrid = document.getElementById('entry-calendar-grid');
+const exitCalendarGrid = document.getElementById('exit-calendar-grid');
+const prevMonthBtn = document.getElementById('prev-month-btn');
+const nextMonthBtn = document.getElementById('next-month-btn');
+const nightsCount = document.getElementById('nights-count');
+
+let today = new Date();
+let entryDate = null;
+let exitDate = null;
+let entryMonth = today.getMonth();
+let entryYear = today.getFullYear();
+let exitMonth = entryMonth + 1;
+let exitYear = entryYear;
+let selecting = null; // 'entry' o 'exit'
+let hoverDate = null;
+
+// Sincroniza los meses de ambos calendarios
+function syncMonths(dir) {
+  if (dir === 'next') {
+    entryMonth++;
+    if (entryMonth > 11) {
+      entryMonth = 0;
+      entryYear++;
+    }
+    exitMonth = entryMonth + 1;
+    exitYear = entryYear;
+    if (exitMonth > 11) {
+      exitMonth = 0;
+      exitYear += 1;
+    }
+  } else {
+    entryMonth--;
+    if (entryMonth < 0) {
+      entryMonth = 11;
+      entryYear--;
+    }
+    exitMonth = entryMonth + 1;
+    exitYear = entryYear;
+    if (exitMonth > 11) {
+      exitMonth = 0;
+      exitYear += 1;
+    }
+  }
+}
+
+// Mostrar calendarios y aplicar sombra neon
+function showCalendars(type) {
+  calendarsDropdown.style.display = 'block';
+  selecting = type;
+  entryBtn.classList.add('neon');
+  exitBtn.classList.toggle('neon', selecting === 'exit');
+  renderCalendars();
+}
+
+// Ocultar calendarios y quitar sombra neon
+function hideCalendars() {
+  calendarsDropdown.style.display = 'none';
+  entryBtn.classList.remove('neon');
+  exitBtn.classList.remove('neon');
+  selecting = null;
+}
+
+// Eventos para mostrar los calendarios
+entryBtn.addEventListener('click', () => {showCalendars('entry')});
+exitBtn.addEventListener('click', () => {showCalendars('exit')});
+
+// Renderiza ambos calendarios
+function renderCalendars() {
+  renderCalendar('entry', entryYear, entryMonth, entryDate, exitDate);
+  renderCalendar('exit', exitYear, exitMonth, exitDate, entryDate);
+  updateNights();
+}
+
+// Renderiza un calendario individual
+function renderCalendar(type, year, month, selected, otherSelected) {
+  const grid = type === 'entry' ? entryCalendarGrid : exitCalendarGrid;
+  const monthLabel = type === 'entry' ? entryMonthLabel : exitMonthLabel;
+  const current = new Date(year, month, 1);
+  monthLabel.textContent = current.toLocaleDateString("es-ES", { month: "long", year: "numeric" });
+
+  let html = '';
+  const weekdays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+  weekdays.forEach(day => {
+    html += `<div class="day-disabled" style="font-weight:bold;cursor:default;">${day}</div>`;
+  });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  if (type === 'exit' && entryDate) {
+    minDate = new Date(entryDate);
+    minDate.setDate(minDate.getDate() + 1);
+  }
+
+  for (let i = 0; i < firstDay; i++) {
+    html += `<div class="day-disabled"></div>`;
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateObj = new Date(year, month, day);
+    const dateStr = dateObj.toISOString().split('T')[0];
+    let disabled = false;
+
+    if (dateObj < minDate) disabled = true;
+    if (type === 'entry' && dateObj < minDate) disabled = true; // puede ser que la fecha de entrada sea antes de hoy
+    if (type === 'exit' && entryDate && dateObj <= new Date(entryDate)) disabled = true;
+
+    let classes = [];
+    if (disabled) classes.push('day-disabled');
+    if (selected && dateStr === selected) classes.push('day-selected');
+
+    // Pintar rango seleccionado
+    if (entryDate && exitDate && !disabled) {
+      const entryD = new Date(entryDate);
+      const exitD = new Date(exitDate);
+      if (dateObj > entryD && dateObj < exitD) {
+        classes.push('day-range');
+      }
+    }
+
+    // Pintar rango hover
+    if (selecting === 'exit' && entryDate && hoverDate && !disabled) {
+      const entryD = new Date(entryDate);
+      const hoverD = new Date(hoverDate);
+      if (dateObj >= entryD && dateObj <= hoverD) {
+        classes.push('day-range-hover');
+      }
+    }
+
+    html += `<div 
+      class="${classes.join(' ')}"
+      data-type="${type}"
+      data-date="${dateStr}"
+      ${disabled ? '' : 'tabindex="0"'}
+    >${day}</div>`;
+  }
+
+  grid.innerHTML = html;
+
+  // Evento para seleccionar fecha
+  Array.from(grid.querySelectorAll('div[data-date]')).forEach(el => {
+    el.addEventListener('click', function() {
+      const type = el.getAttribute('data-type');
+      const dateStr = el.getAttribute('data-date');
+      if (type === 'entry') {
+        entryDate = dateStr;
+        exitDate = null;
+        entryLabel.textContent = formatDate(entryDate);
+        exitLabel.textContent = "Salida";
+        renderCalendars();
+      } else {
+        exitDate = dateStr;
+        exitLabel.textContent = formatDate(exitDate);
+        hideCalendars();
+        renderCalendars();
+      }
+    });
+    el.addEventListener('mouseover', function() {
+      hoverDate = el.getAttribute('data-date');
+      renderCalendars();
+    });
+    el.addEventListener('mouseout', function() {
+      hoverDate = null;
+      renderCalendars();
+    });
+  });
+}
+
+// Flechas para cambiar de mes
+prevMonthBtn.addEventListener('click', () => {
+  syncMonths('prev');
+  renderCalendars();
+});
+nextMonthBtn.addEventListener('click', () => {
+  syncMonths('next');
+  renderCalendars();
+});
+
+// Cerrar calendario al hacer clic fuera
+document.addEventListener('mousedown', function(e) {
+  if (!calendarsDropdown.contains(e.target) && !entryBtn.contains(e.target) && !exitBtn.contains(e.target)) {
+    hideCalendars();
+  }
+});
+
+// Formato de fecha
+function formatDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return `${day}/${month}/${year}`;
+}
+
+// Actualiza noches seleccionadas
+function updateNights() {
+  if (entryDate && exitDate) {
+    const nights = (new Date(exitDate) - new Date(entryDate)) / (1000 * 60 * 60 * 24);
+    nightsCount.textContent = `Noches seleccionadas: ${nights}`;
+  } else {
+    nightsCount.textContent = `Noches seleccionadas: 0`;
+  }
+}
+
+// Inicializa labels
+entryLabel.textContent = "Entrada";
+exitLabel.textContent = "Salida";
+
+// Render inicial
+renderCalendars();
+</script>
 </body>
 </html>

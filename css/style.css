@@ -1,9 +1,8 @@
-
- /* INDEX */
+/* INDEX */
  /* Estilos generales */
         :root {
-            --primary-color: #6aaa5c;
-            --secondary-color: #504f2c;
+            --primary-color: #346164;
+            --secondary-color: #3d494c;
             --accent-color: #e74c3c;
             --light-color: #ecf0f1;
             --grey-color: #d7d7d7;
@@ -20,7 +19,7 @@
         
         body {
             background-color: #f5f5f5;
-            color: white;
+            color: black;
             line-height: 1.6;
         }
         
@@ -34,7 +33,7 @@
         .hero-section {
             position: relative;
             height: 80vh;
-            overflow: hidden;
+            overflow: visible;
             margin: 0;
         }
         
@@ -101,6 +100,46 @@
             height: 80px;
         }
         
+        .dropdown-restaurante {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-link-restaurante {
+            position: relative;
+            padding-right: 18px;
+        }
+
+        .dropdown-content-restaurante {
+            color: var(--primary-color);
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 160px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            z-index: 100;
+        }
+
+        .dropdown-content-restaurante a {
+            color: #504f2c;
+            padding: 12px 18px;
+            text-decoration: none;
+            display: block;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .dropdown-content-restaurante a:hover {
+            background: #f5f5f5;
+            color: var(--primary-color, #2980b9);
+        }
+
+        .dropdown-restaurante:hover .dropdown-content-restaurante {
+            display: block;
+        }
+
         .main-title {
             position: absolute;
             top: 50%;
@@ -124,6 +163,7 @@
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             color: white;
+            z-index: 1000;
         }
 
         .booking-box h3 {
@@ -163,11 +203,14 @@
             display: inline-block;
             min-width: 120px;
         }
+        
+        .custom-date-picker.entrada {
+            margin-right: 100px;
+            margin-left: -100px;
+        }
 
         .date-picker-button {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            background: transparent;
             padding: 5px 0px;
             cursor: pointer;
             display: flex;
@@ -179,9 +222,151 @@
         .date-picker-button span:first-child {
             font-size: 16px;
             }
-
         
+        /* Calendarios juntos */
+        .calendars-dropdown {
+          color: black;
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: white;
+          border: 1px solid #eee;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+          padding: 24px 32px;
+          z-index: 3000;
+          min-width: 800px;
+          display: flex;
+          gap: 40px;
+          align-items: flex-start;
+        }
 
+        .calendar-side-info {
+          min-width: 220px;
+          margin-right: 40px;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+        }
+
+        .calendar-title {
+          font-size: 1.3rem;
+          color: #504f2c;
+          margin-bottom: 10px;
+          text-align: right;
+        }
+
+        .calendar-nights {
+          font-size: 0.95rem;
+          color: #888;
+          margin-bottom: 30px;
+          text-align: right;
+        }
+
+        .calendars-container {
+          display: flex;
+          gap: 40px;
+        }
+
+        .calendar-block {
+          width: 350px;
+        }
+
+        .calendar-header {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 10px;
+          font-weight: bold;
+          font-size: 16px;
+          gap: 10px;
+        }
+
+        .calendar-header button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 18px;
+          color: #504f2c;
+          transition: color 0.2s;
+        }
+
+        .calendar-header button:hover {
+          color: #e74c3c;
+        }
+
+        .calendar-month-label {
+          flex: 1;
+          text-align: center;
+        }
+
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 4px;
+          color: black;
+        }
+
+        .calendar-grid div {
+          padding: 8px;
+          text-align: center;
+          cursor: pointer;
+          border-radius: 4px;
+          border: 2px solid transparent;
+          transition: border 0.2s, box-shadow 0.2s;
+          font-size: 15px;
+          background: white;
+        }
+
+        .calendar-grid .day-disabled {
+          color: #ccc;
+          cursor: not-allowed;
+          background: #f5f5f5;
+        }
+
+        .calendar-grid .day-selected,
+        .calendar-grid .day-range {
+          background: linear-gradient(135deg, #ffb347 0%, #ffcc80 100%);
+          color: #504f2c;
+          border: 2px solid #ffb347;
+        }
+
+        .calendar-grid .day-hover,
+        .calendar-grid .day-range-hover {
+          background: red;
+          border: 2px solid #fff;
+          box-shadow: 0 0 8px 2px #fff;
+        }
+
+        .date-picker-button.neon {
+          box-shadow: 0 0 8px 2px #fff, 0 0 2px 1px #fff;
+          border-radius: 6px;
+          border: 1px solid #fff;
+        }
+
+        .date-label {
+          position: static;
+          font-size: 14px;
+          color: white;
+          display: block;
+          margin-left: 4px;
+        }
+        
+        .calendars-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            z-index: 3000;
+            width: 800px;
+            display: flex;
+            gap: 20px;
+        }
+        
         .calendar-dropdown {
             display: none;
             position: absolute;
@@ -189,10 +374,9 @@
             left: 0;
             background: white;
             border: 1px solid #eee;
-            border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 12px;
-            z-index: 100;
+            z-index: 3000;
             width: 400px;
         }
 
@@ -214,6 +398,8 @@
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
+            color: black;
+            z-index: 100;
         }
 
         .calendar-grid div {
@@ -223,9 +409,7 @@
             border-radius: 4px;
         }
 
-        .calendar-grid div:hover {
-            background: #f0f0f0;
-        }
+        
 
         .calendar-grid .day-selected {
             background: black;
@@ -239,8 +423,9 @@
         .date-input-group {
             display: flex;
             align-items: center;
+            justify-content: center;
             padding: 8px 15px;
-            gap: 10px;
+            gap: 5px;
         }
 
         .date-input-group .date-input {
@@ -256,15 +441,6 @@
             background-color: white;
         }
         
-        .form-group input, .form-group select {
-            border: none;
-            outline: none;
-            background: transparent;
-            color: white;
-            padding: 8px 0;
-            min-width: 120px;
-            border-radius: 0px;
-        }
 
         .form-group input::placeholder {
             color: rgba(255, 255, 255, 0.7);
@@ -289,19 +465,19 @@
         }
 
         .date-label {
-            position: absolute;
+            position: static;
             top: 2px;
             bottom: 5px;
             left: 0;
-            font-size: 10px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.8);
-            display: none;
+            display: block;
         }
         
         .room-type-dropdown {
             position: relative;
-            padding-top: 12.5px;
-            padding-bottom: 12.5px;
+            padding-top: 6px;
+            padding-bottom: 5px;
             flex: 1;
             min-width: 200px;
         }
@@ -314,9 +490,15 @@
             padding-left: 8px;
             cursor: pointer;
         }
+        
+        #room-type:focus {
+            outline: none;
+            border: none;
+            box-shadow: none;
+        }
 
         #room-type option {
-        color: #333;
+        color: var(--secondary-color);
         }
 
         .dropdown-content {
@@ -328,7 +510,7 @@
             background-color: white;
             border-radius: 0 0 4px 4px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            z-index: 100;
             margin-top: -1px;
         }
         
@@ -355,12 +537,14 @@
             background-color: white;
             color: rgb(113, 99, 54);
             border: none;
-            padding: 20px 40px;
+            padding: 20px 50px;
+            margin-bottom: 25px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s;
             font-size: 15px;
+            text-decoration: none;
         }
         
         .search-btn:hover {
@@ -369,41 +553,57 @@
         
 
         /* Carrusel de noticias*/
-        .slider-container {
+
+        .noticias-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 70px;
+            margin-left: 150px;
+            margin-bottom: 10px;
+        }
+        .noticias-container {
             position: relative;
-            margin: 80px auto;
+            margin-left: 150px;
             max-width: 1200px;
-            overflow: hidden;
+            max-height: 500px;
+            overflow: hidden;   
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
+
+        .noticias-container h1{
+            padding-left: 20px;
+            border: none;
+        }
         
-        .slider {
+        .noticiasMain {
             display: flex;
             transition: transform 0.6s ease-in-out;
         }
-        
-        .slide {
+
+        .noticia {
             min-width: 100%;
             display: flex;
             background: white;
         }
         
-        .slide-image-idx {
-            flex: 1;
+        .noticia-img {
+            flex: 7;
             background-size: cover;
             background-position: center;
+            
         }
         
-        .slide-info-idx {
-            flex: 1;
+        .noticia-info {
+            flex: 3;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            font-size: 0.8rem;
         }
         
         .room-type {
-            background: var(--primary-color);
+            background: red;
             color: white;
             display: inline-block;
             padding: 5px 15px;
@@ -480,7 +680,7 @@
             border: none;
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 20%;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -572,69 +772,6 @@
             color: #555;
         }
         
-        /* Contacto */
-        .contact {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--secondary-color), #1a2530);
-            color: white;
-        }
-        
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.1);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .contact-form h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-        }
-        
-        .form-group-idx {
-            margin-bottom: 25px;
-        }
-        
-        .form-group-idx label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-group-idx input,
-        .form-group-idx textarea {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.9);
-        }
-        
-        .form-group-idx textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-button {
-            width: 100%;
-            padding: 15px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .submit-button:hover {
-            background: #2980b9;
-        }
         
         /* Footer */
         .footer {
@@ -707,9 +844,76 @@
 
 /* HABITACIONES */
 
+        .header-wrap{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 5px solid var(--primary-color);
+            background: var(--secondary-color);
+        }
+
+        .logo {
+            padding-left: 30px;
+        }
+
+        .logo img{
+            max-height: 80px;
+        }
+
+        .nav-header{
+            color: white;
+            padding: 30px;
+        }
+
+        .nav-header{
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-header a {
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+
+        .nav-header a:hover {
+            color: var(--primary-color);
+        }
+
+        .progress-bar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 300px;
+            font-weight: none;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding: 0px 10px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .progress-bar-step {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding-right: 40px;
+            padding-left:10px;
+            transform: translateX(-55px);
+        }
+
+        .number{
+            background-color: var(--secondary-color);
+            color: white;
+            height: 80px;
+            width: 80px;
+            text-align: center;
+            padding-top: 15px;
+        }
+
+
         .container header {
-    text-align: center;
-       }
+            text-align: center;
+        }
 
         .subtitle {
             font-size: 1.2rem;
@@ -1821,7 +2025,6 @@
             justify-content: space-between;
             transform: translateY(-50%);
             padding: 0 20px;
-            z-index: 3;
             pointer-events: none;
         }
         
@@ -1845,30 +2048,6 @@
         .carousel-controls button:hover {
             background: white;
             transform: scale(1.1);
-        }
-        
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 3;
-        }
-        
-        .indicator-serv {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .indicator-serv.active {
-            background: var(--primary-color);
-            transform: scale(1.2);
         }
         
         /* Servicios */

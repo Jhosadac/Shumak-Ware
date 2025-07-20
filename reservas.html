@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habitaciones - Shumak Ware</title>
+
+    <!--estilos-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!--libreria de firebase-->
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
@@ -15,27 +20,43 @@
     <header class="main-header">
         <div class="header-wrap">
             <div class="logo">
-                <img src="assests/logo.png" alt="logo">
+                <img src="assests/logo_final.png">
             </div>
             <nav class="nav-header">
-                <ul class="main-menu">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="#">Habitaciones</a></li>
-                    <li><a href="restaurante.html">Restaurante</a></li>
-                    <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                    <li><a href="reservas.html" class="active">Reservas</a></li>
-                </ul>
+                    <a href="index.html">Inicio</a>
+                    <a href="#">Habitaciones</a>
+                    <div class="dropdown-restaurante">
+                        <a href="restaurante.html" class="nav-link-restaurante">Restaurante</a>
+                        <div class="dropdown-content-restaurante">
+                            <a href="menu.html">Menú</a>
+                            <a href="reserva-mesa.html">Reserva de Mesa</a>
+                        </div>
+                    </div>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="reservas.html" class="active">Reservas</a>
             </nav>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-bar-step">
+                <div class="number"> <h1>1</h1> </div>
+                <div> CONSULTAR DISPONIBILIDAD</div>
+            </div>
+            <div class="progress-bar-step">
+                <div class="number"> <h1>2</h1> </div>
+                <div class="step-title"> REVIEW</div>
+            </div>
+            <div class="progress-bar-step">
+                <div class="number"> <h1>3</h1> </div>
+                <div> CHECK OUT</div>
+            </div>
         </div>
     </header>
 
+
+
     <div class="container">
-        <header>
-            <h1><i class="fas fa-hotel"></i> Reserva de Habitaciones</h1>
-            <p class="subtitle">Encuentra la habitación perfecta para tu estadía. Fácil, rápido y seguro.</p>
-        </header>
-        
         <div class="search-bar">
             <div class="search-field">
                 <label for="fechaEntrada"><i class="fas fa-calendar-check"></i> Fecha de Entrada</label>
