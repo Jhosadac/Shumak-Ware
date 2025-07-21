@@ -127,7 +127,6 @@
             padding: 12px 18px;
             text-decoration: none;
             display: block;
-            font-size: 1rem;
             transition: background 0.2s;
         }
 
@@ -534,7 +533,7 @@
         }
         
         .search-btn {
-            background-color: white;
+            background:white;
             color: rgb(113, 99, 54);
             border: none;
             padding: 20px 50px;
@@ -548,7 +547,7 @@
         }
         
         .search-btn:hover {
-            background-color: #ef9e12;
+            filter: brightness(0.9); 
         }
         
 
@@ -843,25 +842,28 @@
  /* INDEX */
 
 /* HABITACIONES */
-
+        .main-header{
+            top: 0px;
+        }
         .header-wrap{
             display: flex;
             justify-content: space-between;
-            border-bottom: 5px solid var(--primary-color);
-            background: var(--secondary-color);
+            border-bottom: 0.8px solid #ddd;
+            background: white;
+            color: black;
+            padding-left: 450px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 14px;
         }
 
         .logo {
             padding-left: 30px;
+            transform: translateX(-300px);
         }
 
         .logo img{
             max-height: 80px;
-        }
-
-        .nav-header{
-            color: white;
-            padding: 30px;
         }
 
         .nav-header{
@@ -877,6 +879,7 @@
 
         .nav-header a:hover {
             color: var(--primary-color);
+            border-bottom: 0.8px solid var(--primary-color);
         }
 
         .progress-bar {
@@ -925,23 +928,46 @@
         /* Barra de búsqueda */
         .search-bar {
             display: flex;
-            flex-wrap: wrap;
             gap: 20px;
-            background: white;
+            background: rgb(237, 233, 233);
             padding: 25px;
-            border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
+            text-align: center;
+            align-items: center;
+            padding-left: 300px;
+            font-size: 13px;
+            max-height: 80px;
         }
         
+        .fechas {
+            display: flex;
+        }
+
         .search-field {
             flex: 1;
             min-width: 200px;
+            border: 2px solid grey;
+            margin-left: 0;
+            background: white;
+            padding: 8px 20px;
+        }
+
+        .entrada {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;    
+            border-left: 1px solid #ddd;  
+            border-right: 0.5px solid #ddd; 
+        }
+        .salida {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;    
+            border-left: 0.5px solid #ddd;;    
+            border-right: 1px solid #ddd; 
         }
         
         .search-field label {
-            display: block;
-            margin-bottom: 8px;
+            justify-content: left;
+            display: flex;
             font-weight: 500;
             color: var(--dark-color);
         }
@@ -951,25 +977,11 @@
             margin-right: 8px;
         }
         
-        .search-field input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        
-        .search-field input:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
         
         /* Dropdown */
         .dropdown {
+            display: flex;
             position: relative;
-            flex: 1;
             min-width: 250px;
         }
         
@@ -977,10 +989,8 @@
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 6px;
             background: white;
             text-align: left;
-            font-size: 1rem;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -1071,12 +1081,11 @@
         }
         
         .apply-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-color);
+            padding: 12px 24px;
+            background: linear-gradient(90deg, #40E0D0, #4682B4);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 50px;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
@@ -1084,8 +1093,17 @@
         }
         
         .apply-btn:hover {
-            background: #2980b9;
+            filter: brightness(0.9); 
         }
+
+        .hab-desc {
+            padding: 10px 90px;
+        }
+
+        .hab-desc-title {
+            font-size: 2rem;
+        }
+
         
         /* Resultados */
         .results-container {
@@ -1118,30 +1136,33 @@
         }
         
         .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 25px;
-            padding: 25px;
+            padding: 10px 90px;
         }
         
         .room-card {
             border: 1px solid #eee;
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 15px;
             transition: transform 0.3s, box-shadow 0.3s;
             background: white;
+            max-width: 1300px;
+            display: flex;
+            max-height: 300px;
+            overflow: hidden;
         }
-        
+
+        .room-img{
+            flex: 1;
+        }
+        .room-img img{
+            max-height: 300px;
+        }
+
         .room-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-        
-        .room-image {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
         }
         
         .room-status {
@@ -1165,6 +1186,7 @@
         }
         
         .room-details {
+            flex: 4;
             padding: 20px;
         }
         
@@ -1202,9 +1224,8 @@
         }
         
         .book-btn {
-            width: 100%;
             padding: 12px;
-            background: var(--primary-color);
+            background: linear-gradient(90deg, #40E0D0, #4682B4);
             color: white;
             border: none;
             border-radius: 6px;
@@ -1215,7 +1236,7 @@
         }
         
         .book-btn:hover {
-            background: #2980b9;
+            filter: brightness(1.1);
         }
         
         /* Modal */

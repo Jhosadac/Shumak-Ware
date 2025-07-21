@@ -16,12 +16,38 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="header-wrap">
+        <div class="search-bar">
             <div class="logo">
                 <img src="assests/logo_final.png">
             </div>
+            <div class="fechas">
+                <div class="search-field entrada">
+                    <label for="fechaEntrada"><i class="fas fa-calendar-check"></i> Entrada</label>
+                </div>
+            
+                <div class="search-field salida">
+                    <label for="fechaSalida"><i class="fas fa-calendar-times"></i> Salida</label>
+                </div>
+            </div>
+            
+            <div class="dropdown">
+                <button class="dropdown-btn" id="dropdownBtn">
+                    <i class="fas fa-bed"></i> <span>Todas</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <div class="dropdown-option" data-type="all">Todas</div>
+                    <div class="dropdown-option" data-type="simple">Simple</div>
+                    <div class="dropdown-option" data-type="doble">Doble</div>
+                    <div class="dropdown-option" data-type="matrimonial">Matrimonial</div>
+                </div>
+            </div>
+            <button class="apply-btn" id="aplicarBtn">Buscar</button>
+        </div>
+
+        <!-- Header -->
+    <header class="main-header">
+        <div class="header-wrap">
             <nav class="nav-header">
                     <a href="index.html">Inicio</a>
                     <a href="#">Habitaciones</a>
@@ -37,87 +63,220 @@
                     <a href="reservas.html" class="active">Reservas</a>
             </nav>
         </div>
-
-        <div class="progress-bar">
-            <div class="progress-bar-step">
-                <div class="number"> <h1>1</h1> </div>
-                <div> CONSULTAR DISPONIBILIDAD</div>
-            </div>
-            <div class="progress-bar-step">
-                <div class="number"> <h1>2</h1> </div>
-                <div class="step-title"> REVIEW</div>
-            </div>
-            <div class="progress-bar-step">
-                <div class="number"> <h1>3</h1> </div>
-                <div> CHECK OUT</div>
-            </div>
-        </div>
     </header>
+       
+    <div class="hab-desc">
+        <div class="hab-desc-title">Nuestras habitaciones</div>
+        <p>El alojamiento en el hotel Shumak Ware garantiza una estancia inolvidable. Disfruta de sus exclusivas habitaciones 
+            completamente equipadas y aprovecha la multitud de actividades que ofrecemos.</p>
+    </div>
 
-
-
-    <div class="container">
-        <div class="search-bar">
-            <div class="search-field">
-                <label for="fechaEntrada"><i class="fas fa-calendar-check"></i> Fecha de Entrada</label>
-                <input type="date" id="fechaEntrada">
-            </div>
-            
-            <div class="search-field">
-                <label for="fechaSalida"><i class="fas fa-calendar-times"></i> Fecha de Salida</label>
-                <input type="date" id="fechaSalida">
-            </div>
-            
-            <div class="dropdown">
-                <label><i class="fas fa-bed"></i> Tipo de Habitacion </label>
-                <button class="dropdown-btn" id="dropdownBtn">
-                    <span>Todas</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown-content" id="dropdownContent">
-                    <div class="dropdown-option" data-type="all">Todas</div>
-                    <div class="dropdown-option" data-type="simple">Simple</div>
-                    <div class="dropdown-option" data-type="doble">Doble</div>
-                    <div class="dropdown-option" data-type="matrimonial">Matrimonial</div>
-                </div>
-            </div>
-            <button class="apply-btn" id="aplicarBtn">Buscar habitaciones</button>
+    <div class="rooms-grid">
+        <div class="room-card" id="1">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
         </div>
         
-        <div class="results-container">
-            <div class="results-header">
-                <h2 class="results-title"><i class="fas fa-hiking"></i> ¡Encuentra tu aventura perfecta!</h2>
-                <div class="results-count" id="resultsCount">0 encontradas</div>
-            </div>
 
-            <!-- estados  -->
-        <div class="initial-state">
-            <i class="fas fa-binoculars"></i>
-            <h3>¡Comienza tu aventura!</h3>
-            <p>Selecciona fechas para descubrir nuestras habitaciones disponibles</p>
-        </div>
-
-        <div class="loading" style="display: none;">
-            <div class="spinner"></div>
-            <p>Cargando habitaciones disponibles...</p>
-        </div>
-
-        <div class="error" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            <p>Por favor selecciona fechas de entrada y salida</p>
-        </div>
-
-        <div class="no-rooms" style="display: none;">
-            <i class="fas fa-bed"></i>
-            <h3>No se encontraron habitaciones disponibles</h3>
-            <p>Intenta cambiar tus criterios de búsqueda</p>
-        </div>
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
             
-            <div class="rooms-grid" id="resultados">
-                <!-- Solo habitaciones aquí -->
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
             </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
         </div>
     </div>
+
+    <!--room 2-->
+        <div class="room-card" id="2">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!-- room 3-->
+        <div class="room-card" id="3">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room 4-->
+        <div class="room-card" id="4">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room5-->
+        <div class="room-card" id="5">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room6-->
+    <div class="room-card" id="6">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room7-->
+        <div class="room-card" id="7">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Matrimonial</h3>
+            <div class="room-price">S/.50 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    </div>    
+
+    
 
     <!-- Modal de reserva -->
     <div class="modal-hab" id="reservationModal">
@@ -231,7 +390,7 @@
     </footer>
     
     <script>
-    // Configuración de Firebase
+    // ==================== CONFIGURACIÓN FIREBASE ====================
     const firebaseConfig = {
         apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
         authDomain: "shumak-ware.firebaseapp.com",
@@ -242,315 +401,125 @@
         appId: "1:64196160181:web:76852cef50c12a498e6cfc",
         measurementId: "G-8L85H7B12E"
     };
-
-    // Inicializar Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    // Variables globales
+    // ==================== VARIABLES Y DATOS ====================
     const habitaciones = [
-        { id: 1, tipo: "simple", nombre: "Habitación Simple", precio: 50, capacidad: 1, descripcion: "Habitación cómoda y acogedora para tu estadía." },
-        { id: 2, tipo: "simple", nombre: "Habitación Simple", precio: 50, capacidad: 1, descripcion: "Habitación cómoda y acogedora para tu estadía." },
-        { id: 3, tipo: "simple", nombre: "Habitación Simple", precio: 50, capacidad: 1, descripcion: "Habitación cómoda y acogedora para tu estadía." },
-        { id: 4, tipo: "doble", nombre: "Habitación Doble", precio: 60, capacidad: 2, descripcion: "Amplia habitación con dos camas individuales." },
-        { id: 5, tipo: "doble", nombre: "Habitación Doble", precio: 60, capacidad: 2, descripcion: "Amplia habitación con dos camas individuales." },
-        { id: 6, tipo: "doble", nombre: "Habitación Doble", precio: 60, capacidad: 2, descripcion: "Amplia habitación con dos camas individuales." },
-        { id: 7, tipo: "matrimonial", nombre: "Habitación Matrimonial", precio: 70, capacidad: 3, descripcion: "Lujosa habitación con cama matrimonial y sofá cama." }
+        { id: 1, tipo: "simple" },
+        { id: 2, tipo: "simple" },
+        { id: 3, tipo: "simple" },
+        { id: 4, tipo: "doble" },
+        { id: 5, tipo: "doble" },
+        { id: 6, tipo: "doble" },
+        { id: 7, tipo: "matrimonial" }
     ];
-
-    // Elementos DOM
+    const roomsGrid = document.querySelector('.rooms-grid');
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const dropdownContent = document.getElementById('dropdownContent');
+    const dropdownOptions = document.querySelectorAll('.dropdown-option');
     const aplicarBtn = document.getElementById('aplicarBtn');
     const fechaEntradaInput = document.getElementById('fechaEntrada');
     const fechaSalidaInput = document.getElementById('fechaSalida');
-    const dropdownBtn = document.getElementById('dropdownBtn');
-    const dropdownContent = document.getElementById('dropdownContent');
-    const resultadosContainer = document.getElementById('resultados');
-    const resultsCount = document.getElementById('resultsCount');
-    const dropdownOptions = document.querySelectorAll('.dropdown-option');
-    
-    // Variables de estado
+
     let selectedType = 'all';
-    let fechaEntrada = null;
-    let fechaSalida = null;
-    let reservaActual = null;
+    let fechaEntrada = '';
+    let fechaSalida = '';
+    let reservas = {};
 
-    // Configurar fecha mínima como hoy
-    const today = new Date().toISOString().split('T')[0];
-    fechaEntradaInput.min = today;
-    fechaSalidaInput.min = today;
-
-    // Event listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        // Configurar evento de cambio para fechaEntrada
-        fechaEntradaInput.addEventListener('change', function() {
-            if (this.value) {
-                fechaSalidaInput.min = this.value;
-            }
-        });
-    });
-
-    // Dropdown functionality
+    // ==================== FILTRO DE TIPO DE HABITACIÓN ====================
     dropdownOptions.forEach(option => {
         option.addEventListener('click', () => {
             selectedType = option.getAttribute('data-type');
             dropdownBtn.querySelector('span').textContent = option.textContent;
             dropdownContent.style.display = 'none';
+            actualizarEstadoHabitaciones();
         });
     });
-
     dropdownBtn.addEventListener('click', () => {
         dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
     });
-
-    // Cerrar dropdown si se hace clic fuera
     window.addEventListener('click', (e) => {
-        if (!e.target.matches('.dropdown-btn')) {
-            dropdownContent.style.display = 'none';
-        }
+        if (!e.target.matches('.dropdown-btn')) dropdownContent.style.display = 'none';
     });
 
-    // Función para mostrar/ocultar elementos
-    function showElement(element) {
-        resultadosContainer.innerHTML = ''
-        element.style.display = 'block';
+    // ==================== FECHAS ====================
+    const today = new Date().toISOString().split('T')[0];
+    fechaEntradaInput.min = today;
+    fechaSalidaInput.min = today;
+    fechaEntradaInput.addEventListener('change', function() {
+        fechaSalidaInput.min = this.value;
+        fechaEntrada = this.value;
+    });
+    fechaSalidaInput.addEventListener('change', function() {
+        fechaSalida = this.value;
+    });
+
+    // ==================== LÓGICA DE DISPONIBILIDAD ====================
+    function haySolapamiento(fechaEntrada, fechaSalida, reserva) {
+        const entrada1 = new Date(fechaEntrada);
+        const salida1 = new Date(fechaSalida);
+        const entrada2 = new Date(reserva.fechaEntrada);
+        const salida2 = new Date(reserva.fechaSalida);
+        return !(salida1 <= entrada2 || entrada1 >= salida2);
     }
 
-    function hideElement(element) {
-        element.style.display = 'none';
+    async function cargarReservas() {
+        const snapshot = await db.ref('rooms').once('value');
+        reservas = snapshot.val() || {};
     }
 
-    // Función para calcular días entre dos fechas
-    function calcularDias(fechaInicio, fechaFin) {
-        const unDia = 24 * 60 * 60 * 1000; // milisegundos en un día
-        const inicio = new Date(fechaInicio);
-        const fin = new Date(fechaFin);
-        const diferencia = Math.round(Math.abs((fin - inicio) / unDia));
-        return diferencia;
-    }
-
-    // Función para verificar disponibilidad de habitaciones (CORREGIDA)
-    async function habitacionesDisponibles(fechaEntrada, fechaSalida) {
-        try {
-            const refReservas = db.ref('rooms');
-            const snapshot = await refReservas.once('value');
-            const reservas = snapshot.val();
-            
-            // Si no hay reservas, todas las habitaciones están disponibles
-            if (!reservas) {
-                if (tipo === 'simple'){
-                    return [1,2,3];
-                }
-                if (tipo === 'doble'){
-                    return [4,5,6];
-                }
-                if (tipo === 'matrimonial'){
-                    return [7];
-                }
-                return [1, 2, 3, 4, 5, 6, 7];
+    function habitacionesOcupadasPorFechas() {
+        if (!fechaEntrada || !fechaSalida) return [];
+        let ocupadas = [];
+        Object.values(reservas).forEach(reserva => {
+            if (haySolapamiento(fechaEntrada, fechaSalida, reserva)) {
+                ocupadas.push(Number(reserva.idHabitacion));
             }
-            
-            // Habitaciones ocupadas
-            const habitacionesOcupadas = new Set();
-            
-            // Convertir fechas a objetos Date para comparación
-            const entrada = new Date(fechaEntrada);
-            const salida = new Date(fechaSalida);
-            
-            // Recorrer todas las reservas
-            Object.values(reservas).forEach(reserva => {
-                const reservaEntrada = new Date(reserva.fechaEntrada);
-                const reservaSalida = new Date(reserva.fechaSalida);
-                
-                // Comprobar si hay solapamiento de fechas
-                if (!(salida <= reservaEntrada || entrada >= reservaSalida)) {
-                    habitacionesOcupadas.add(parseInt(reserva.idHabitacion));
+        });
+        return ocupadas;
+    }
+
+    function actualizarEstadoHabitaciones() {
+        // Ocupa solo los cuartos ya existentes en el HTML
+        const ocupadas = habitacionesOcupadasPorFechas();
+        habitaciones.forEach(hab => {
+            const card = document.getElementById(hab.id);
+            if (!card) return;
+            // Filtrar por tipo si corresponde
+            if (selectedType !== 'all' && hab.tipo !== selectedType) {
+                card.style.display = 'none';
+            } else {
+                card.style.display = '';
+                // Estado disponible/ocupado
+                if (ocupadas.includes(hab.id)) {
+                    card.classList.add('room-status', 'unavailable');
+                    card.querySelector('.book-btn').disabled = true;
+                    card.querySelector('.book-btn').style.background = "#ccc";
+                    card.querySelector('.book-btn').style.cursor = "not-allowed";
+                } else {
+                    card.classList.remove('unavailable');
+                    card.querySelector('.book-btn').disabled = false;
+                    card.querySelector('.book-btn').style.background = "";
+                    card.querySelector('.book-btn').style.cursor = "";
                 }
-            });
-            
-            // Filtrar habitaciones disponibles (no están en habitacionesOcupadas)
-            return [1, 2, 3, 4, 5, 6, 7].filter(id => !habitacionesOcupadas.has(id));
-            
-        } catch (error) {
-            console.error('Error al obtener habitaciones disponibles:', error);
-            return [1, 2, 3, 4, 5, 6, 7]; // Por defecto mostrar todas si hay error
-        }
+            }
+        });
     }
 
-    // Función para renderizar habitaciones (CORREGIDA)
-    function renderHabitaciones(disponiblesIds) {
-        // Ocultar todos los estados
-        hideElement(document.querySelector('.loading'));
-        hideElement(document.querySelector('.error'));
-        hideElement(document.querySelector('.no-rooms'));
-        hideElement(document.querySelector('.initial-state'));
-        
-        // Limpiar resultados
-        resultadosContainer.innerHTML = '';
-        
-        // Filtrar habitaciones por tipo seleccionado y por disponibilidad
-        const habitacionesFiltradas = habitaciones.filter(h => 
-            disponiblesIds.includes(h.id) && 
-            (selectedType === 'all' || h.tipo === selectedType)
-        );
-        
-        // Actualizar contador
-        resultsCount.textContent = `${habitacionesFiltradas.length} encontradas`;
-        
-        if (habitacionesFiltradas.length === 0) {
-            showElement(document.querySelector('.no-rooms'));
-        } else {
-            habitacionesFiltradas.forEach(habitacion => {
-                const roomCard = document.createElement('div');
-                roomCard.className = 'room-card';
-                roomCard.id = habitacion.id;
-                
-                roomCard.innerHTML = `
-                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&w=800')">
-                        <div class="room-status">Disponible</div>
-                    </div>
-                    <div class="room-details">
-                        <h3 class="room-name">${habitacion.nombre}</h3>
-                        <div class="room-price">S/.${habitacion.precio} <span>/noche</span></div>
-                        
-                        <div class="room-features">
-                            <div class="feature">
-                                <i class="fas fa-bed"></i>
-                                <span>${habitacion.tipo}</span>
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-user"></i>
-                                <span>${habitacion.capacidad} Persona${habitacion.capacidad > 1 ? 's' : ''}</span>
-                            </div>
-                        </div>
-                        
-                        <p class="room-description">${habitacion.descripcion}</p>
-                        <button class="book-btn" data-id="${habitacion.id}">
-                            Reservar Ahora
-                        </button>
-                    </div>
-                `;
-                
-                resultadosContainer.appendChild(roomCard);
-                
-                // Añadir evento al botón de reserva
-                roomCard.querySelector('.book-btn').addEventListener('click', () => {
-                    abrirModalReserva(habitacion);
-                });
-            });
-        }
-    }
-
-    // Función para buscar habitaciones (CORREGIDA)
-    async function buscarHabitaciones() {
+    // ==================== BUSCAR HABITACIONES ====================
+    aplicarBtn.addEventListener('click', async () => {
         fechaEntrada = fechaEntradaInput.value;
         fechaSalida = fechaSalidaInput.value;
-        
-        // Validar fechas
-        if (!fechaEntrada || !fechaSalida) {
-            // Mostrar error
-            showElement(document.querySelector('.error'));
-            hideElement(document.querySelector('.loading'));
-            hideElement(document.querySelector('.no-rooms'));
-            hideElement(document.querySelector('.initial-state'));
-            return;
-        }
-        
-        // Mostrar estado de carga
-        showElement(document.querySelector('.loading'));
-        hideElement(document.querySelector('.error'));
-        hideElement(document.querySelector('.no-rooms'));
-        hideElement(document.querySelector('.initial-state'));
-        
-        // Obtener IDs de habitaciones disponibles
-        const disponiblesIds = await habitacionesDisponibles(fechaEntrada, fechaSalida);
-        
-        // Renderizar habitaciones
-        renderHabitaciones(disponiblesIds);
-    }
+        await cargarReservas();
+        actualizarEstadoHabitaciones();
+    });
 
-    // Función para abrir modal de reserva
-    function abrirModalReserva(habitacion) {
-        const modal = document.getElementById('reservationModal');
-        const dias = calcularDias(fechaEntrada, fechaSalida);
-        const total = dias * habitacion.precio;
-        
-        // Llenar resumen
-        document.getElementById('tipo').textContent = habitacion.tipo.charAt(0).toUpperCase() + habitacion.tipo.slice(1);
-        document.getElementById('fechaEntradaModal').textContent = fechaEntrada;
-        document.getElementById('fechaSalidaModal').textContent = fechaSalida;
-        document.getElementById('numNoches').textContent = dias;
-        document.getElementById('precio').textContent = `S/${habitacion.precio}`;
-        document.getElementById('total').textContent = `S/${total}`;
-        
-        // Guardar datos de reserva actual
-        reservaActual = {
-            habitacion,
-            fechaEntrada,
-            fechaSalida,
-            dias,
-            total
-        };
-        
-        // Mostrar modal
-        modal.style.display = 'flex';
-    }
-
-    // Evento para buscar habitaciones
-    aplicarBtn.addEventListener('click', buscarHabitaciones);
-    
-    // Cerrar modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-        document.getElementById('reservationModal').style.display = 'none';
-    });
-    
-    // Enviar formulario de reserva
-    document.getElementById('reservationForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nombre = document.getElementById('nombre').value;
-        const correo = document.getElementById('correo').value;
-        const telefono = document.getElementById('telefono').value;
-        
-        // Generar ID de reserva
-        const reservationId = 'REC' + Date.now();
-        
-        // Guardar en Firebase
-        const reservaRef = db.ref('rooms/' + reservationId);
-        
-        reservaRef.set({
-            nombre,
-            correo,
-            telefono,
-            fechaEntrada: reservaActual.fechaEntrada,
-            fechaSalida: reservaActual.fechaSalida,
-            noches: reservaActual.dias,
-            precioHabitacion: reservaActual.habitacion.precio,
-            precioTotal: reservaActual.total,
-            tipoHabitacion: reservaActual.habitacion.tipo,
-            idHabitacion: reservaActual.habitacion.id,
-            fechaReserva: new Date().toISOString()
-        })
-        .then(() => {
-            // Cerrar modal de reserva
-            document.getElementById('reservationModal').style.display = 'none';
-            
-            // Mostrar modal de confirmación
-            document.getElementById('reservationId').textContent = reservationId;
-            document.getElementById('confirmationModal').style.display = 'flex';
-        })
-        .catch(error => {
-            console.error('Error al guardar la reserva:', error);
-            alert('Ocurrió un error al guardar la reserva. Por favor, inténtalo de nuevo.');
-        });
-    });
-    
-    // Botón de WhatsApp
-    document.getElementById('whatsappBtn').addEventListener('click', () => {
-        const phoneNumber = "+51912345678";
-        const message = "Hola, aquí está mi comprobante de pago para la reserva " + document.getElementById('reservationId').textContent;
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-    });
-</script>
+    // ==================== MOSTRAR TODAS AL INICIO ====================
+window.addEventListener('DOMContentLoaded', async () => {
+    await cargarReservas();
+    actualizarEstadoHabitaciones();
+});
+    </script>
 </body>
 </html>
