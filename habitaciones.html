@@ -1,81 +1,142 @@
 <!DOCTYPE html>
-<hmtl lang ="es">
-    <head>
-        <meta charset="UFT-8">
-        <meta name="viewport" content="width=device-width, intial-scale=1.0">
-        <title> Habitaciones - Shumak Ware </title>
-        <!--estilos-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones - Shumak Ware</title>
 
-        <!--libreria de firebase-->
-        <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
-    </head>
+    <!--estilos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-    <body>
-        <header class="main-header">
-            <div class="header-wrap">
-                <div class="logo">   
-                    <img src="assests/logo_final.png" alt="logo">
+    <!--libreria de firebase-->
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+</head>
+<body>
+    <div class="rooms-navegator">
+        <div class="counter-container">
+            <div class="volver">Volver</div> 
+            <div class="rooms-counter"> 1 de 10 habitaciones</div> 
+            <div class="logo-name">Shumak Ware</div>
+        </div>
+
+        <div class="rooms-range">
+            <div class="room-prev-btn">ra</div> 
+            <div class="room-type-name"> <b>Simple</b></div> 
+            <div class="room-next-btn">rp</div>
+        </div>
+
+        <div class="search-bar">
+            <div class="dates-range"> 
+                <div class="fechas">
+                    <div class="search-field entrada" id="fechaEntrada">
+                         <div><i class="fas fa-calendar-check"></i> <span id="entradaLabel">Entrada</span></div>
+                    </div>
+                
+                    <div class="search-field salida" id="fechaSalida">
+                         <div><i class="fas fa-calendar-check"></i> <span id="salidaLabel">Salida</span></div>
+                    </div>
                 </div>
-
-                <nav class="nav-header"> 
-                    <ul class="main-menu">
-                        <li><a href="index.html">Inicio</a> </li>
-                        <li class="habitaciones">
-                            <a href="habitaciones.html">Habitaciones</a>
-                            <div class="rooms-content">
-                                <a href="#">Simple</a>
-                                <a href="#">Doble</a>
-                                <a href="#">Matrimonial</a>
+                <!---calendar-->
+                <div class="dropdown-calendars" id="calendarsDropdown">
+                    <div class="triangle-container"><div class="triangle"></div></div>
+                    <div class="calendars-container">
+                        <div class="calendar-details">
+                            <div> <b>Seleccione sus fechas</b> (opcional)</div>
+                            <div class="number-nights" id="nightsCount"> 0 noches seleccionadas </div>
+                        </div>
+                        <div class="calendars-block">
+                            <div class= "calendar-block">
+                                <div class="calendar-header">
+                                    <div class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></div>
+                                    <div class="month-label" id="entry-month-label">Julio</div>
+                                </div>
+                                <div class="calendar-grid" id="entry-calendar-grid"></div>
                             </div>
-                        </li>
-                        <li><a href="restaurante.html">Restaurante</a></li>
-                        <li><a href="servicios.html">Servicios</li>
-                        <li><a href="contacto.html">Contacto</a></li>
-                        <li><a href="reservas.html">Reservas</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 
-        <!--noticias-->
-        
-
-
-        <!--footer-->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <div class="footer-section">
-                        <h3>Acerca de Nostros</h3>
-                        <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Enlaces Rapidos</h3>
-                        <ul>
-                            <li><a href="index.html">Inicio</a></li>
-                            <li><a href="habitaciones.html">Habitaciones</a></li>
-                            <li><a href="restaurante.html">Restaurante</a></li>
-                            <li><a href="servicios.html">Servicios</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-section">
-                        <h3>Contacto</h3>
-                        <ul>
-                            <li><i class="fas fa-phone"></i> +51 912 345 678</li>
-                            <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
-                            <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
-                        </ul>
+                            <div class= "calendar-block">
+                                <div class="calendar-header">
+                                    <div class="month-label" id="exit-month-label">Agosto</div>
+                                    <div class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                                <div class="calendar-grid" id="exit-calendar-grid"></div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="dropdown">
+                <button class="dropdown-btn">
+                    <i class="fas fa-bed"></i> <span>Todas</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <div class="dropdown-option" data-type="all">Todas</div>
+                    <div class="dropdown-option" data-type="simple">Simple</div>
+                    <div class="dropdown-option" data-type="doble">Doble</div>
+                    <div class="dropdown-option" data-type="matrimonial">Matrimonial</div>
+                </div>
+            </div>
+            <button class="apply-btn" id="aplicarBtn">Buscar</button>
+        </div>
+    </div>
+    
+    <div class="contenedor">
+        <div class="slider-room-pictures-container">
+            <div class="slider-room-pictures">
+                <img src="assests/habitacion_1.jpg" alt="habitacion_1">
+            </div>
+            <button class="room-pictures-prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="room-pictures-next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="add-to-cart-container">
+                <div class="precio-cuarto">Precio</div> <div class="apply-btn">Añadir</div>
+            </div>
+        </div>
 
-                <div class="footer-bottom">
+    </div>
+
+    
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Acerca de Nosotros</h3>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="habitaciones.html">Habitaciones</a></li>
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Teléfono: +51 912 345 678</li>
+                        <li>Email: shumakware@gmail.com</li>
+                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
                 &copy; 2023 Shumak Ware. Todos los derechos reservados.
             </div>
         </div>
-        </footer>
-    </body>
-</hmtl>
+    </footer>
+</body>
+</html>

@@ -1164,7 +1164,8 @@
         }
 
         .hab-desc {
-            padding: 10px 90px;
+            padding: 10px 20px;
+            margin-top: 200px;
         }
 
         .hab-desc-title {
@@ -1533,6 +1534,104 @@
         }
         
 /* HABITACIONES */
+
+
+/* La verdaderas habitaciones */
+.rooms-navegator{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100000;
+}
+
+.counter-container {
+    padding: 10px 10px;
+    display: flex;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 3px 3px -3px rgba(0,0,0,0.5);
+    background: white;
+    color: grey;
+}
+.volver{
+    flex: 1;
+}
+.rooms-counter{
+    flex: 5;
+}
+
+.logo-name{
+    flex: 1;
+}
+
+.rooms-range{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    min-height: 60px;
+    border-bottom: 1px solid #ccc;
+    background: rgb(237, 233, 233);
+}
+
+.room-prev-btn{
+    flex: 3;
+}
+
+.room-type-name{
+    font-size: 20px;
+    flex: 5;
+}
+
+.room-next-btn{
+    flex: 3;
+}
+
+.contenedor{
+    margin-top: 220px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.slider-room-pictures-container{
+    position: relative;
+    margin-left: 33.3%;
+}
+
+.slider-room-pictures img{
+    width: 50%;
+    display: flex;
+}
+
+.room-pictures-prev-btn{
+    position: absolute;
+    top: 50%;
+}
+
+.room-pictures-next-btn{
+    position: absolute;
+    top: 50%;
+    left: 48.7%;
+}
+
+.add-to-cart-container{
+    position: absolute;
+    top: 95%;
+    right: 64%;
+    background: white;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    gap: 20px;
+}
+
+.precio-cuarto{
+    padding: 10px;
+    flex: 1;
+}
+
 
 /* RESTAURANTE */
 /* Estilos generales */
