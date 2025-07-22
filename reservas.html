@@ -16,26 +16,58 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
+
         <div class="search-bar">
             <div class="logo">
-                <img src="assests/logo_final.png">
+                <img src="assests/logo_final.png" alt="Shumak Ware Logo">
             </div>
-            <div class="fechas">
-                <div class="search-field entrada">
-                    <label for="fechaEntrada"><i class="fas fa-calendar-check"></i> Entrada</label>
+
+            <div class="dates-range"> 
+                <div class="fechas">
+                    <div class="search-field entrada" id="fechaEntrada">
+                         <div><i class="fas fa-calendar-check"></i> <span id="entradaLabel">Entrada</span></div>
+                    </div>
+                
+                    <div class="search-field salida" id="fechaSalida">
+                         <div><i class="fas fa-calendar-check"></i> <span id="salidaLabel">Salida</span></div>
+                    </div>
                 </div>
-            
-                <div class="search-field salida">
-                    <label for="fechaSalida"><i class="fas fa-calendar-times"></i> Salida</label>
+                <!---calendar-->
+                <div class="dropdown-calendars" id="calendarsDropdown">
+                    <div class="triangle-container"><div class="triangle"></div></div>
+                    <div class="calendars-container">
+                        <div class="calendar-details">
+                            <div> <b>Seleccione sus fechas</b> (opcional)</div>
+                            <div class="number-nights" id="nightsCount"> 0 noches seleccionadas </div>
+                        </div>
+                        <div class="calendars-block">
+                            <div class= "calendar-block">
+                                <div class="calendar-header">
+                                    <div class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></div>
+                                    <div class="month-label" id="entry-month-label">Julio</div>
+                                </div>
+                                <div class="calendar-grid" id="entry-calendar-grid"></div>
+                            </div>
+
+                            <div class= "calendar-block">
+                                <div class="calendar-header">
+                                    <div class="month-label" id="exit-month-label">Agosto</div>
+                                    <div class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></div>
+                                </div>
+                                <div class="calendar-grid" id="exit-calendar-grid"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="dropdown">
-                <button class="dropdown-btn" id="dropdownBtn">
+                <button class="dropdown-btn">
                     <i class="fas fa-bed"></i> <span>Todas</span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
-                <div class="dropdown-content" id="dropdownContent">
+                <div class="dropdown-content">
                     <div class="dropdown-option" data-type="all">Todas</div>
                     <div class="dropdown-option" data-type="simple">Simple</div>
                     <div class="dropdown-option" data-type="doble">Doble</div>
@@ -388,138 +420,276 @@
             </div>
         </div>
     </footer>
-    
+
     <script>
-    // ==================== CONFIGURACIÓN FIREBASE ====================
-    const firebaseConfig = {
-        apiKey: "AIzaSyApq_K7pJmtrLNZcewzxaVXWnVf4Sxynv4",
-        authDomain: "shumak-ware.firebaseapp.com",
-        databaseURL: "https://shumak-ware-default-rtdb.firebaseio.com",
-        projectId: "shumak-ware",
-        storageBucket: "shumak-ware.firebasestorage.app",
-        messagingSenderId: "64196160181",
-        appId: "1:64196160181:web:76852cef50c12a498e6cfc",
-        measurementId: "G-8L85H7B12E"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    // ==================== VARIABLES Y DATOS ====================
-    const habitaciones = [
-        { id: 1, tipo: "simple" },
-        { id: 2, tipo: "simple" },
-        { id: 3, tipo: "simple" },
-        { id: 4, tipo: "doble" },
-        { id: 5, tipo: "doble" },
-        { id: 6, tipo: "doble" },
-        { id: 7, tipo: "matrimonial" }
-    ];
-    const roomsGrid = document.querySelector('.rooms-grid');
-    const dropdownBtn = document.getElementById('dropdownBtn');
-    const dropdownContent = document.getElementById('dropdownContent');
-    const dropdownOptions = document.querySelectorAll('.dropdown-option');
-    const aplicarBtn = document.getElementById('aplicarBtn');
-    const fechaEntradaInput = document.getElementById('fechaEntrada');
-    const fechaSalidaInput = document.getElementById('fechaSalida');
-
-    let selectedType = 'all';
-    let fechaEntrada = '';
-    let fechaSalida = '';
-    let reservas = {};
-
-    // ==================== FILTRO DE TIPO DE HABITACIÓN ====================
-    dropdownOptions.forEach(option => {
-        option.addEventListener('click', () => {
-            selectedType = option.getAttribute('data-type');
-            dropdownBtn.querySelector('span').textContent = option.textContent;
-            dropdownContent.style.display = 'none';
-            actualizarEstadoHabitaciones();
-        });
-    });
-    dropdownBtn.addEventListener('click', () => {
-        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-    });
-    window.addEventListener('click', (e) => {
-        if (!e.target.matches('.dropdown-btn')) dropdownContent.style.display = 'none';
-    });
-
-    // ==================== FECHAS ====================
-    const today = new Date().toISOString().split('T')[0];
-    fechaEntradaInput.min = today;
-    fechaSalidaInput.min = today;
-    fechaEntradaInput.addEventListener('change', function() {
-        fechaSalidaInput.min = this.value;
-        fechaEntrada = this.value;
-    });
-    fechaSalidaInput.addEventListener('change', function() {
-        fechaSalida = this.value;
-    });
-
-    // ==================== LÓGICA DE DISPONIBILIDAD ====================
-    function haySolapamiento(fechaEntrada, fechaSalida, reserva) {
-        const entrada1 = new Date(fechaEntrada);
-        const salida1 = new Date(fechaSalida);
-        const entrada2 = new Date(reserva.fechaEntrada);
-        const salida2 = new Date(reserva.fechaSalida);
-        return !(salida1 <= entrada2 || entrada1 >= salida2);
-    }
-
-    async function cargarReservas() {
-        const snapshot = await db.ref('rooms').once('value');
-        reservas = snapshot.val() || {};
-    }
-
-    function habitacionesOcupadasPorFechas() {
-        if (!fechaEntrada || !fechaSalida) return [];
-        let ocupadas = [];
-        Object.values(reservas).forEach(reserva => {
-            if (haySolapamiento(fechaEntrada, fechaSalida, reserva)) {
-                ocupadas.push(Number(reserva.idHabitacion));
+        // Variables globales para calendario
+        let selectedStartDate = null;
+        let selectedEndDate = null;
+        let currentMonth = new Date();
+        
+        // Días de la semana
+        const weekDays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+        
+        // Nombres de los meses
+        const monthNames = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+        
+        // Función para inicializar la página
+        function initPage() {
+            
+            // Generar calendarios
+            renderCalendars();
+            
+            // Configurar eventos
+            setupEventListeners();
+        }
+        
+        
+        // Función para generar los calendarios
+        function renderCalendars() {
+            // Actualizar etiquetas de mes
+            document.getElementById('entry-month-label').textContent = monthNames[currentMonth.getMonth()];
+            
+            // Calcular mes siguiente
+            const nextMonth = new Date(currentMonth);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            document.getElementById('exit-month-label').textContent = monthNames[nextMonth.getMonth()];
+            
+            // Generar calendario de entrada
+            renderCalendar('entry-calendar-grid', currentMonth.getFullYear(), currentMonth.getMonth());
+            
+            // Generar calendario de salida (mes siguiente)
+            renderCalendar('exit-calendar-grid', nextMonth.getFullYear(), nextMonth.getMonth());
+        }
+        
+        // Función para generar un calendario
+        function renderCalendar(containerId, year, month) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            // Generar encabezados de días
+            for (let i = 0; i < 7; i++) {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = weekDays[i];
+                container.appendChild(dayHeader);
             }
-        });
-        return ocupadas;
-    }
-
-    function actualizarEstadoHabitaciones() {
-        // Ocupa solo los cuartos ya existentes en el HTML
-        const ocupadas = habitacionesOcupadasPorFechas();
-        habitaciones.forEach(hab => {
-            const card = document.getElementById(hab.id);
-            if (!card) return;
-            // Filtrar por tipo si corresponde
-            if (selectedType !== 'all' && hab.tipo !== selectedType) {
-                card.style.display = 'none';
-            } else {
-                card.style.display = '';
-                // Estado disponible/ocupado
-                if (ocupadas.includes(hab.id)) {
-                    card.classList.add('room-status', 'unavailable');
-                    card.querySelector('.book-btn').disabled = true;
-                    card.querySelector('.book-btn').style.background = "#ccc";
-                    card.querySelector('.book-btn').style.cursor = "not-allowed";
-                } else {
-                    card.classList.remove('unavailable');
-                    card.querySelector('.book-btn').disabled = false;
-                    card.querySelector('.book-btn').style.background = "";
-                    card.querySelector('.book-btn').style.cursor = "";
+            
+            // Obtener primer día del mes y cantidad de días
+            const firstDay = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Días del mes anterior para completar la semana
+            const startDayOfWeek = firstDay.getDay();
+            
+            // Crear días del calendario
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day disabled';
+                day.textContent = '';
+                container.appendChild(day);
+            }
+            
+            // Crear días del mes actual
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+                day.dataset.date = `${year}-${month + 1}-${i}`;
+                
+                const dateObj = new Date(year, month, i);
+                dateObj.setHours(0, 0, 0, 0);
+                
+                // Deshabilitar días pasados
+                if (dateObj < today) {
+                    day.classList.add('disabled');
                 }
+                
+                // Deshabilitar días anteriores a la fecha de entrada seleccionada
+                if (selectedStartDate && dateObj < selectedStartDate) {
+                    day.classList.add('disabled');
+                }
+                
+                // Marcar días seleccionados
+                if (selectedStartDate && isSameDay(dateObj, selectedStartDate)) {
+                    day.classList.add('selected');
+                }
+                
+                if (selectedEndDate && isSameDay(dateObj, selectedEndDate)) {
+                    day.classList.add('selected');
+                }
+                
+                // Marcar rango si existe
+                if (selectedStartDate && selectedEndDate) {
+                    if (dateObj > selectedStartDate && dateObj < selectedEndDate) {
+                        day.classList.add('in-range');
+                    }
+                }
+                
+                container.appendChild(day);
             }
-        });
-    }
-
-    // ==================== BUSCAR HABITACIONES ====================
-    aplicarBtn.addEventListener('click', async () => {
-        fechaEntrada = fechaEntradaInput.value;
-        fechaSalida = fechaSalidaInput.value;
-        await cargarReservas();
-        actualizarEstadoHabitaciones();
-    });
-
-    // ==================== MOSTRAR TODAS AL INICIO ====================
-window.addEventListener('DOMContentLoaded', async () => {
-    await cargarReservas();
-    actualizarEstadoHabitaciones();
-});
+        }
+        
+        // Función para manejar clic en día del calendario
+        function handleDayClick(dayElement) {
+            if (dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const clickedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            clickedDate.setHours(0, 0, 0, 0);
+            
+            // Si no hay fecha seleccionada o ya hay dos fechas seleccionadas
+            if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+                // Reiniciar selección
+                selectedStartDate = clickedDate;
+                selectedEndDate = null;
+                
+                // Actualizar UI
+                document.getElementById('entradaLabel').textContent = formatDate(selectedStartDate);
+                document.getElementById('salidaLabel').textContent = 'Salida';
+                document.getElementById('nightsCount').textContent = '0 noches seleccionadas';
+            } 
+            // Si ya hay fecha de inicio seleccionada
+            else {
+                // Validar que la fecha de salida sea posterior a la de entrada
+                if (clickedDate <= selectedStartDate) {
+                    alert('La fecha de salida debe ser posterior a la fecha de entrada');
+                    return;
+                }
+                
+                selectedEndDate = clickedDate;
+                
+                // Calcular noches
+                const diffTime = Math.abs(selectedEndDate - selectedStartDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                
+                // Actualizar UI
+                document.getElementById('salidaLabel').textContent = formatDate(selectedEndDate);
+                document.getElementById('nightsCount').textContent = `${diffDays} noches seleccionadas`;
+            }
+            
+            // Actualizar calendarios
+            renderCalendars();
+        }
+        
+        // Función para manejar hover en días del calendario
+        function handleDayHover(dayElement) {
+            if (!selectedStartDate || selectedEndDate || dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const hoverDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            hoverDate.setHours(0, 0, 0, 0);
+            
+            // Limpiar resaltados anteriores
+            document.querySelectorAll('.calendar-day.highlight').forEach(day => {
+                day.classList.remove('highlight');
+            });
+            
+            // Determinar rango para resaltar
+            const start = selectedStartDate < hoverDate ? selectedStartDate : hoverDate;
+            const end = selectedStartDate < hoverDate ? hoverDate : selectedStartDate;
+            
+            // Resaltar todos los días en el rango
+            const allDays = document.querySelectorAll('.calendar-day:not(.disabled)');
+            allDays.forEach(day => {
+                const dateString = day.dataset.date;
+                if (!dateString) return;
+                
+                const dateParts = dateString.split('-');
+                const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                date.setHours(0, 0, 0, 0);
+                
+                if (date > start && date < end) {
+                    day.classList.add('highlight');
+                }
+            });
+        }
+        
+        // Función para configurar eventos
+        function setupEventListeners() {
+            // Mostrar/ocultar calendarios
+            document.querySelectorAll('.search-field').forEach(field => {
+                field.addEventListener('click', () => {
+                    document.getElementById('calendarsDropdown').classList.toggle('show');
+                });
+            });
+            
+            // Ocultar calendarios al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                const calendarsDropdown = document.getElementById('calendarsDropdown');
+                const isClickInside = calendarsDropdown.contains(e.target) || 
+                                     e.target.closest('.search-field');
+                
+                if (!isClickInside) {
+                    calendarsDropdown.classList.remove('show');
+                }
+            });
+            
+            
+            // Eventos para días del calendario (usando delegación)
+            document.getElementById('entry-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            document.getElementById('exit-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            document.getElementById('entry-calendar-grid').addEventListener('mouseover', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayHover(e.target);
+                }
+            });
+            
+            document.getElementById('exit-calendar-grid').addEventListener('mouseover', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayHover(e.target);
+                }
+            });
+            
+            // Navegación entre meses
+            document.getElementById('prevMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() - 1);
+                renderCalendars();
+            });
+            
+            document.getElementById('nextMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() + 1);
+                renderCalendars();
+            });
+            
+            
+        }
+        
+        // Funciones de utilidad
+        function formatDate(date) {
+            if (!date) return '';
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+        
+        // Inicializar la página cuando se cargue
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
+    
 </body>
 </html>
