@@ -1549,7 +1549,7 @@
     display: flex;
     text-align: center;
     border-bottom: 1px solid #ccc;
-    box-shadow: 0 3px 3px -3px rgba(0,0,0,0.5);
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.5);
     background: white;
     color: grey;
 }
@@ -1593,6 +1593,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    flex-direction: column;
+    gap: 80px;
 }
 
 .slider-room-pictures-container{
@@ -1625,11 +1627,32 @@
     display: flex;
     text-align: center;
     gap: 20px;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.5);
 }
 
 .precio-cuarto{
     padding: 10px;
     flex: 1;
+}
+
+.info-room-container{
+    display: flex;
+}
+.desc-room{
+    flex: 1;
+}
+.det-room{
+    flex: 1;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 15px 10px;
+}
+.det-room-title{
+    position: absolute;
+    top: -15%;
+    left: 35%;
+    background: #f5f5f5;
+    padding: 5px;
 }
 
 
