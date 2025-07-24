@@ -16,20 +16,12 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
-    <div class="rooms-navegator">
-        <div class="counter-container">
-            <div class="volver">Volver</div> 
-            <div class="rooms-counter"> 1 de 10 habitaciones</div> 
-            <div class="logo-name">Shumak Ware</div>
-        </div>
-
-        <div class="rooms-range">
-            <div class="room-prev-btn">ra</div> 
-            <div class="room-type-name"> <b>Simple</b></div> 
-            <div class="room-next-btn">rp</div>
-        </div>
 
         <div class="search-bar">
+            <div class="logo">
+                <img src="assests/logo_final.png" alt="Shumak Ware Logo">
+            </div>
+
             <div class="dates-range"> 
                 <div class="fechas">
                     <div class="search-field entrada" id="fechaEntrada">
@@ -84,37 +76,317 @@
             </div>
             <button class="apply-btn" id="aplicarBtn">Buscar</button>
         </div>
-    </div>
-    
-    <div class="contenedor">
-        <div class="slider-room-pictures-container">
-            <div class="slider-room-pictures">
-                <img src="assests/habitacion_1.jpg" alt="habitacion_1">
-            </div>
-            <button class="room-pictures-prev-btn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="room-pictures-next-btn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <div class="add-to-cart-container">
-                <div class="precio-cuarto">Precio</div> <div class="apply-btn">Añadir</div>
-            </div>
-        </div>
 
-        <div class="info-room-container">
-            <div class="desc-room">
-                Este es una habitacion con mamparas con vista al huascaran <br>
-                cuenta con un baño con ducha <br>
-                cuenta con televisor
+        <!-- Header -->
+    <header class="main-header">
+        <div class="header-wrap">
+            <nav class="nav-header">
+                    <a href="index.html">Inicio</a>
+                    <div class="dropdown-restaurante">
+                        <a href="restaurante.html" class="nav-link-restaurante">Restaurante</a>
+                        <div class="dropdown-content-restaurante">
+                            <a href="menu.html">Menú</a>
+                            <a href="reserva-mesa.html">Reserva de Mesa</a>
+                        </div>
+                    </div>
+                    <a href="servicios.html">Servicios</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="habitaciones.html" class="active">Habitaciones</a>
+            </nav>
+        </div>
+    </header>
+       
+    <div class="hab-desc">
+        <div class="hab-desc-title">Nuestras habitaciones</div>
+        <p>El alojamiento en el hotel Shumak Ware garantiza una estancia inolvidable. Disfruta de sus exclusivas habitaciones 
+            completamente equipadas y aprovecha la multitud de actividades que ofrecemos.</p>
+    </div>
+
+    <div class="rooms-grid">
+        <div class="room-card" id="1">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
             </div>
-            <div class="det-room">
-                aqui van los detalles
-                <div class="det-room-title">Detalles de Habitacion</div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room 2-->
+        <div class="room-card" id="2">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
             </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!-- room 3-->
+        <div class="room-card" id="3">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Simple</h3>
+            <div class="room-price">S/.30 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room 4-->
+        <div class="room-card" id="4">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room5-->
+        <div class="room-card" id="5">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room6-->
+    <div class="room-card" id="6">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Doble</h3>
+            <div class="room-price">S/.40 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    <!--room7-->
+        <div class="room-card" id="7">
+        <div class="room-img">
+            <img src="assests/habitacion_1.jpg">
+        </div>
+        
+
+        <div class="room-details">
+            <h3 class="room-name">Matrimonial</h3>
+            <div class="room-price">S/.50 <span>/noche</span></div>
+            
+            <div class="room-features">
+                <div class="feature">
+                    <i class="fas fa-bed"></i>
+                    <span>1</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user"></i>
+                    <span>1 Persona</span>
+                </div>
+            </div>
+            
+            <p class="room-description">Este es un buena habitacion</p>
+            <button class="book-btn" data-id="${habitacion.id}">
+                Reservar Ahora
+            </button>
+        </div>
+    </div>
+
+    </div>    
+
+    
+
+    <!-- Modal de reserva -->
+    <div class="modal-hab" id="reservationModal">
+        <div class="modal-hab-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            
+            <div class="modal-hab-header">
+                <h2><i class="fas fa-calendar-check"></i> Completa tu reserva</h2>
+                <p>Por favor ingresa tus datos para finalizar la reserva</p>
+            </div>
+            
+            <div class="reservation-summary" id="reservationSummary">
+                <!-- Resumen -->
+                <h3>Resumen de Reserva</h3>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Tipo:</span>
+                        <span class="reservation-value" id="tipo"> </span>
+                    </div>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Fecha de entrada:</span>
+                        <span class="reservation-value" id="fechaEntradaModal"> </span>
+                    </div>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Fecha de salida:</span>
+                        <span class="reservation-value" id="fechaSalidaModal"> </span>
+                    </div>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Noches:</span>
+                        <span class="reservation-value" id="numNoches"> </span>
+                    </div>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Precio por noche:</span>
+                        <span class="reservation-value" id="precio">S/</span>
+                    </div>
+                    <div class="reservation-item">
+                        <span class="reservation-label">Total:</span>
+                        <span class="reservation-value" style="color: #e74c3c; font-weight: 700;" id="total"> </span>
+                    </div>
+            </div>
+            
+            <form id="reservationForm">
+                <div class="form-group-hab">
+                    <label for="nombre"><i class="fas fa-user"></i> Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                
+                <div class="form-group-hab">
+                    <label for="correo"><i class="fas fa-envelope"></i> Correo electrónico</label>
+                    <input type="email" id="correo" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                
+                <div class="form-group-hab">
+                    <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                    <input type="tel" id="telefono" placeholder="Ingresa tu número telefónico" required>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitReservation">
+                    <i class="fas fa-check-circle"></i> Confirmar Reserva
+                </button>
+            </form>
         </div>
     </div>
     
+    <!-- Modal de confirmación -->
+    <div class="modal-hab" id="confirmationModal">
+        <div class="modal-hab-content">
+            <div class="confirmation">
+                <i class="fas fa-check-circle"></i>
+                <h2>¡Reserva Confirmada!</h2>
+                <p>Tu reserva ha sido registrada exitosamente.</p>
+                <p>ID de reserva: <strong id="reservationId">RES-2023-001</strong></p>
+                <p>Por favor envía el comprobante de pago por WhatsApp para finalizar el proceso.</p>
+                
+                <button class="submit-btn whatsapp-btn-hab" id="whatsappBtn">
+                    <i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -147,5 +419,276 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Variables globales para calendario
+        let selectedStartDate = null;
+        let selectedEndDate = null;
+        let currentMonth = new Date();
+        
+        // Días de la semana
+        const weekDays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+        
+        // Nombres de los meses
+        const monthNames = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+        
+        // Función para inicializar la página
+        function initPage() {
+            
+            // Generar calendarios
+            renderCalendars();
+            
+            // Configurar eventos
+            setupEventListeners();
+        }
+        
+        
+        // Función para generar los calendarios
+        function renderCalendars() {
+            // Actualizar etiquetas de mes
+            document.getElementById('entry-month-label').textContent = monthNames[currentMonth.getMonth()];
+            
+            // Calcular mes siguiente
+            const nextMonth = new Date(currentMonth);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            document.getElementById('exit-month-label').textContent = monthNames[nextMonth.getMonth()];
+            
+            // Generar calendario de entrada
+            renderCalendar('entry-calendar-grid', currentMonth.getFullYear(), currentMonth.getMonth());
+            
+            // Generar calendario de salida (mes siguiente)
+            renderCalendar('exit-calendar-grid', nextMonth.getFullYear(), nextMonth.getMonth());
+        }
+        
+        // Función para generar un calendario
+        function renderCalendar(containerId, year, month) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            // Generar encabezados de días
+            for (let i = 0; i < 7; i++) {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = weekDays[i];
+                container.appendChild(dayHeader);
+            }
+            
+            // Obtener primer día del mes y cantidad de días
+            const firstDay = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Días del mes anterior para completar la semana
+            const startDayOfWeek = firstDay.getDay();
+            
+            // Crear días del calendario
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day disabled';
+                day.textContent = '';
+                container.appendChild(day);
+            }
+            
+            // Crear días del mes actual
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+                day.dataset.date = `${year}-${month + 1}-${i}`;
+                
+                const dateObj = new Date(year, month, i);
+                dateObj.setHours(0, 0, 0, 0);
+                
+                // Deshabilitar días pasados
+                if (dateObj < today) {
+                    day.classList.add('disabled');
+                }
+                
+                // Deshabilitar días anteriores a la fecha de entrada seleccionada
+                if (selectedStartDate && dateObj < selectedStartDate) {
+                    day.classList.add('disabled');
+                }
+                
+                // Marcar días seleccionados
+                if (selectedStartDate && isSameDay(dateObj, selectedStartDate)) {
+                    day.classList.add('selected');
+                }
+                
+                if (selectedEndDate && isSameDay(dateObj, selectedEndDate)) {
+                    day.classList.add('selected');
+                }
+                
+                // Marcar rango si existe
+                if (selectedStartDate && selectedEndDate) {
+                    if (dateObj > selectedStartDate && dateObj < selectedEndDate) {
+                        day.classList.add('in-range');
+                    }
+                }
+                
+                container.appendChild(day);
+            }
+        }
+        
+        // Función para manejar clic en día del calendario
+        function handleDayClick(dayElement) {
+            if (dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const clickedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            clickedDate.setHours(0, 0, 0, 0);
+            
+            // Si no hay fecha seleccionada o ya hay dos fechas seleccionadas
+            if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+                // Reiniciar selección
+                selectedStartDate = clickedDate;
+                selectedEndDate = null;
+                
+                // Actualizar UI
+                document.getElementById('entradaLabel').textContent = formatDate(selectedStartDate);
+                document.getElementById('salidaLabel').textContent = 'Salida';
+                document.getElementById('nightsCount').textContent = '0 noches seleccionadas';
+            } 
+            // Si ya hay fecha de inicio seleccionada
+            else {
+                // Validar que la fecha de salida sea posterior a la de entrada
+                if (clickedDate <= selectedStartDate) {
+                    alert('La fecha de salida debe ser posterior a la fecha de entrada');
+                    return;
+                }
+                
+                selectedEndDate = clickedDate;
+                
+                // Calcular noches
+                const diffTime = Math.abs(selectedEndDate - selectedStartDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                
+                // Actualizar UI
+                document.getElementById('salidaLabel').textContent = formatDate(selectedEndDate);
+                document.getElementById('nightsCount').textContent = `${diffDays} noches seleccionadas`;
+            }
+            
+            // Actualizar calendarios
+            renderCalendars();
+        }
+        
+        // Función para manejar hover en días del calendario
+        function handleDayHover(dayElement) {
+            if (!selectedStartDate || selectedEndDate || dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const hoverDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            hoverDate.setHours(0, 0, 0, 0);
+            
+            // Limpiar resaltados anteriores
+            document.querySelectorAll('.calendar-day.highlight').forEach(day => {
+                day.classList.remove('highlight');
+            });
+            
+            // Determinar rango para resaltar
+            const start = selectedStartDate < hoverDate ? selectedStartDate : hoverDate;
+            const end = selectedStartDate < hoverDate ? hoverDate : selectedStartDate;
+            
+            // Resaltar todos los días en el rango
+            const allDays = document.querySelectorAll('.calendar-day:not(.disabled)');
+            allDays.forEach(day => {
+                const dateString = day.dataset.date;
+                if (!dateString) return;
+                
+                const dateParts = dateString.split('-');
+                const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                date.setHours(0, 0, 0, 0);
+                
+                if (date > start && date < end) {
+                    day.classList.add('highlight');
+                }
+            });
+        }
+        
+        // Función para configurar eventos
+        function setupEventListeners() {
+            // Mostrar/ocultar calendarios
+            document.querySelectorAll('.search-field').forEach(field => {
+                field.addEventListener('click', () => {
+                    document.getElementById('calendarsDropdown').classList.toggle('show');
+                });
+            });
+            
+            // Ocultar calendarios al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                const calendarsDropdown = document.getElementById('calendarsDropdown');
+                const isClickInside = calendarsDropdown.contains(e.target) || 
+                                     e.target.closest('.search-field');
+                
+                if (!isClickInside) {
+                    calendarsDropdown.classList.remove('show');
+                }
+            });
+            
+            
+            // Eventos para días del calendario (usando delegación)
+            document.getElementById('entry-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            document.getElementById('exit-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            document.getElementById('entry-calendar-grid').addEventListener('mouseover', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayHover(e.target);
+                }
+            });
+            
+            document.getElementById('exit-calendar-grid').addEventListener('mouseover', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayHover(e.target);
+                }
+            });
+            
+            // Navegación entre meses
+            document.getElementById('prevMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() - 1);
+                renderCalendars();
+            });
+            
+            document.getElementById('nextMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() + 1);
+                renderCalendars();
+            });
+            
+            
+        }
+        
+        // Funciones de utilidad
+        function formatDate(date) {
+            if (!date) return '';
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+        
+        // Inicializar la página cuando se cargue
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+    
 </body>
 </html>
