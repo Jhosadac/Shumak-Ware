@@ -1768,7 +1768,6 @@
  display: flex;
  flex-direction: column;
  gap: 10px;
- align-items: center;
  justify-content: center;
 }
 .categoria-container{
@@ -1777,6 +1776,8 @@
  border: none;
 }
 .categoria-title{
+ color: white;
+ border-radius: 20%;
  position: absolute;
  top: 0%;
  font-weight: bold;
@@ -1867,22 +1868,20 @@
         }
         
         .form-group-rest input, .form-group-rest select {
-            width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 16px;
+            font-size: 13px;
         }
         
         button[type="submit"] {
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 6px 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            width: 100%;
+            font-size: 13px;
         }
         
         button[type="submit"]:hover {
