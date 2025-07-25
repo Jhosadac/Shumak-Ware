@@ -1774,10 +1774,11 @@
  justify-content: center;
 }
 .categoria-container{
- width: 50%;
+ width: 70%;
  position: relative;
  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
  border: none;
+ padding: 20px 20px;
 }
 .categoria-title{
  color: white;
