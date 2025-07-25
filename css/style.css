@@ -1706,7 +1706,111 @@
 }
 
 /* RESTAURANTE */
-/* Estilos generales */
+/* Header */
+.rest-header{
+  width: 100%;
+  display: flex;
+ align-items: center;
+ justify-content: center;
+ padding-left: 150px;
+ padding-top: 10px;
+}
+.rest-nav{
+  display: flex;
+  gap: 10px;
+}
+.rest-nav a{
+  text-decoration: none;
+  color: var(--dark-color);
+  transition: color 0.3s;
+}
+.rest-nav a:hover{
+  color: var(--primary-color);
+  border-bottom: 0.8px solid var(--primary-color);
+}
+.rest-options{
+ display: flex;
+ width: 100%;
+ align-items: center;
+ justify-content: center;
+ padding-left: 150px;
+ padding-top: 20px;
+}
+.rest-logo-label{
+ flex: 1;
+}
+.rest-menu{
+ flex: 1;
+}
+.rest-reservas{
+ flex: 1;
+}
+.rest-call-container{
+ flex: 1;
+}
+.rest-call-upper{
+ font-size: 14px;
+}
+.rest-call-number{
+ font-size: 20px;
+}
+
+/* categorias*/
+.platos-header{
+ padding: 10px 50px;
+ font-size: 20px;
+}
+.platos-header-description{
+ font-size: 14px;
+}
+.categorias-container{
+ padding-left: 50px;
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ align-items: center;
+ justify-content: center;
+}
+.categoria-container{
+ position: relative;
+ box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+ border: none;
+}
+.categoria-title{
+ position: absolute;
+ top: 0%;
+ font-weight: bold;
+ background: linear-gradient(to top,
+    #0c1445 0%,       
+    #3a3a7e 25%,      
+    #8c4b7c 50%,       
+    #d76e6a 75%,       
+    #feb960 100% 
+  ); 
+ padding: 10px 10px;
+}
+.categoria-images{
+ position: absolute;
+ top: 80%;
+ left: 80%;
+ height: 50px;
+ width: 100px;
+}
+
+.rest-container{
+ display: flex;
+ padding: 10px 50px;
+}
+.rest-img{
+ flex: 1;
+}
+.rest-img img{
+ height: 200px;
+}
+.rest-formulario{
+ flex: 3;
+ height: 200px;
+}
         
        
         
