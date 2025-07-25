@@ -1794,6 +1794,8 @@
  position: absolute;
  top: 80%;
  left: 80%;
+}
+.categoria-images img{
  height: 50px;
  width: 100px;
 }
@@ -1810,7 +1812,7 @@
 }
 .rest-formulario{
  flex: 3;
- height: 200px;
+ height: 400px;
 }
         
        
