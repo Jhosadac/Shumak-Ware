@@ -1713,7 +1713,8 @@
  align-items: center;
  justify-content: center;
  padding-top: 10px;
- padding-left: 10px;
+ padding-left: -200px;
+ gap: 50px;
 }
 .rest-nav{
   display: flex;
@@ -1734,7 +1735,8 @@
  align-items: center;
  justify-content: center;
  padding-left: 150px;
- padding-top: 20px;
+ padding-top: 10px;
+ padding-bottom: 10px;
  background: #ccc;
 }
 .rest-logo-label{
