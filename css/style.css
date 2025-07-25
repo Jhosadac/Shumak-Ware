@@ -1713,7 +1713,7 @@
  align-items: center;
  justify-content: center;
  padding-top: 10px;
- padding-left: -200px;
+ padding-right: 200px;
  gap: 50px;
 }
 .rest-nav{
@@ -1767,7 +1767,7 @@
  font-size: 14px;
 }
 .categorias-container{
- padding-left: 50px;
+ padding-left: 500px;
  display: flex;
  flex-direction: column;
  gap: 10px;
@@ -1796,12 +1796,12 @@
 }
 .categoria-images{
  position: absolute;
- top: 80%;
- left: 80%;
+ top: 50%;
+ left: 50%;
 }
 .categoria-images img{
- height: 50px;
- width: 100px;
+ height: 100px;
+ width: 200px;
 }
 
 .rest-container{
