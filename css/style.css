@@ -1715,10 +1715,11 @@
  padding-top: 10px;
  padding-right: 500px;
  gap: 50px;
+ background: rgb(237, 233, 233);
 }
 .rest-nav{
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
 .rest-nav a{
   text-decoration: none;
@@ -1727,7 +1728,6 @@
 }
 .rest-nav a:hover{
   color: var(--primary-color);
-  border-bottom: 0.8px solid var(--primary-color);
 }
 .rest-options{
  display: flex;
@@ -1735,10 +1735,16 @@
  align-items: center;
  justify-content: center;
  padding-left: 150px;
- padding-top: 10px;
- padding-bottom: 10px;
- background: #ccc;
+ padding-top: 5px;
+ padding-bottom: 5px;
+ background: white;
+ font-size: 14px;
 }
+.rest-options div:hover{
+ color: var(--primary-color);
+ border-bottom: 0.8px solid var(--primary-color);
+}
+
 .rest-logo-label{
  flex: 1;
 }
