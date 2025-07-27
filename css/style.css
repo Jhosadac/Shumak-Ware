@@ -1735,9 +1735,15 @@
  font-size: 14px;
  gap: 20px;
 }
-.rest-options a:hover{
+.rest-options .options-container a:hover{
  color: var(--primary-color);
  border-bottom: 0.8px solid var(--primary-color);
+}
+.options-container{
+ flex: 3;
+}
+.rest-call-container{
+ flex: 1;
 }
 
 .rest-call-upper{
@@ -1759,11 +1765,11 @@
  min-height: 100vh;
 }
 .platos-header{
- padding: 10px 50px;
- font-size: 20px;
+ padding: 30px 50px;
+ font-size: 30px;
 }
 .platos-header-description{
- font-size: 14px;
+ font-size: 20px;
 }
 .menu-container{
  max-width: 900px;
