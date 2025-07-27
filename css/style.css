@@ -1741,6 +1741,9 @@
 }
 .options-container{
  flex: 3;
+ display: flex;
+ gap: 10px;
+ padding-left: 250px;
 }
 .rest-call-container{
  flex: 1;
