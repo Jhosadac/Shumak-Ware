@@ -14,65 +14,205 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
     </head>
     
-    <body>
-        <div class="res-navigator">
-            <div class="res-brand"> 
-                <div class="res-brand-title"> <b>Shumak Ware</b></div>
-                <div class="res-brand-subtitle">Hotel Campestre</div>
-            </div>
-
-            <div class="res-contact">
-                <div class="res-contact-upper">Llámanos</div>
-                <div class="res-contact-number">(0700) 34561 (Gratis) </div>
-            </div>
+   <body>
+    <!-- Navegador superior -->
+    <div class="res-navigator">
+        <div class="res-brand"> 
+            <div class="res-brand-title">Shumak Ware</div>
+            <div class="res-brand-subtitle">Hotel Campestre</div>
         </div>
 
-        <div class="progress-bar">
-            <div class="step-container"> 
-                <div class="step-number"> 1 </div>
-                <div class="step-label"> Extras </div>
-            </div>
-             <div class="step-container"> 
-                <div class="step-number"> 2 </div>
-                <div class="step-label"> Tus Datos </div>
-            </div>
-             <div class="step-container"> 
-                <div class="step-number"> 3 </div>
-                <div class="step-label"> Pago </div>
-            </div>
+        <div class="res-contact">
+            <div class="res-contact-upper">Llámanos</div>
+            <div class="res-contact-number">(0700) 34561 (Gratis)</div>
         </div>
+    </div>
 
-        <div class="container-selected-rooms">
-            <div class="selected-rooms-title"> Tus habitaciones </div>
+    <!-- Barra de progreso -->
+    <div class="progress-bar">
+        <div class="step-container active">
+            <div class="step-number">1</div>
+            <div class="step-label">Extras</div>
+        </div>
+        <div class="step-container">
+            <div class="step-number">2</div>
+            <div class="step-label">Tus Datos</div>
+        </div>
+        <div class="step-container">
+            <div class="step-number">3</div>
+            <div class="step-label">Pago</div>
+        </div>
+    </div>
 
-            <div class="room-card">
-                <div class="room-img">
-                    <img src="assests/habitacion_1.jpg">
+    <!-- Contenido principal -->
+    <div class="container-selected-rooms">
+        <h2 class="selected-rooms-title">Tus habitaciones</h2>
+
+        <div class="room-card">
+            <div class="room-img">
+                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Habitación Simple">
+            </div>
+            
+            <div class="room-details">
+                <h3 class="room-name">Habitación Simple Premium</h3>
+                <div class="room-price">S/120 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>Cama King</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>2 Personas</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-expand"></i>
+                        <span>35 m²</span>
+                    </div>
                 </div>
                 
-
-                <div class="room-details">
-                    <h3 class="room-name">Simple</h3>
-                    <div class="room-price">S/.30 <span>/noche</span></div>
-                    
-                    <div class="room-features">
-                        <div class="feature">
-                            <i class="fas fa-bed"></i>
-                            <span>1</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-user"></i>
-                            <span>1 Persona</span>
-                        </div>
+                <p class="room-description">Disfruta de una estancia relajante en nuestra habitación premium con vistas panorámicas al majestuoso Huascarán. Incluye baño privado con ducha de hidromasaje y productos orgánicos de la región.</p>
+                <button class="book-btn">
+                    Reservar Ahora
+                </button>
+            </div>
+        </div>
+        
+        <div class="room-card">
+            <div class="room-img">
+                <img src="https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Habitación Doble">
+            </div>
+            
+            <div class="room-details">
+                <h3 class="room-name">Habitación Doble Vista Montañas</h3>
+                <div class="room-price">S/180 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>2 Camas Queen</span>
                     </div>
-                    
-                    <p class="room-description">Este es un buena habitacion</p>
-                    <button class="book-btn" data-id="${habitacion.id}">
-                        Reservar Ahora
-                    </button>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>4 Personas</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-expand"></i>
+                        <span>45 m²</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Amplia habitación con dos camas queen y balcón privado con vistas espectaculares a la Cordillera Blanca. Perfecta para familias o grupos pequeños.</p>
+                <button class="book-btn">
+                    Reservar Ahora
+                </button>
+            </div>
+        </div>
+        
+        <div class="extras-section">
+            <h2 class="extras-title">Servicios Adicionales</h2>
+            
+            <div class="extras-grid">
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 class="extra-name">Spa Completo</h3>
+                    <div class="extra-price">S/120</div>
+                    <p class="extra-description">Sesión de 90 minutos que incluye masaje relajante, facial y acceso a jacuzzi.</p>
+                    <button class="add-extra-btn">Añadir</button>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <h3 class="extra-name">Tour Montaña</h3>
+                    <div class="extra-price">S/80</div>
+                    <p class="extra-description">Excursión guiada de medio día por los senderos más hermosos de la Cordillera Blanca.</p>
+                    <button class="add-extra-btn">Añadir</button>
+                </div>
+                
+                <div class="extra-card">
+                    <div class="extra-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3 class="extra-name">Traslado Aeropuerto</h3>
+                    <div class="extra-price">S/50</div>
+                    <p class="extra-description">Servicio privado de recogida en el aeropuerto de Huaraz con chofer profesional.</p>
+                    <button class="add-extra-btn">Añadir</button>
                 </div>
             </div>
         </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Acerca de Nosotros</h3>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad, ofreciendo experiencias únicas en el corazón de la Cordillera Blanca.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="habitaciones.html">Habitaciones</a></li>
+                        <li><a href="restaurante.html">Restaurante</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
+                        <li><i class="fab fa-facebook"></i> facebook.com/shumakware</li>
+                        <li><i class="fab fa-instagram"></i> instagram.com/shumakware</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2023 Shumak Ware. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
 
-    </body>
+    <script>
+        // Función para manejar el clic en los botones
+        document.querySelectorAll('.book-btn, .add-extra-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Animación de clic
+                this.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    this.style.transform = '';
+                    
+                    // Mostrar feedback visual
+                    const originalText = this.textContent;
+                    this.textContent = '✓ Añadido';
+                    this.style.backgroundColor = '#2c3e50';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = '';
+                    }, 1500);
+                }, 200);
+            });
+        });
+        
+        // Cambiar paso activo al hacer clic
+        document.querySelectorAll('.step-container').forEach(step => {
+            step.addEventListener('click', function() {
+                document.querySelectorAll('.step-container').forEach(s => {
+                    s.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
 </html>
