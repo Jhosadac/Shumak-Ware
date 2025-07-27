@@ -1777,6 +1777,7 @@
 }
 .platos-header-title{
  border-bottom: 2px solid #daa520;
+ padding-right: 0;
 }
 
 .platos-header-description{
