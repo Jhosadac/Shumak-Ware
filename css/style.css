@@ -180,9 +180,8 @@
             display: flex;
             align-items: center;
             background-color: transparent;
-            border: 1px solid white;
-            padding: 8px 15px;
-            color: white;
+            border: none;
+            color: none;
             min-height: 40px;
         }
       
@@ -196,6 +195,7 @@
             display: flex;
             min-width: 120px;
             border: none;
+            gap: 20px;
         }
 
         .date-picker-button {
@@ -207,6 +207,7 @@
             gap: 8px;
             font-size: 14px;
             border: 1px solid white;
+            padding: 8px 15px;
         }
 
         .date-picker-button span:first-child {
