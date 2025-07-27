@@ -1739,24 +1739,13 @@
  padding-bottom: 5px;
  background: white;
  font-size: 14px;
+ gap: 20px;
 }
-.rest-options div:hover{
+.rest-options a:hover{
  color: var(--primary-color);
  border-bottom: 0.8px solid var(--primary-color);
 }
 
-.rest-logo-label{
- flex: 1;
-}
-.rest-menu{
- flex: 1;
-}
-.rest-reservas{
- flex: 1;
-}
-.rest-call-container{
- flex: 1;
-}
 .rest-call-upper{
  font-size: 14px;
 }
