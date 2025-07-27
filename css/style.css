@@ -193,13 +193,9 @@
      
         .custom-date-picker {
             position: relative;
-            display: inline-block;
+            display: flex;
             min-width: 120px;
-        }
-        
-        .custom-date-picker.entrada {
-            margin-right: 100px;
-            margin-left: -100px;
+            border: none;
         }
 
         .date-picker-button {
@@ -210,6 +206,7 @@
             align-items: center;
             gap: 8px;
             font-size: 14px;
+            border: 1px solid white;
         }
 
         .date-picker-button span:first-child {
