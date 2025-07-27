@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <!--importando firebase-->
@@ -15,193 +16,197 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
+   
+	<!-- Header -->
     <div class="rest-header">
-	<div class="logo">
-		<img src="assests/logo_final.png">
-	</div>
-	<div class="rest-nav">
-		<a href="index.html">Inicio</a>
-		<a href="restaurante.html">Restaurante</a>
-		<a href="servicios.html">Servicio</a>
-		<a href="contacto.html">Contacto</a>
-		<a href="habitaciones.html">Habitaciones</a>
-	</div>  
+        <div class="logo">
+            <img src="assests/logo_final.png">
+        </div>
+        <div class="rest-nav">
+            <a href="index.html">Inicio</a>
+            <a href="restaurante.html">Restaurante</a>
+            <a href="servicios.html">Servicio</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="habitaciones.html">Habitaciones</a>
+        </div>  
     </div>
+    
+    <!-- Opciones del restaurante -->
     <div class="rest-options">
-	    <div class="rest-logo-label">Shumak Ware</div>
-	    <div class="options-container">
-		    <a class="rest-menu">Menu</a>
-		    <a class="rest-reservas">Reservas</a>
-	    </div>
-	    <div class="rest-call-container">
-		    <div class="rest-call-upper">Llamanos</div>
-		    <div class="rest-call-number">(0700) 123 456</div>
-	    </div>
+        <div class="rest-logo-label">Shumak Ware</div>
+        <div class="options-container">
+            <a class="rest-menu">Menu</a>
+            <a class="rest-reservas">Reservas</a>
+        </div>
+        <div class="rest-call-container">
+            <div class="rest-call-upper">Llamanos</div>
+            <div class="rest-call-number">(0700) 123 456</div>
+        </div>
     </div>
-
-    <!--categorias-->
+    
+    <!-- Encabezado de gastronomía -->
     <div class="platos-header">
-	<div class="platos-header-title">Nuestra Gastronomia</div>
-	<div class="platos-header-description">
-		La gastronomía ancashina, tesoro culinario de los Andes peruanos, fusiona la riqueza de su costa y sierra. 
-		Se destaca por el uso intensivo de ingredientes autóctonos como la papa, el maíz, el ají y carnes como el cuy y el chancho. 
-		Platos emblemáticos como el picante de cuy, la patasca y la humita expresan su sabor único y ancestral.
-	</div>
+        <div class="platos-header-title">Nuestra Gastronomía</div>
+        <div class="platos-header-description">
+            La gastronomía ancashina, tesoro culinario de los Andes peruanos, fusiona la riqueza de su costa y sierra. 
+            Se destaca por el uso intensivo de ingredientes autóctonos como la papa, el maíz, el ají y carnes como el cuy y el chancho. 
+            Platos emblemáticos como el picante de cuy, la patasca y la humita expresan su sabor único y ancestral.
+        </div>
     </div>
-
-<div class="container-restaurante">
-	<section class="menu-section">
-	<div class="menu-container">
-        
-        <div class="menu-header">
-            <h1 class="menu-title">Sabores de Áncash</h1>
-            <p class="menu-subtitle">Auténtica gastronomía andina</p>
-        </div>
-        
-        <!-- Entradas -->
-        <div class="category-container">
-            <div class="ribbon">Entradas</div>
-            <div class="category-content">
-                <div class="items-container">
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Humitas Ancashinas</span>
-                            <span class="item-price">S/ 15.00</span>
+    
+    <!-- Contenedor principal -->
+    <div class="container-restaurante">
+        <!-- Sección de menú -->
+        <section class="menu-section">
+            <div class="menu-container">
+                <div class="menu-header">
+                    <h1 class="menu-title">Sabores de Áncash</h1>
+                    <p class="menu-subtitle">Auténtica gastronomía andina</p>
+                </div>
+                
+                <!-- Entradas -->
+                <div class="category-container">
+                    <div class="ribbon">Entradas</div>
+                    <div class="category-content">
+                        <div class="items-container">
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Humitas Ancashinas</span>
+                                    <span class="item-price">S/ 15.00</span>
+                                </div>
+                                <p class="item-description">Delicadas masas de maíz rellenas con queso y pasas, envueltas en hojas de choclo.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Tamales de Huari</span>
+                                    <span class="item-price">S/ 14.00</span>
+                                </div>
+                                <p class="item-description">Masa de maíz sazonada con ají panca y rellena de carne de cerdo, envueltas en hojas de plátano.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Papa Rellena Ancashina</span>
+                                    <span class="item-price">S/ 16.00</span>
+                                </div>
+                                <p class="item-description">Papa amarilla rellena con carne, huevo, aceitunas y pasas, frita a la perfección.</p>
+                            </div>
                         </div>
-                        <p class="item-description">Delicadas masas de maíz rellenas con queso y pasas, envueltas en hojas de choclo.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Tamales de Huari</span>
-                            <span class="item-price">S/ 14.00</span>
+                        <div class="images-container">
+                            <img src="assests/entradas_imagen.png" class="category-image">
                         </div>
-                        <p class="item-description">Masa de maíz sazonada con ají panca y rellena de carne de cerdo, envueltas en hojas de plátano.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Papa Rellena Ancashina</span>
-                            <span class="item-price">S/ 16.00</span>
-                        </div>
-                        <p class="item-description">Papa amarilla rellena con carne, huevo, aceitunas y pasas, frita a la perfección.</p>
                     </div>
                 </div>
-                <div class="images-container">
-                    <img src="assests/entradas_imagen.png" class="category-image image">
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <!-- Sopas -->
-        <div class="category-container">
-            <div class="ribbon">Sopas</div>
-            <div class="category-content">
-                <div class="items-container">
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Pecan Caldo</span>
-                            <span class="item-price">S/ 18.00</span>
+                
+                <div class="divider"></div>
+                
+                <!-- Sopas -->
+                <div class="category-container">
+                    <div class="ribbon">Sopas</div>
+                    <div class="category-content">
+                        <div class="items-container">
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Pecan Caldo</span>
+                                    <span class="item-price">S/ 18.00</span>
+                                </div>
+                                <p class="item-description">Sopa tradicional de cabeza de carnero con hierbabuena, ají y papas nativas.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Chupe de Habas</span>
+                                    <span class="item-price">S/ 16.00</span>
+                                </div>
+                                <p class="item-description">Cremosa sopa de habas frescas con leche, queso andino y huacatay.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Sopa de Quinua</span>
+                                    <span class="item-price">S/ 15.00</span>
+                                </div>
+                                <p class="item-description">Nutritiva sopa de quinua con verduras frescas de la región y queso fresco.</p>
+                            </div>
                         </div>
-                        <p class="item-description">Sopa tradicional de cabeza de carnero con hierbabuena, ají y papas nativas.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Chupe de Habas</span>
-                            <span class="item-price">S/ 16.00</span>
+                        <div class="images-container">
+                            <img src="assests/sopas_imagen.png" class="category-image">
                         </div>
-                        <p class="item-description">Cremosa sopa de habas frescas con leche, queso andino y huacatay.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Sopa de Quinua</span>
-                            <span class="item-price">S/ 15.00</span>
-                        </div>
-                        <p class="item-description">Nutritiva sopa de quinua con verduras frescas de la región y queso fresco.</p>
-                    </div>
-                </div>
-                <div class="images-container">
-                    <img src="assests/sopas_imagen.png" class="category-image image">
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <!-- Segundos -->
-        <div class="category-container">
-            <div class="ribbon">Segundos</div>
-            <div class="category-content">
-                <div class="items-container">
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Pachamanca Ancashina</span>
-                            <span class="item-price">S/ 32.00</span>
-                        </div>
-                        <p class="item-description">Carnes, papas y habas cocidas bajo tierra con hierbas aromáticas, al estilo tradicional.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Cuy Chactado</span>
-                            <span class="item-price">S/ 28.00</span>
-                        </div>
-                        <p class="item-description">Cuy frito bajo piedra acompañado de papas nativas y salsa de maní.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Trucha Frita</span>
-                            <span class="item-price">S/ 25.00</span>
-                        </div>
-                        <p class="item-description">Trucha fresca de río frita en aceite de oliva, acompañada de arroz y yuyo.</p>
                     </div>
                 </div>
-                <div class="images-container">
-                    <img src="assests/segundos_imagen.png" class="category-image image">
-                </div>
-            </div>
-        </div>
-        
-        <div class="divider"></div>
-        
-        <!-- Bebidas -->
-        <div class="category-container">
-            <div class="ribbon">Bebidas</div>
-            <div class="category-content">
-                <div class="items-container">
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Chicha de Jora</span>
-                            <span class="item-price">S/ 8.00</span>
+                
+                <div class="divider"></div>
+                
+                <!-- Segundos -->
+                <div class="category-container">
+                    <div class="ribbon">Segundos</div>
+                    <div class="category-content">
+                        <div class="items-container">
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Pachamanca Ancashina</span>
+                                    <span class="item-price">S/ 32.00</span>
+                                </div>
+                                <p class="item-description">Carnes, papas y habas cocidas bajo tierra con hierbas aromáticas, al estilo tradicional.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Cuy Chactado</span>
+                                    <span class="item-price">S/ 28.00</span>
+                                </div>
+                                <p class="item-description">Cuy frito bajo piedra acompañado de papas nativas y salsa de maní.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Trucha Frita</span>
+                                    <span class="item-price">S/ 25.00</span>
+                                </div>
+                                <p class="item-description">Trucha fresca de río frita en aceite de oliva, acompañada de arroz y yuyo.</p>
+                            </div>
                         </div>
-                        <p class="item-description">Bebida ancestral de maíz fermentado, refrescante y ligeramente ácida.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Emoliente Ancashino</span>
-                            <span class="item-price">S/ 7.00</span>
+                        <div class="images-container">
+                            <img src="assests/segundos_imagen.png" class="category-image">
                         </div>
-                        <p class="item-description">Infusión de hierbas andinas con linaza, cebada y boldo, endulzado con miel.</p>
-                    </div>
-                    <div class="menu-item">
-                        <div class="item-name">
-                            <span>Jugo de Tumbo</span>
-                            <span class="item-price">S/ 9.00</span>
-                        </div>
-                        <p class="item-description">Refrescante jugo de la fruta regional con un toque de menta.</p>
                     </div>
                 </div>
-                <div class="images-container">
-                    <img src="assests/bebidas_imagen.png" class="category-image image">
+                
+                <div class="divider"></div>
+                
+                <!-- Bebidas -->
+                <div class="category-container">
+                    <div class="ribbon">Bebidas</div>
+                    <div class="category-content">
+                        <div class="items-container">
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Chicha de Jora</span>
+                                    <span class="item-price">S/ 8.00</span>
+                                </div>
+                                <p class="item-description">Bebida ancestral de maíz fermentado, refrescante y ligeramente ácida.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Emoliente Ancashino</span>
+                                    <span class="item-price">S/ 7.00</span>
+                                </div>
+                                <p class="item-description">Infusión de hierbas andinas con linaza, cebada y boldo, endulzado con miel.</p>
+                            </div>
+                            <div class="menu-item">
+                                <div class="item-name">
+                                    <span>Jugo de Tumbo</span>
+                                    <span class="item-price">S/ 9.00</span>
+                                </div>
+                                <p class="item-description">Refrescante jugo de la fruta regional con un toque de menta.</p>
+                            </div>
+                        </div>
+                        <div class="images-container">
+                            <img src="assests/bebidas_imagen.png" class="category-image">
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                
+                <p class="footer-note">Todos nuestros platos son preparados con productos frescos de la región de Áncash</p>
+            </div>	    
+        </section>
         
-        <p class="footer-note">Todos nuestros platos son preparados con productos frescos de la región de Áncash</p>
-    </div>	    
-    </section>
-
-
-    <!-- Reserva Container -->
+        <!-- Sección de reservas -->
         <div class="reserva-container">
             <div class="reserva-imagen">
                 <div class="reserva-imagen-content">
@@ -264,9 +269,10 @@
                 </form>
             </div>
         </div>
-</div>
-    
+    </div>
 
+
+	
     <!-- Modal de confirmación -->
     <div class="modal-hab" id="confirmationModal">
         <div class="modal-hab-content">
