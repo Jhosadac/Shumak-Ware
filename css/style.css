@@ -1944,7 +1944,7 @@
             border: 8px double #8b4513;
             position: relative;
            width: 60%;
-         transform: translateX(50%);
+         transform: translateX(30%);
         }
         
         .reserva-container::before {
