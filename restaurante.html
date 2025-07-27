@@ -47,7 +47,8 @@
 	</div>
     </div>
 
-    <section class="menu-section">
+<div class="container-restaurante">
+	<section class="menu-section">
 	<div class="menu-container">
         
         <div class="menu-header">
@@ -198,41 +199,86 @@
     </section>
 
 
-    <!--reservas-->
-    <div class="rest-container">
-	<div class="rest-img">
-		<img src="assests/reser_imagen.jpg">
-	</div> 
-	<div class="rest-formulario">
-	     <form id="restForm">
-                <div class="form-group-rest">
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
+    <!-- Reserva Container -->
+        <div class="reserva-container">
+            <div class="reserva-imagen">
+                <div class="reserva-imagen-content">
+                    <h2>Reserva tu Mesa</h2>
+                    <p>Disfruta de la mejor gastronomía ancashina en un ambiente cálido y tradicional. Reserva con anticipación para asegurar tu lugar.</p>
+                    <p><i class="fas fa-calendar-alt"></i> Abierto de Martes a Domingo: 12:00pm - 10:00pm</p>
                 </div>
-                <div class="form-group-rest">
-                    <label for="correo">Correo:</label>
-                    <input type="email" id="correo" name="correo" required>
-                </div>
-                <div class="form-group-rest">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" required>
-                </div>
-                <div class="form-group-rest">
-                    <label for="fecha">Fecha:</label>
-                    <input type="date" id="fecha" name="fecha" required min="">
-                </div>
-                <div class="form-group-rest">
-                    <label for="hora">Hora:</label>
-                    <input type="time" id="hora" name="hora" required>
-                </div>
-                <div class="form-group-rest">
-                    <label for="personas">Número de personas:</label>
-                    <input type="number" id="personas" name="personas" min="1" max="40" required>
-                </div>
-                <button type="submit" id="enviarReserva">Reservar</button>
-            </form>
-	</div>
-    </div>
+            </div>
+            
+            <div class="reserva-formulario">
+                <h2 class="reserva-title">Reserva Ahora</h2>
+                
+                <form id="reserva-form">
+                    <div class="form-group">
+                        <label for="nombre"><i class="fas fa-user"></i> Nombre Completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono"><i class="fas fa-phone"></i> Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ingresa tu número de teléfono" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fecha"><i class="fas fa-calendar-day"></i> Fecha</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="hora"><i class="fas fa-clock"></i> Hora</label>
+                        <select id="hora" name="hora" required>
+                            <option value="">Selecciona una hora</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mesas"><i class="fas fa-utensils"></i> Número de Mesas</label>
+                        <select id="mesas" name="mesas" required>
+                            <option value="">Selecciona cantidad</option>
+                            <option value="1">1 mesa (2 personas)</option>
+                            <option value="2">2 mesas (4 personas)</option>
+                            <option value="3">3 mesas (6 personas)</option>
+                            <option value="4">4 mesas (8 personas)</option>
+                            <option value="5">5+ mesas (Grupo grande)</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-reservar">Confirmar Reserva</button>
+                    
+                    <div class="contacto-info">
+                        <div class="contacto-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Av. Ancash 123, Huaraz</p>
+                        </div>
+                        <div class="contacto-item">
+                            <i class="fas fa-phone"></i>
+                            <p>(043) 123-456</p>
+                        </div>
+                        <div class="contacto-item">
+                            <i class="fas fa-envelope"></i>
+                            <p>reservas@saboresancash.com</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+    
 
     <!-- Modal de confirmación -->
     <div class="modal-hab" id="confirmationModal">
