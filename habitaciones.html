@@ -16,298 +16,309 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
-
-        <div class="search-bar">
-            <div class="logo">
-                <img src="assests/logo_final.png" alt="Shumak Ware Logo">
-            </div>
-
-            <div class="dates-range"> 
-                <div class="fechas">
-                    <div class="search-field entrada" id="fechaEntrada">
-                         <div><i class="fas fa-calendar-check"></i> <span id="entradaLabel">Entrada</span></div>
-                    </div>
-                
-                    <div class="search-field salida" id="fechaSalida">
-                         <div><i class="fas fa-calendar-check"></i> <span id="salidaLabel">Salida</span></div>
-                    </div>
-                </div>
-                <!---calendar-->
-                <div class="dropdown-calendars" id="calendarsDropdown">
-                    <div class="triangle-container"><div class="triangle"></div></div>
-                    <div class="calendars-container">
-                        <div class="calendar-details">
-                            <div> <b>Seleccione sus fechas</b> (opcional)</div>
-                            <div class="number-nights" id="nightsCount"> 0 noches seleccionadas </div>
-                        </div>
-                        <div class="calendars-block">
-                            <div class= "calendar-block">
-                                <div class="calendar-header">
-                                    <div class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></div>
-                                    <div class="month-label" id="entry-month-label">Julio</div>
-                                </div>
-                                <div class="calendar-grid" id="entry-calendar-grid"></div>
-                            </div>
-
-                            <div class= "calendar-block">
-                                <div class="calendar-header">
-                                    <div class="month-label" id="exit-month-label">Agosto</div>
-                                    <div class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></div>
-                                </div>
-                                <div class="calendar-grid" id="exit-calendar-grid"></div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dropdown">
-                <button class="dropdown-btn">
-                    <i class="fas fa-bed"></i> <span>Todas</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <div class="dropdown-option" data-type="all">Todas</div>
-                    <div class="dropdown-option" data-type="simple">Simple</div>
-                    <div class="dropdown-option" data-type="doble">Doble</div>
-                    <div class="dropdown-option" data-type="matrimonial">Matrimonial</div>
-                </div>
-            </div>
-            <button class="apply-btn" id="aplicarBtn">Buscar</button>
-        </div>
-
-        <!-- Header -->
+    <!-- Header -->
     <header class="main-header">
         <div class="header-wrap">
             <nav class="nav-header">
-                    <a href="index.html">Inicio</a>
-                    <div class="dropdown-restaurante">
-                        <a href="restaurante.html" class="nav-link-restaurante">Restaurante</a>
-                        <div class="dropdown-content-restaurante">
-                            <a href="menu.html">Menú</a>
-                            <a href="reserva-mesa.html">Reserva de Mesa</a>
-                        </div>
+                <a href="index.html">Inicio</a>
+                <div class="dropdown-restaurante">
+                    <a href="restaurante.html" class="nav-link-restaurante">Restaurante</a>
+                    <div class="dropdown-content-restaurante">
+                        <a href="menu.html">Menú</a>
+                        <a href="reserva-mesa.html">Reserva de Mesa</a>
                     </div>
-                    <a href="servicios.html">Servicios</a>
-                    <a href="contacto.html">Contacto</a>
-                    <a href="habitaciones.html" class="active">Habitaciones</a>
+                </div>
+                <a href="servicios.html">Servicios</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="habitaciones.html" class="active">Habitaciones</a>
             </nav>
         </div>
     </header>
-       
+    
+    <!-- Barra de búsqueda -->
+    <div class="search-bar">
+        <div class="logo">
+            <img src="assests/logo_final.png" alt="Shumak Ware Logo">
+        </div>
+
+        <div class="dates-range"> 
+            <div class="fechas">
+                <div class="search-field entrada" id="fechaEntrada">
+                    <i class="fas fa-calendar-check"></i> 
+                    <span id="entradaLabel">Entrada</span>
+                </div>
+            
+                <div class="search-field salida" id="fechaSalida">
+                    <i class="fas fa-calendar-check"></i> 
+                    <span id="salidaLabel">Salida</span>
+                </div>
+            </div>
+            
+            <div class="dropdown-calendars" id="calendarsDropdown">
+                <div class="triangle-container"><div class="triangle"></div></div>
+                <div class="calendars-container">
+                    <div class="calendar-details">
+                        <div><b>Seleccione sus fechas</b> (opcional)</div>
+                        <div class="number-nights" id="nightsCount">0 noches seleccionadas</div>
+                    </div>
+                    <div class="calendars-block">
+                        <div class="calendar-block">
+                            <div class="calendar-header">
+                                <button class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></button>
+                                <div class="month-label" id="entry-month-label">Julio</div>
+                            </div>
+                            <div class="calendar-grid" id="entry-calendar-grid"></div>
+                        </div>
+
+                        <div class="calendar-block">
+                            <div class="calendar-header">
+                                <div class="month-label" id="exit-month-label">Agosto</div>
+                                <button class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                            <div class="calendar-grid" id="exit-calendar-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dropdown">
+            <button class="dropdown-btn">
+                <i class="fas fa-bed"></i> <span>Todas</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <div class="dropdown-option" data-type="all">Todas</div>
+                <div class="dropdown-option" data-type="simple">Simple</div>
+                <div class="dropdown-option" data-type="doble">Doble</div>
+                <div class="dropdown-option" data-type="matrimonial">Matrimonial</div>
+            </div>
+        </div>
+        <button class="apply-btn" id="aplicarBtn">Buscar</button>
+    </div>
+
+    <!-- Descripción -->
     <div class="hab-desc">
-        <div class="hab-desc-title">Nuestras habitaciones</div>
+        <h2 class="hab-desc-title">Nuestras habitaciones</h2>
         <p>El alojamiento en el hotel Shumak Ware garantiza una estancia inolvidable. Disfruta de sus exclusivas habitaciones 
             completamente equipadas y aprovecha la multitud de actividades que ofrecemos.</p>
     </div>
 
+    <!-- Grid de habitaciones -->
     <div class="rooms-grid">
+        <!-- Habitación 1 -->
         <div class="room-card" id="1">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Simple</h3>
-            <div class="room-price">S/.30 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+            <div class="room-img">
+                <img src="assests/habitacion_1.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
+            <div class="room-details">
+                <h3 class="room-name">Simple</h3>
+                <div class="room-price">S/.30 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>1</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>1 Persona</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Habitación acogedora con vista a las montañas, perfecta para viajeros individuales.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="1" data-name="Simple" data-price="30">Añadir</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!--room 2-->
+        <!-- Habitación 2 -->
         <div class="room-card" id="2">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Simple</h3>
-            <div class="room-price">S/.30 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+            <div class="room-img">
+                <img src="assests/habitacion_2.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
+            <div class="room-details">
+                <h3 class="room-name">Simple Premium</h3>
+                <div class="room-price">S/.40 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>1</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>1 Persona</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Habitación con balcón privado y vista panorámica a la Cordillera Blanca.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="2" data-name="Simple Premium" data-price="40">Añadir</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- room 3-->
+        <!-- Habitación 3 -->
         <div class="room-card" id="3">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Simple</h3>
-            <div class="room-price">S/.30 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+            <div class="room-img">
+                <img src="assests/habitacion_3.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
+            <div class="room-details">
+                <h3 class="room-name">Doble</h3>
+                <div class="room-price">S/.50 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>2</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>2 Personas</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Amplia habitación con dos camas individuales, ideal para amigos o familiares.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="3" data-name="Doble" data-price="50">Añadir</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!--room 4-->
+        <!-- Habitación 4 -->
         <div class="room-card" id="4">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Doble</h3>
-            <div class="room-price">S/.40 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+            <div class="room-img">
+                <img src="assests/habitacion_1.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
+            <div class="room-details">
+                <h3 class="room-name">Doble Premium</h3>
+                <div class="room-price">S/.60 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>2</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>2 Personas</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Habitación con terraza privada y vistas espectaculares a las montañas.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="4" data-name="Doble Premium" data-price="60">Añadir</button>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!--room5-->
+        <!-- Habitación 5 -->
         <div class="room-card" id="5">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Doble</h3>
-            <div class="room-price">S/.40 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+            <div class="room-img">
+                <img src="assests/habitacion_2.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
-        </div>
-    </div>
-
-    <!--room6-->
-    <div class="room-card" id="6">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Doble</h3>
-            <div class="room-price">S/.40 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
+            <div class="room-details">
+                <h3 class="room-name">Matrimonial</h3>
+                <div class="room-price">S/.70 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>1</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>2 Personas</span>
+                    </div>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
+                
+                <p class="room-description">Romántica habitación con cama king size y baño con jacuzzi.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="5" data-name="Matrimonial" data-price="70">Añadir</button>
                 </div>
             </div>
-            
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
         </div>
-    </div>
 
-    <!--room7-->
-        <div class="room-card" id="7">
-        <div class="room-img">
-            <img src="assests/habitacion_1.jpg">
-        </div>
-        
-
-        <div class="room-details">
-            <h3 class="room-name">Matrimonial</h3>
-            <div class="room-price">S/.50 <span>/noche</span></div>
-            
-            <div class="room-features">
-                <div class="feature">
-                    <i class="fas fa-bed"></i>
-                    <span>1</span>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-user"></i>
-                    <span>1 Persona</span>
-                </div>
+        <!-- Habitación 6 -->
+        <div class="room-card" id="6">
+            <div class="room-img">
+                <img src="assests/habitacion_3.jpg">
             </div>
             
-            <p class="room-description">Este es un buena habitacion</p>
-            <button class="book-btn" data-id="${habitacion.id}">
-                Reservar Ahora
-            </button>
+            <div class="room-details">
+                <h3 class="room-name">Matrimonial Premium</h3>
+                <div class="room-price">S/.90 <span>/noche</span></div>
+                
+                <div class="room-features">
+                    <div class="feature">
+                        <i class="fas fa-bed"></i>
+                        <span>1</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-user"></i>
+                        <span>2 Personas</span>
+                    </div>
+                </div>
+                
+                <p class="room-description">Suite de lujo con balcón privado, chimenea y vistas panorámicas.</p>
+                
+                <div class="room-actions">
+                    <button class="view-details-btn">Ver detalles</button>
+                    <button class="add-to-cart-btn" data-id="6" data-name="Matrimonial Premium" data-price="90">Añadir</button>
+                </div>
+            </div>
         </div>
-    </div>
-
     </div>    
 
-    
+    <!-- Botón de carrito flotante -->
+    <div class="cart-icon-container" id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- Modal de carrito -->
+    <div class="modal-hab" id="cartModal">
+        <div class="modal-hab-content">
+            <span class="close-btn" id="closeCartModal">&times;</span>
+            
+            <div class="modal-hab-header">
+                <h2><i class="fas fa-shopping-cart"></i> Tu Carrito de Reservas</h2>
+                <p>Revisa las habitaciones que has seleccionado</p>
+            </div>
+            
+            <div class="reservation-summary">
+                <h3>Resumen de Reservas</h3>
+                <div id="cartItems">
+                    <!-- Elementos del carrito se agregarán aquí dinámicamente -->
+                </div>
+                <div class="reservation-item">
+                    <span class="reservation-label">Total:</span>
+                    <span class="reservation-value" style="color: var(--turquesa); font-weight: 700; font-size: 1.2rem;" id="cartTotal">S/ 0.00</span>
+                </div>
+            </div>
+            
+            <button class="submit-btn" id="reserveNowBtn">
+                <i class="fas fa-check-circle"></i> Reservar ahora
+            </button>
+        </div>
+    </div>
 
     <!-- Modal de reserva -->
     <div class="modal-hab" id="reservationModal">
@@ -320,32 +331,7 @@
             </div>
             
             <div class="reservation-summary" id="reservationSummary">
-                <!-- Resumen -->
-                <h3>Resumen de Reserva</h3>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Tipo:</span>
-                        <span class="reservation-value" id="tipo"> </span>
-                    </div>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Fecha de entrada:</span>
-                        <span class="reservation-value" id="fechaEntradaModal"> </span>
-                    </div>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Fecha de salida:</span>
-                        <span class="reservation-value" id="fechaSalidaModal"> </span>
-                    </div>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Noches:</span>
-                        <span class="reservation-value" id="numNoches"> </span>
-                    </div>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Precio por noche:</span>
-                        <span class="reservation-value" id="precio">S/</span>
-                    </div>
-                    <div class="reservation-item">
-                        <span class="reservation-label">Total:</span>
-                        <span class="reservation-value" style="color: #e74c3c; font-weight: 700;" id="total"> </span>
-                    </div>
+                <!-- Resumen de reserva se agregará aquí dinámicamente -->
             </div>
             
             <form id="reservationForm">
@@ -381,7 +367,7 @@
                 <p>ID de reserva: <strong id="reservationId">RES-2023-001</strong></p>
                 <p>Por favor envía el comprobante de pago por WhatsApp para finalizar el proceso.</p>
                 
-                <button class="submit-btn whatsapp-btn-hab" id="whatsappBtn">
+                <button class="whatsapp-btn-hab" id="whatsappBtn">
                     <i class="fab fa-whatsapp"></i> Enviar Comprobante por WhatsApp
                 </button>
             </div>
@@ -394,7 +380,7 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad, ofreciendo experiencias únicas en el corazón de la Cordillera Blanca.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -408,9 +394,11 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
+                        <li><i class="fab fa-facebook"></i> facebook.com/shumakware</li>
+                        <li><i class="fab fa-instagram"></i> instagram.com/shumakware</li>
                     </ul>
                 </div>
             </div>
@@ -421,7 +409,8 @@
     </footer>
 
     <script>
-        // Variables globales para calendario
+        // Variables globales
+        let cart = [];
         let selectedStartDate = null;
         let selectedEndDate = null;
         let currentMonth = new Date();
@@ -437,14 +426,15 @@
         
         // Función para inicializar la página
         function initPage() {
-            
             // Generar calendarios
             renderCalendars();
             
             // Configurar eventos
             setupEventListeners();
+            
+            // Actualizar contador de carrito
+            updateCartCount();
         }
-        
         
         // Función para generar los calendarios
         function renderCalendars() {
@@ -631,7 +621,6 @@
                 }
             });
             
-            
             // Eventos para días del calendario (usando delegación)
             document.getElementById('entry-calendar-grid').addEventListener('click', (e) => {
                 if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
@@ -642,18 +631,6 @@
             document.getElementById('exit-calendar-grid').addEventListener('click', (e) => {
                 if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
                     handleDayClick(e.target);
-                }
-            });
-            
-            document.getElementById('entry-calendar-grid').addEventListener('mouseover', (e) => {
-                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
-                    handleDayHover(e.target);
-                }
-            });
-            
-            document.getElementById('exit-calendar-grid').addEventListener('mouseover', (e) => {
-                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
-                    handleDayHover(e.target);
                 }
             });
             
@@ -668,7 +645,42 @@
                 renderCalendars();
             });
             
+            // Botón de aplicar búsqueda
+            document.getElementById('aplicarBtn').addEventListener('click', applySearch);
             
+            // Botones de añadir al carrito
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', addToCart);
+            });
+            
+            // Botones de ver detalles
+            document.querySelectorAll('.view-details-btn').forEach(btn => {
+                btn.addEventListener('click', viewDetails);
+            });
+            
+            // Botón de carrito
+            document.getElementById('cartIcon').addEventListener('click', showCartModal);
+            
+            // Cerrar modal de carrito
+            document.getElementById('closeCartModal').addEventListener('click', () => {
+                document.getElementById('cartModal').classList.remove('show');
+            });
+            
+            // Botón de reservar ahora en el carrito
+            document.getElementById('reserveNowBtn').addEventListener('click', showReservationModal);
+            
+            // Cerrar modal de reserva
+            document.getElementById('closeModal').addEventListener('click', () => {
+                document.getElementById('reservationModal').classList.remove('show');
+            });
+            
+            // Enviar formulario de reserva
+            document.getElementById('reservationForm').addEventListener('submit', submitReservation);
+            
+            // Botón de WhatsApp
+            document.getElementById('whatsappBtn').addEventListener('click', () => {
+                alert('Enviando a WhatsApp...');
+            });
         }
         
         // Funciones de utilidad
@@ -686,9 +698,159 @@
                    date1.getDate() === date2.getDate();
         }
         
+        // Función para aplicar búsqueda
+        function applySearch() {
+            alert('Búsqueda aplicada');
+            document.getElementById('calendarsDropdown').classList.remove('show');
+        }
+        
+        // Función para añadir al carrito
+        function addToCart(e) {
+            const button = e.target;
+            const roomId = button.getAttribute('data-id');
+            const roomName = button.getAttribute('data-name');
+            const roomPrice = parseFloat(button.getAttribute('data-price'));
+            
+            // Verificar si ya está en el carrito
+            const existingItem = cart.find(item => item.id === roomId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: roomId,
+                    name: roomName,
+                    price: roomPrice,
+                    quantity: 1
+                });
+            }
+            
+            // Actualizar contador de carrito
+            updateCartCount();
+            
+            // Mostrar confirmación
+            alert(`Se ha añadido: ${roomName} al carrito`);
+        }
+        
+        // Función para actualizar contador de carrito
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = totalItems;
+        }
+        
+        // Función para mostrar modal de carrito
+        function showCartModal() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío</p>';
+                document.getElementById('cartTotal').textContent = 'S/ 0.00';
+                document.getElementById('reserveNowBtn').disabled = true;
+            } else {
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'reservation-item';
+                    itemElement.innerHTML = `
+                        <span class="reservation-label">${item.name} x ${item.quantity}</span>
+                        <span class="reservation-value">S/ ${itemTotal.toFixed(2)}</span>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+                
+                document.getElementById('cartTotal').textContent = `S/ ${total.toFixed(2)}`;
+                document.getElementById('reserveNowBtn').disabled = false;
+            }
+            
+            document.getElementById('cartModal').classList.add('show');
+        }
+        
+        // Función para mostrar modal de reserva
+        function showReservationModal() {
+            const reservationSummary = document.getElementById('reservationSummary');
+            reservationSummary.innerHTML = '';
+            
+            if (cart.length === 0) return;
+            
+            let total = 0;
+            
+            // Crear encabezado
+            const header = document.createElement('h3');
+            header.textContent = 'Resumen de Reserva';
+            reservationSummary.appendChild(header);
+            
+            // Agregar habitaciones
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'reservation-item';
+                itemElement.innerHTML = `
+                    <span class="reservation-label">Habitación:</span>
+                    <span class="reservation-value">${item.name} x ${item.quantity}</span>
+                `;
+                reservationSummary.appendChild(itemElement);
+            });
+            
+            // Agregar fechas si están seleccionadas
+            if (selectedStartDate && selectedEndDate) {
+                const diffTime = Math.abs(selectedEndDate - selectedStartDate);
+                const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                const datesElement = document.createElement('div');
+                datesElement.className = 'reservation-item';
+                datesElement.innerHTML = `
+                    <span class="reservation-label">Fechas:</span>
+                    <span class="reservation-value">${formatDate(selectedStartDate)} - ${formatDate(selectedEndDate)} (${nights} noches)</span>
+                `;
+                reservationSummary.appendChild(datesElement);
+            }
+            
+            // Agregar total
+            const totalElement = document.createElement('div');
+            totalElement.className = 'reservation-item';
+            totalElement.innerHTML = `
+                <span class="reservation-label">Total:</span>
+                <span class="reservation-value" style="color: var(--turquesa); font-weight: 700;">S/ ${total.toFixed(2)}</span>
+            `;
+            reservationSummary.appendChild(totalElement);
+            
+            document.getElementById('cartModal').classList.remove('show');
+            document.getElementById('reservationModal').classList.add('show');
+        }
+        
+        // Función para enviar reserva
+        function submitReservation(e) {
+            e.preventDefault();
+            
+            // Generar ID de reserva
+            const reservationId = 'RES-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('reservationId').textContent = reservationId;
+            
+            // Mostrar modal de confirmación
+            document.getElementById('reservationModal').classList.remove('show');
+            document.getElementById('confirmationModal').classList.add('show');
+            
+            // Limpiar carrito
+            cart = [];
+            updateCartCount();
+        }
+        
+        // Función para ver detalles de habitación
+        function viewDetails(e) {
+            const roomCard = e.target.closest('.room-card');
+            const roomId = roomCard.id;
+            alert(`Mostrando detalles de la habitación ${roomId}`);
+        }
+        
         // Inicializar la página cuando se cargue
         document.addEventListener('DOMContentLoaded', initPage);
     </script>
-    
 </body>
 </html>
