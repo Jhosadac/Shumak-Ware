@@ -1944,6 +1944,7 @@
             border: 8px double #8b4513;
             position: relative;
            width: 60%;
+         transform: translateX(50%);
         }
         
         .reserva-container::before {
@@ -2080,6 +2081,7 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
+         padding-bottom: 30px;
         }
         
         /* Modal de reservas */
