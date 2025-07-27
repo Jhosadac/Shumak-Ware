@@ -16,55 +16,58 @@
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
 </head>
 <body>
+    <!-- Navegador de habitaciones -->
     <div class="rooms-navegator">
         <div class="counter-container">
-            <div class="volver"> <i class="fas fa-chevron-left"></i> Volver</div> 
+            <div class="volver"> 
+                <i class="fas fa-chevron-left"></i> Volver
+            </div> 
             <div class="rooms-counter"> 1 de 10 habitaciones</div> 
             <div class="logo-name">Shumak Ware</div>
         </div>
 
         <div class="rooms-range">
-            <div class="room-prev-btn"><i class="fas fa-arrow-left"></i></div> 
-            <div class="room-type-name"> <b>Simple</b></div> 
-            <div class="room-next-btn"><i class="fas fa-arrow-right"></i></div>
+            <button class="room-prev-btn"><i class="fas fa-arrow-left"></i></button> 
+            <div class="room-type-name"> <b>Simple Premium</b></div> 
+            <button class="room-next-btn"><i class="fas fa-arrow-right"></i></button>
         </div>
 
         <div class="search-bar">
             <div class="dates-range"> 
                 <div class="fechas">
                     <div class="search-field entrada" id="fechaEntrada">
-                         <div><i class="fas fa-calendar-check"></i> <span id="entradaLabel">Entrada</span></div>
+                        <i class="fas fa-calendar-check"></i> 
+                        <span id="entradaLabel">Entrada</span>
                     </div>
                 
                     <div class="search-field salida" id="fechaSalida">
-                         <div><i class="fas fa-calendar-check"></i> <span id="salidaLabel">Salida</span></div>
+                        <i class="fas fa-calendar-check"></i> 
+                        <span id="salidaLabel">Salida</span>
                     </div>
                 </div>
-                <!---calendar-->
                 <div class="dropdown-calendars" id="calendarsDropdown">
                     <div class="triangle-container"><div class="triangle"></div></div>
                     <div class="calendars-container">
                         <div class="calendar-details">
-                            <div> <b>Seleccione sus fechas</b> (opcional)</div>
-                            <div class="number-nights" id="nightsCount"> 0 noches seleccionadas </div>
+                            <div><b>Seleccione sus fechas (opcional)</b></div>
+                            <div class="number-nights" id="nightsCount">0 noches seleccionadas</div>
                         </div>
                         <div class="calendars-block">
-                            <div class= "calendar-block">
+                            <div class="calendar-block">
                                 <div class="calendar-header">
-                                    <div class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></div>
+                                    <button class="prev-month-btn" id="prevMonthBtn"><i class="fas fa-chevron-left"></i></button>
                                     <div class="month-label" id="entry-month-label">Julio</div>
                                 </div>
                                 <div class="calendar-grid" id="entry-calendar-grid"></div>
                             </div>
 
-                            <div class= "calendar-block">
+                            <div class="calendar-block">
                                 <div class="calendar-header">
                                     <div class="month-label" id="exit-month-label">Agosto</div>
-                                    <div class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></div>
+                                    <button class="next-month-btn" id="nextMonthBtn"><i class="fas fa-chevron-right"></i></button>
                                 </div>
                                 <div class="calendar-grid" id="exit-calendar-grid"></div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -86,10 +89,11 @@
         </div>
     </div>
     
+    <!-- Contenido principal -->
     <div class="contenedor">
         <div class="slider-room-pictures-container">
             <div class="slider-room-pictures">
-                <img src="assests/habitacion_1.jpg" alt="habitacion_1">
+                <img src="assests/habitacion_1.jpg" alt="Habitación Simple Premium">
             </div>
             <button class="room-pictures-prev-btn">
                 <i class="fas fa-chevron-left"></i>
@@ -98,31 +102,91 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
             <div class="add-to-cart-container">
-                <div class="precio-cuarto">Precio</div> <div class="apply-btn">Añadir</div>
+                <div class="precio-cuarto">S/ 120</div>
+                <button class="apply-btn">Añadir</button>
             </div>
         </div>
 
         <div class="info-room-container">
             <div class="desc-room">
-                Este es una habitacion con mamparas con vista al huascaran <br>
-                cuenta con un baño con ducha <br>
-                cuenta con televisor
+                <h2>Habitación Simple Premium con Vista al Huascarán</h2>
+                <p>Esta encantadora habitación te ofrece una experiencia única con vistas panorámicas al majestuoso Huascarán. Diseñada para tu máximo confort, combina la calidez de la decoración andina con comodidades modernas.</p>
+                
+                <p>Disfruta de una estancia relajante en nuestra cama king size con colchón ortopédico y ropa de cama de alta calidad. Despierta cada mañana con la impresionante vista de la Cordillera Blanca desde tu ventana.</p>
+                
+                <p>El baño privado cuenta con una amplia ducha de hidromasaje y productos de baño orgánicos de la región. Además, la habitación incluye calefacción para las frescas noches andinas.</p>
+                
+                <h3>Experiencia Incluida:</h3>
+                <ul>
+                    <li>Desayuno ancashino tradicional cada mañana</li>
+                    <li>Acceso al spa con descuento especial</li>
+                    <li>Tour gratuito de introducción a la flora local</li>
+                </ul>
             </div>
+            
             <div class="det-room">
-                aqui van los detalles
-                <div class="det-room-title">Detalles de Habitacion</div>
+                <div class="det-room-title">Detalles de Habitación</div>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="feature-text">Cama King Size</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="feature-text">2 Personas</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-expand"></i>
+                        </div>
+                        <div class="feature-text">35 m²</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="feature-text">Wi-Fi de alta velocidad</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <div class="feature-text">TV Pantalla Plana</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="feature-text">Aire Acondicionado</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shower"></i>
+                        </div>
+                        <div class="feature-text">Ducha de hidromasaje</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-mountain"></i>
+                        </div>
+                        <div class="feature-text">Vista a las montañas</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-section">
                     <h3>Acerca de Nosotros</h3>
-                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad</p>
+                    <p>Shumak Ware es un hotel-restaurante campestre que combina la naturaleza con la comodidad, ofreciendo experiencias únicas en el corazón de la Cordillera Blanca.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
@@ -136,9 +200,11 @@
                 <div class="footer-section">
                     <h3>Contacto</h3>
                     <ul>
-                        <li>Teléfono: +51 912 345 678</li>
-                        <li>Email: shumakware@gmail.com</li>
-                        <li>Dirección: Anta, Huaraz, Ancash</li>
+                        <li><i class="fas fa-phone"></i> +51 912 345 678</li>
+                        <li><i class="fas fa-envelope"></i> shumakware@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anta, Huaraz, Ancash</li>
+                        <li><i class="fab fa-facebook"></i> facebook.com/shumakware</li>
+                        <li><i class="fab fa-instagram"></i> instagram.com/shumakware</li>
                     </ul>
                 </div>
             </div>
@@ -147,5 +213,286 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Variables globales para calendario
+        let selectedStartDate = null;
+        let selectedEndDate = null;
+        let currentMonth = new Date();
+        
+        // Días de la semana
+        const weekDays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+        
+        // Nombres de los meses
+        const monthNames = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+        
+        // Función para inicializar la página
+        function initPage() {
+            // Generar calendarios
+            renderCalendars();
+            
+            // Configurar eventos
+            setupEventListeners();
+        }
+        
+        // Función para generar los calendarios
+        function renderCalendars() {
+            // Actualizar etiquetas de mes
+            document.getElementById('entry-month-label').textContent = monthNames[currentMonth.getMonth()];
+            
+            // Calcular mes siguiente
+            const nextMonth = new Date(currentMonth);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            document.getElementById('exit-month-label').textContent = monthNames[nextMonth.getMonth()];
+            
+            // Generar calendario de entrada
+            renderCalendar('entry-calendar-grid', currentMonth.getFullYear(), currentMonth.getMonth());
+            
+            // Generar calendario de salida (mes siguiente)
+            renderCalendar('exit-calendar-grid', nextMonth.getFullYear(), nextMonth.getMonth());
+        }
+        
+        // Función para generar un calendario
+        function renderCalendar(containerId, year, month) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            // Generar encabezados de días
+            for (let i = 0; i < 7; i++) {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day-header';
+                dayHeader.textContent = weekDays[i];
+                container.appendChild(dayHeader);
+            }
+            
+            // Obtener primer día del mes y cantidad de días
+            const firstDay = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            // Días del mes anterior para completar la semana
+            const startDayOfWeek = firstDay.getDay();
+            
+            // Crear días del calendario
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day disabled';
+                day.textContent = '';
+                container.appendChild(day);
+            }
+            
+            // Crear días del mes actual
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+                day.dataset.date = `${year}-${month + 1}-${i}`;
+                
+                const dateObj = new Date(year, month, i);
+                dateObj.setHours(0, 0, 0, 0);
+                
+                // Deshabilitar días pasados
+                if (dateObj < today) {
+                    day.classList.add('disabled');
+                }
+                
+                // Deshabilitar días anteriores a la fecha de entrada seleccionada
+                if (selectedStartDate && dateObj < selectedStartDate) {
+                    day.classList.add('disabled');
+                }
+                
+                // Marcar días seleccionados
+                if (selectedStartDate && isSameDay(dateObj, selectedStartDate)) {
+                    day.classList.add('selected');
+                }
+                
+                if (selectedEndDate && isSameDay(dateObj, selectedEndDate)) {
+                    day.classList.add('selected');
+                }
+                
+                // Marcar rango si existe
+                if (selectedStartDate && selectedEndDate) {
+                    if (dateObj > selectedStartDate && dateObj < selectedEndDate) {
+                        day.classList.add('in-range');
+                    }
+                }
+                
+                container.appendChild(day);
+            }
+        }
+        
+        // Función para manejar clic en día del calendario
+        function handleDayClick(dayElement) {
+            if (dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const clickedDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            clickedDate.setHours(0, 0, 0, 0);
+            
+            // Si no hay fecha seleccionada o ya hay dos fechas seleccionadas
+            if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+                // Reiniciar selección
+                selectedStartDate = clickedDate;
+                selectedEndDate = null;
+                
+                // Actualizar UI
+                document.getElementById('entradaLabel').textContent = formatDate(selectedStartDate);
+                document.getElementById('salidaLabel').textContent = 'Salida';
+                document.getElementById('nightsCount').textContent = '0 noches seleccionadas';
+            } 
+            // Si ya hay fecha de inicio seleccionada
+            else {
+                // Validar que la fecha de salida sea posterior a la de entrada
+                if (clickedDate <= selectedStartDate) {
+                    alert('La fecha de salida debe ser posterior a la fecha de entrada');
+                    return;
+                }
+                
+                selectedEndDate = clickedDate;
+                
+                // Calcular noches
+                const diffTime = Math.abs(selectedEndDate - selectedStartDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                
+                // Actualizar UI
+                document.getElementById('salidaLabel').textContent = formatDate(selectedEndDate);
+                document.getElementById('nightsCount').textContent = `${diffDays} noches seleccionadas`;
+            }
+            
+            // Actualizar calendarios
+            renderCalendars();
+        }
+        
+        // Función para manejar hover en días del calendario
+        function handleDayHover(dayElement) {
+            if (!selectedStartDate || selectedEndDate || dayElement.classList.contains('disabled')) return;
+            
+            const dateString = dayElement.dataset.date;
+            const dateParts = dateString.split('-');
+            const hoverDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+            hoverDate.setHours(0, 0, 0, 0);
+            
+            // Limpiar resaltados anteriores
+            document.querySelectorAll('.calendar-day.highlight').forEach(day => {
+                day.classList.remove('highlight');
+            });
+            
+            // Determinar rango para resaltar
+            const start = selectedStartDate < hoverDate ? selectedStartDate : hoverDate;
+            const end = selectedStartDate < hoverDate ? hoverDate : selectedStartDate;
+            
+            // Resaltar todos los días en el rango
+            const allDays = document.querySelectorAll('.calendar-day:not(.disabled)');
+            allDays.forEach(day => {
+                const dateString = day.dataset.date;
+                if (!dateString) return;
+                
+                const dateParts = dateString.split('-');
+                const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                date.setHours(0, 0, 0, 0);
+                
+                if (date > start && date < end) {
+                    day.classList.add('highlight');
+                }
+            });
+        }
+        
+        // Función para configurar eventos
+        function setupEventListeners() {
+            // Mostrar/ocultar calendarios
+            document.querySelectorAll('.search-field').forEach(field => {
+                field.addEventListener('click', () => {
+                    document.getElementById('calendarsDropdown').classList.toggle('show');
+                });
+            });
+            
+            // Ocultar calendarios al hacer clic fuera
+            document.addEventListener('click', (e) => {
+                const calendarsDropdown = document.getElementById('calendarsDropdown');
+                const isClickInside = calendarsDropdown.contains(e.target) || 
+                                     e.target.closest('.search-field');
+                
+                if (!isClickInside) {
+                    calendarsDropdown.classList.remove('show');
+                }
+            });
+            
+            // Eventos para días del calendario (usando delegación)
+            document.getElementById('entry-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            document.getElementById('exit-calendar-grid').addEventListener('click', (e) => {
+                if (e.target.classList.contains('calendar-day') && !e.target.classList.contains('disabled')) {
+                    handleDayClick(e.target);
+                }
+            });
+            
+            // Navegación entre meses
+            document.getElementById('prevMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() - 1);
+                renderCalendars();
+            });
+            
+            document.getElementById('nextMonthBtn').addEventListener('click', () => {
+                currentMonth.setMonth(currentMonth.getMonth() + 1);
+                renderCalendars();
+            });
+            
+            // Botón de aplicar búsqueda
+            document.getElementById('aplicarBtn').addEventListener('click', applySearch);
+            
+            // Botones de navegación de habitaciones
+            document.querySelector('.room-prev-btn').addEventListener('click', () => {
+                alert('Habitación anterior');
+            });
+            
+            document.querySelector('.room-next-btn').addEventListener('click', () => {
+                alert('Habitación siguiente');
+            });
+            
+            // Botón de añadir al carrito
+            document.querySelector('.add-to-cart-container .apply-btn').addEventListener('click', () => {
+                alert('Habitación añadida al carrito');
+            });
+            
+            // Botón de volver
+            document.querySelector('.volver').addEventListener('click', () => {
+                window.history.back();
+            });
+        }
+        
+        // Funciones de utilidad
+        function formatDate(date) {
+            if (!date) return '';
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        function isSameDay(date1, date2) {
+            return date1.getFullYear() === date2.getFullYear() &&
+                   date1.getMonth() === date2.getMonth() &&
+                   date1.getDate() === date2.getDate();
+        }
+        
+        // Función para aplicar búsqueda
+        function applySearch() {
+            alert('Búsqueda aplicada');
+            document.getElementById('calendarsDropdown').classList.remove('show');
+        }
+        
+        // Inicializar la página cuando se cargue
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
 </body>
 </html>
